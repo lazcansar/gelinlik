@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Musterihizmetleri;
 use App\Models\SssModel;
 use Illuminate\Http\Request;
 
@@ -24,7 +25,8 @@ class PagesController extends Controller
     }
     public function customerPageView ()
     {
-        return view('pages.costumer');
+        $customer = Musterihizmetleri::all();
+        return view('pages.costumer', compact('customer'));
     }
     public function weddingPageView()
     {

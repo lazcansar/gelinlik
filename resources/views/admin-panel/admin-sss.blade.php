@@ -44,6 +44,11 @@
             <div class="alert alert-warning">{{ session('delete') }}</div>
         </div>
     @endif
+    @if(session('update'))
+        <div class="container">
+            <div class="alert alert-warning">{{ session('update') }}</div>
+        </div>
+    @endif
 
     <section class="admin-sss-page">
         <div class="container">

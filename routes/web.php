@@ -40,3 +40,10 @@ Route::get('/admin-panel/sss-yonetim/sil/{id}', [AdminpageController::class, 'ss
 Route::get('/admin-panel/sss-yonetim/detay/{id}', [AdminpageController::class, 'sssDetail'])->name('sss-goruntule');
 Route::post('/admin-panel/sss-yonetim/guncelle/{id}', [AdminpageController::class, 'sssUpdate'])->name('sss-guncelle');
 
+Route::get('/admin-panel/musteri-hizmet-yonetim', [AdminpageController::class, 'adminCustomerServices'])->name('customer-view');
+Route::get('/admin-panel/musteri-hizmet-yonetim/ekle', [AdminpageController::class, 'adminCustomerServiceOlustur'])->name('customer-insert');
+Route::post('/admin-panel/musteri-hizmet-yonetim/ekle', [AdminpageController::class, 'adminCustomerServiceOlustur'])->name('customer-insert-db');
+Route::get('/admin-panel/musteri-hizmet-yonetim/sil/{id}', [AdminpageController::class, 'adminCustomerDelete'])->name('customer-delete');
+Route::get('/admin-panel/musteri-hizmet-yonetim/detay/{id}', [AdminpageController::class, 'adminCustomerDetail'])->name('customer-detail');
+Route::post('/admin-panel/musteri-hizmet-yonetim/guncelle/{id}', [AdminpageController::class, 'adminCustomerDetail'])->name('customer-update');
+
