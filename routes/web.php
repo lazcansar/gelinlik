@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PagesController;
+use App\Http\Controllers\AdminpageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,3 +30,13 @@ Route::get('/odeme-basarili', [PagesController::class, 'checkoutSuccess'])->name
 
 Route::get('/giris-yap', [PagesController::class, 'loginPageView'])->name('login-page');
 Route::get('/kayit-ol', [PagesController::class, 'registerPageView'])->name('register-page');
+
+
+
+Route::get('/admin-panel/sss-yonetim', [AdminpageController::class, 'adminSssCreate'])->name('sss-yonetim');
+Route::get('/admin-panel/sss-yonetim/ekle', [AdminpageController::class, 'adminSssOlustur'])->name('sss-kayit');
+Route::post('/admin-panel/sss-yonetim/ekle', [AdminpageController::class, 'adminSssCreateReg'])->name("sss-kayit-ekle");
+Route::get('/admin-panel/sss-yonetim/sil/{id}', [AdminpageController::class, 'sssDelete'])->name('sss-sil');
+Route::get('/admin-panel/sss-yonetim/detay/{id}', [AdminpageController::class, 'sssDetail'])->name('sss-goruntule');
+Route::post('/admin-panel/sss-yonetim/guncelle/{id}', [AdminpageController::class, 'sssUpdate'])->name('sss-guncelle');
+

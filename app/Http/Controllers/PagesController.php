@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\SssModel;
 use Illuminate\Http\Request;
 
 class PagesController extends Controller
@@ -15,7 +16,8 @@ class PagesController extends Controller
         return view('pages.contact');
     }
     public function sssPageView () {
-        return view('pages.sss');
+        $sss = SssModel::all();
+        return view('pages.sss', compact('sss'));
     }
     public function aboutPageView () {
         return view('pages.about');
