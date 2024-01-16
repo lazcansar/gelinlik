@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\AdminpageController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -53,3 +54,8 @@ Route::post('/admin-panel/category/ekle', [AdminpageController::class, 'adminCat
 Route::get('/admin-panel/category/delete/{id}', [AdminpageController::class, 'adminCategoryDelete'])->name('category-delete');
 Route::get('/admin-panel/category/duzenle/{id}', [AdminpageController::class, 'adminCategoryDetail'])->name('category-detail');
 Route::post('/admin-panel/category/guncelle/{id}', [AdminpageController::class, 'adminCategoryDetail'])->name('category-update');
+
+//Product Services
+Route::get('/admin-panel/product', [AdminpageController::class, 'adminProductView'])->name('product-view');
+Route::get('/admin-panel/product/ekle', [AdminpageController::class, 'adminProductInsert'])->name('product-insert-page');
+Route::post('/admin-panel/product/ekle', [AdminpageController::class, 'adminProductInsert'])->name('product-insert');

@@ -32,6 +32,7 @@
     <a class="btn btn-danger" href="{{ route('sss-yonetim') }}">SSS Yönet</a>
     <a class="btn btn-danger" href="{{ route('customer-view') }}">Müşteri Hizmetleri Yönet</a>
     <a class="btn btn-danger" href="{{ route('category-view') }}">Kategoriler</a>
+    <a class="btn btn-danger" href="{{ route('product-view') }}">Ürünler</a>
 </div>
 
 @yield('govde')

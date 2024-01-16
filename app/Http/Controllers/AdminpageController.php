@@ -5,10 +5,60 @@ namespace App\Http\Controllers;
 use App\Models\SssModel;
 use App\Models\Musterihizmetleri;
 use App\Models\Category;
+use App\Models\Urunler;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\File;
+
 
 class AdminpageController extends Controller
 {
+    // Urun ekleme sayfası
+
+    public function adminProductView(Request $request)
+    {
+            $listCategory = Category::all();
+            $insertCategory = "";
+            return view('admin-panel.admin-product', compact('listCategory', 'insertCategory'));
+    }
+    public function adminProductInsert(Request $request)
+    {
+        if($request->method()=="GET") {
+            $listCategory = "";
+            $insertCategory = Category::all();
+            return view('admin-panel.admin-product', compact('listCategory', 'insertCategory'));
+        }
+        else if($request->method()=="POST") {
+            $title = $request->title;
+            $url = $request->url;
+            $price = $request->price;
+            $stock = $request->stock;
+            $content = $request->productContent;
+            $info = $request->info;
+            $category = $request->category;
+            $foldername = Str::lower($title);
+            $foldername = Str::replace(' ', '-', $foldername);
+            $target_folder = public_path().'/images/product/'.$foldername;
+            File::makeDirectory($target_folder, $mode =0775, true, true);
+            $image = $request->image->getClientOriginalName();
+            $uploadImage = $request->image->move(public_path("images/product/$foldername/"), $image);
+            Urunler::create([
+                "productTitle" => $title,
+                "productUrl" => $url,
+                "productPrice" => $price,
+                "productContent" => $content,
+                "productInfo" => $info,
+                "productStock" => $stock,
+                "productCoverImage" => $uploadImage,
+                "categoryId" => $category,
+            ]);
+            return redirect()->route('product-view')->with('success', 'Ürün başarıyla eklendi');
+        }
+    }
+
+
+
+
     // Kategoriler Sayfası
     public function adminCategory()
     {
