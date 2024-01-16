@@ -28,7 +28,7 @@
                     <input type="password" class="form-control mb-3" name="password" required>
                     <input class="d-inline-block" type="checkbox"> <p class="d-inline-block">Onaylıyorum <a href="">Şartlar</a> ve <a href="">Gizlilik</a> </p>
 
-                    <button type="submit" class="btn btn-success mt-3">Giriş Yap</button>
+                    <button type="submit" class="d-block btn btn-success mt-3">Kayıt Ol</button>
                 </form>
             </div>
 

@@ -4,10 +4,65 @@ namespace App\Http\Controllers;
 
 use App\Models\SssModel;
 use App\Models\Musterihizmetleri;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class AdminpageController extends Controller
 {
+    // Kategoriler Sayfası
+    public function adminCategory()
+    {
+        $categoryFake = '';
+        $categoryDetail = '';
+        $category = Category::all();
+        return view('admin-panel.category', compact('category', 'categoryFake', 'categoryDetail'));
+    }
+    public function adminCategoryInsert(Request $request)
+    {
+        if ($request->method() == "GET") {
+            $categoryFake = Category::all();
+            $category = '';
+            $categoryDetail = '';
+            return view('admin-panel.category', compact('categoryFake', 'category', 'categoryDetail'));
+        }
+        else if($request->method() == "POST") {
+            $title = $request->categoryTitle;
+            $url = $request->categoryUrl;
+            $content = $request->categoryContent;
+            Category::create([
+                "categoryTitle" => $title,
+                "categoryUrl" => $url,
+                "categoryContent" => $content,
+            ]);
+            return redirect()->route('category-view')->with("success", "Kategori oluşturuldu.");
+
+        }
+    }
+    public function adminCategoryDelete($id)
+    {
+        $categoryDelete = Category::wherecategoryid($id)->delete();
+        return redirect()->route('category-view')->with("delete", "Kategori silindi");
+    }
+    public function adminCategoryDetail(Request $request, $id)
+    {
+        if($request->method() == "GET") {
+            $categoryDetail = Category::wherecategoryid($id)->first();
+            $categoryFake = '';
+            $category = '';
+            return view('admin-panel.category', compact('categoryDetail', 'categoryFake', 'category'));
+        }
+        else if ($request->method() == "POST") {
+            Category::wherecategoryid($id)->update([
+                "categoryTitle" => $request->categoryTitle,
+                "categoryUrl" => $request->categoryUrl,
+                "categoryContent" => $request->categoryContent,
+            ]);
+            return redirect()->route('category-view')->with("update", "Kategori güncellendi");
+        }
+    }
+
+
+
     //Müşteri hizmetleri sayfası
     public function adminCustomerServices()
     {

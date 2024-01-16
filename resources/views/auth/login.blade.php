@@ -24,7 +24,7 @@
                     <input type="password" class="form-control mb-3" name="password" required>
                     <a class="d-block mb-3" href="">Şifreni mi unuttun?</a>
 
-                    <button type="submit" class="btn btn-success">Giriş Yap</button>
+                    <button type="submit" class="d-block btn btn-success">Giriş Yap</button>
                 </form>
             </div>
 
