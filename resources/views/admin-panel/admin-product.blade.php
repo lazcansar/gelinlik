@@ -58,16 +58,67 @@ margin-bottom: 1rem;
                             <a class="nav-link" href="{{ route('product-insert-page') }}"><i class="bi bi-upload"></i> Ürün Ekle</a>
                         </li>
                         <li class="nav-item border-bottom">
-                            <a class="nav-link" href="#"><i class="bi bi-images"></i> Ürün Fotoğrafları Ekle</a>
+                            <a class="nav-link" href="{{ route('product-gallery') }}"><i class="bi bi-images"></i> Ürün Fotoğrafları Ekle</a>
                         </li>
                     </ul>
                 </div>
 
 
                 <div class="col-lg-9">
+                    <!-- Gallery Image Insert--->
+                    @if($allGalleryProduct)
 
-                    @if($listCategory)
+                        <div class="admin-sss-page-form">
+                            <form action="{{ route('product-gallery-insert') }}" method="post" enctype="multipart/form-data">
+                                @csrf
 
+
+                                <label>Ürüne ait resimleri seçin!</label>
+                                <input type="file" name="images[]" class="form-control mb-3" multiple>
+
+                                <label>Resimlerin yükleneceği ürünü seçin</label>
+                                <select class="form-select mb-3" name="product">
+                                    @foreach($allGalleryProduct as $gallery)
+                                        <option value="{{ $gallery->productUrl }}">{{ $gallery->productTitle }}</option>
+                                    @endforeach
+                                </select>
+                                <button type="submit" class="btn btn-primary w-100"><i class="bi bi-upload"></i> Yükle</button>
+                            </form>
+                        </div>
+                    @endif
+                    <!-- Gallery Image Insert--->
+                    @if($listProduct)
+                        <table class="table table-hover table-striped">
+                            <thead>
+                            <tr>
+                                <th>Sıra</th>
+                                <th>Ürün Adı</th>
+                                <th>Ürün Fiyatı</th>
+                                <th>Ürün Stock</th>
+                                <th>Ürün Bedeni</th>
+                                <th>İşlem</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @if($listProduct)
+                            @foreach($listProduct as $product)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $product->productTitle }}</td>
+                                    <td>{{ $product->productPrice }}</td>
+                                    <td>{{ $product->productStock }}</td>
+                                    <td>{{ $product->productInfo }}</td>
+                                    <td><a href="" class="btn btn-primary">Güncelle</a> <a href="" class="btn btn-danger">Sil</a> </td>
+                                </tr>
+                            @endforeach
+                            @endif
+                            </tbody>
+                        </table>
+                    <div class="container">
+                        <div class="d-flex justify-content-center">
+                            {{ $listProduct->links() }}
+                        </div>
+                    </div>
                     @endif
 
                     <!---->

@@ -11,22 +11,25 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
 
 
+
 class AdminpageController extends Controller
 {
     // Urun ekleme sayfası
 
-    public function adminProductView(Request $request)
+    public function adminProductView()
     {
-            $listCategory = Category::all();
+            $listProduct = Urunler::paginate(2);
             $insertCategory = "";
-            return view('admin-panel.admin-product', compact('listCategory', 'insertCategory'));
+            $allGalleryProduct = "";
+            return view('admin-panel.admin-product', compact('listProduct', 'insertCategory', 'allGalleryProduct'));
     }
     public function adminProductInsert(Request $request)
     {
         if($request->method()=="GET") {
-            $listCategory = "";
-            $insertCategory = Category::all();
-            return view('admin-panel.admin-product', compact('listCategory', 'insertCategory'));
+            $listProduct = "";
+            $allGalleryProduct = "";
+            $insertCategory = Urunler::all();
+            return view('admin-panel.admin-product', compact('listProduct', 'insertCategory', 'allGalleryProduct'));
         }
         else if($request->method()=="POST") {
             $title = $request->title;
@@ -53,6 +56,30 @@ class AdminpageController extends Controller
                 "categoryId" => $category,
             ]);
             return redirect()->route('product-view')->with('success', 'Ürün başarıyla eklendi');
+        }
+    }
+    public function adminProductGallery(Request $request)
+    {
+        if ($request->method() == "GET") {
+            $listProduct = "";
+            $insertCategory = "";
+            $allGalleryProduct = Urunler::all();
+            return view('admin-panel.admin-product', compact('listProduct', 'insertCategory', 'allGalleryProduct'));
+        }
+        else if ($request->method() == "POST") {
+            $targetFolder = $request->product;
+            $request->validate([
+                'images' => 'required',
+                'images.*' => 'mimes:jpeg,jpg,png,gif,webp,svg|max:2048'
+            ]);
+            if ($request->hasFile('images')) {
+                foreach ($request->file('images') as $image) {
+                    $name = $image->getClientOriginalName();
+                    $image->move(public_path("images/product/$targetFolder/"), $name);
+                }
+                return back()->with('success', 'Geleri resimleri eklendi');
+            }
+
         }
     }
 

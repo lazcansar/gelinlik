@@ -59,3 +59,5 @@ Route::post('/admin-panel/category/guncelle/{id}', [AdminpageController::class, 
 Route::get('/admin-panel/product', [AdminpageController::class, 'adminProductView'])->name('product-view');
 Route::get('/admin-panel/product/ekle', [AdminpageController::class, 'adminProductInsert'])->name('product-insert-page');
 Route::post('/admin-panel/product/ekle', [AdminpageController::class, 'adminProductInsert'])->name('product-insert');
+Route::get('/admin-panel/product-gallery', [AdminpageController::class, 'adminProductGallery'])->name('product-gallery');
+Route::post('/admin-panel/product-gallery/ekle', [AdminpageController::class, 'adminProductGallery'])->name('product-gallery-insert');
