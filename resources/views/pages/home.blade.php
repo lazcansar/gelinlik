@@ -114,56 +114,121 @@
     <!---Navs--->
     <div class="model-nav">
     <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-        <li class="nav-item" role="presentation">
-            <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Gelinlik</button>
-        </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Abiye</button>
-        </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Nişanlık</button>
-        </li>
+        @if($listCategory)
+
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="pills-{{ $listCategory[0]->categoryUrl }}-tab" data-bs-toggle="pill" data-bs-target="#pills-{{ $listCategory[0]->categoryUrl }}" type="button" role="tab" aria-controls="pills-{{ $listCategory[0]->categoryUrl }}" aria-selected="true">{{ $listCategory[0]->categoryTitle }}</button>
+            </li>
+            @foreach($listCategory as $category)
+                @if($category->categoryId > 1)
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="pills-{{ $category->categoryUrl }}-tab" data-bs-toggle="pill" data-bs-target="#pills-{{ $category->categoryUrl }}" type="button" role="tab" aria-controls="pills-{{ $category->categoryUrl }}" aria-selected="false">{{ $category->categoryTitle }}</button>
+                    </li>
+                @endif
+
+            @endforeach
+        @endif
+
     </ul>
     </div>
     <div class="tab-content" id="pills-tabContent">
-        <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">...</div>
-        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">...</div>
-        <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab" tabindex="0">...</div>
-        <div class="tab-pane fade" id="pills-disabled" role="tabpanel" aria-labelledby="pills-disabled-tab" tabindex="0">...</div>
+        @if($listCategory)
+            <div class="tab-pane fade show active" id="pills-{{ $listCategory[0]->categoryUrl }}" role="tabpanel" aria-labelledby="pills-{{ $listCategory[0]->categoryUrl }}-tab" tabindex="0">
+                <!---->
+                <div class="row">
+                    @if($listProduct)
+                        @foreach($listProduct as $product)
+                            @if($product->categoryId == $listCategory[0]->categoryId)
+                                    <?php
+                                    $productUrl = $product->productUrl;
+                                    $productImage = $product->productCoverImage;
+                                    $baseImage = pathinfo($productImage);
+                                    $baseImage = $baseImage['basename'];
+                                    $coverImage = "images/product/".$productUrl."/".$baseImage;
+                                    ?>
+                                <div class="col-lg-3 mb-5 ">
+                                    <div class="model-main">
+                                        <a href="#">
+                                            <div class="model-image">
+                                                <img src="{{ $coverImage }}" class="img-fluid image-one">
+                                                    <?php
+                                                    $images = "images/product/".$productUrl;
+                                                    $allImages = glob("$images/*", GLOB_BRACE);
+                                                    echo '
+                            <img src="'.$allImages[0].'" class="img-fluid image-two">';
+                                                    ?>
+                                                <a href="#" class="w-100 p-2 bg-dark text-white d-block text-center insert-card">Sepete Ekle</a>
+                                            </div></a>
+                                        <div class="model-title">
+                                            <a href="#">{{ $product->productTitle }}</a>
+                                        </div>
+                                        <div class="model-price">
+                                            ₺{{ $product->productPrice }}
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+                        @endforeach
+                    @endif
+
+                </div>
+                <!---->
+            </div>
+            @foreach($listCategory as $category)
+                @if($category->categoryId > 1)
+                    <div class="tab-pane fade" id="pills-{{ $category->categoryUrl }}" role="tabpanel" aria-labelledby="pills-{{ $category->categoryUrl }}-tab" tabindex="0">
+                        <!------>
+                        <div class="row">
+                            @if($listProduct)
+                                @foreach($listProduct as $product)
+                                    @if($product->categoryId == $category->categoryId)
+                                            <?php
+                                            $productUrl = $product->productUrl;
+                                            $productImage = $product->productCoverImage;
+                                            $baseImage = pathinfo($productImage);
+                                            $baseImage = $baseImage['basename'];
+                                            $coverImage = "images/product/".$productUrl."/".$baseImage;
+                                            ?>
+                                        <div class="col-lg-3 mb-5 ">
+                                            <div class="model-main">
+                                                <a href="#">
+                                                    <div class="model-image">
+                                                        <img src="{{ $coverImage }}" class="img-fluid image-one">
+                                                            <?php
+                                                            $images = "images/product/".$productUrl;
+                                                            $allImages = glob("$images/*", GLOB_BRACE);
+                                                            echo '
+                            <img src="'.$allImages[0].'" class="img-fluid image-two">';
+                                                            ?>
+                                                        <a href="#" class="w-100 p-2 bg-dark text-white d-block text-center insert-card">Sepete Ekle</a>
+                                                    </div></a>
+                                                <div class="model-title">
+                                                    <a href="#">{{ $product->productTitle }}</a>
+                                                </div>
+                                                <div class="model-price">
+                                                    ₺{{ $product->productPrice }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
+                                @endforeach
+                            @endif
+
+                        </div>
+
+                        <!------>
+                    </div>
+                @endif
+
+            @endforeach
+        @endif
+
+
     </div>
 
     <!---Navs--->
 
 
-    <div class="row">
-
-
-        <?php
-        for($i = 1; $i<=4; $i++) {
-            echo '<div class="col-lg-3 mb-5 ">
-                            <div class="model-main">
-                                <div class="model-image">
-                                    <img src="https://beyazdusler.com/wp-content/uploads/2023/12/abiy-2-270x350.jpg" class="img-fluid image-one">
-                                    <img src="https://beyazdusler.com/wp-content/uploads/2023/12/abiy-1.jpg" class="img-fluid image-two">
-                                    <a href="#" class="w-100 p-2 bg-dark text-white d-block text-center insert-card">Sepete Ekle</a>
-                                </div>
-                                <div class="model-title">
-                                    <a href="#">Abiye Model - İşleme Detay</a>
-                                </div>
-                                <div class="model-price">
-                                    ₺17.500,00
-                                </div>
-                            </div>
-                        </div>';
-        }
-        ?>
-
-
-
-
-
-
-    </div>
 </div>
     <!--Wedding Models--->
 

@@ -18,7 +18,7 @@ class AdminpageController extends Controller
 
     public function adminProductView()
     {
-            $listProduct = Urunler::paginate(2);
+            $listProduct = Urunler::paginate(10);
             $insertCategory = "";
             $allGalleryProduct = "";
             $imageDelete = "";

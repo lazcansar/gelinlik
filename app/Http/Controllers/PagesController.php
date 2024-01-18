@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Musterihizmetleri;
 use App\Models\SssModel;
+use App\Models\Urunler;
 use Illuminate\Http\Request;
 
 class PagesController extends Controller
@@ -11,7 +13,9 @@ class PagesController extends Controller
 
     public function homePageView()
     {
-        return view('pages.home');
+        $listProduct = Urunler::all();
+        $listCategory = Category::all();
+        return view('pages.home', compact('listProduct', 'listCategory'));
     }
     public function contactPageView () {
         return view('pages.contact');

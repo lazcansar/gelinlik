@@ -119,7 +119,6 @@ margin-bottom: 1rem;
                         <table class="table table-hover table-striped">
                             <thead>
                             <tr>
-                                <th>Sıra</th>
                                 <th>Ürün Adı</th>
                                 <th>Ürün Fiyatı</th>
                                 <th>Ürün Stock</th>
@@ -131,7 +130,6 @@ margin-bottom: 1rem;
                             @if($listProduct)
                             @foreach($listProduct as $product)
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
                                     <td>{{ $product->productTitle }}</td>
                                     <td>{{ $product->productPrice }}</td>
                                     <td>{{ $product->productStock }}</td>
