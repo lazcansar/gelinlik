@@ -108,7 +108,10 @@ margin-bottom: 1rem;
                                     <td>{{ $product->productPrice }}</td>
                                     <td>{{ $product->productStock }}</td>
                                     <td>{{ $product->productInfo }}</td>
-                                    <td><a href="" class="btn btn-primary">Güncelle</a> <a href="" class="btn btn-danger">Sil</a> </td>
+                                    <td>
+                                        <a href="{{ route('product-update-detail', $product->productId) }}" class="btn btn-primary">Güncelle</a>
+                                        <a onclick="return confirm('Silmek istediğinize emin misiniz?')"  href="{{ route('product-delete', $product->productId) }}" class="btn btn-danger">Sil</a>
+                                    </td>
                                 </tr>
                             @endforeach
                             @endif
@@ -166,8 +169,8 @@ margin-bottom: 1rem;
 
                                 <label>Kategori Seçimi</label>
                                 <select name="category" class="form-select mb-3">
-                                    @if($insertCategory)
-                                        @foreach($insertCategory as $category)
+                                    @if($categorySelect)
+                                        @foreach($categorySelect as $category)
                                             <option value="{{ $category->categoryId }}">{{ $category->categoryTitle }}</option>
                                         @endforeach
                                     @endif
@@ -182,6 +185,59 @@ margin-bottom: 1rem;
                     @endif
 
                     <!---->
+
+                    <!--Update--->
+
+                    @if($productDetail)
+                        <div class="admin-sss-page-form">
+                            <form action="{{ route('product-update', $productDetail->productId) }}" method="POST">
+                                @csrf
+
+                                <label>Ürün Adı</label>
+                                <input type="text" class="form-control mb-3" name="title" value="{{ $productDetail->productTitle }}">
+
+                                <label>Ürün URL Adresi</label>
+                                <input type="text" class="form-control mb-3" name="url" value="{{ $productDetail->productUrl }}">
+
+                                <label>Ürün Fiyatı</label>
+                                <input type="text" class="form-control mb-3" name="price" value="{{ $productDetail->productPrice }}">
+
+                                <label>Ürün Stok Miktarı</label>
+                                <input type="text" class="form-control mb-3" name="stock" value="{{ $productDetail->productStock }}">
+
+                                <label>Ürün Açıklama Yazısı</label>
+                                <!-- Place the first <script> tag in your HTML's <head> -->
+                                <script src="https://cdn.tiny.cloud/1/ekyyppga37880rl12p326haultygdx1veo5av63hnd5qna1l/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+
+                                <!-- Place the following <script> and <textarea> tags your HTML's <body> -->
+                                <script>
+                                    tinymce.init({
+                                        selector: 'textarea',
+                                        plugins: 'ai tinycomments mentions anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed permanentpen footnotes advtemplate advtable advcode editimage tableofcontents mergetags powerpaste tinymcespellchecker autocorrect a11ychecker typography inlinecss',
+                                        toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | align lineheight | tinycomments | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+                                        tinycomments_mode: 'embedded',
+                                        tinycomments_author: 'Author name',
+                                        mergetags_list: [
+                                            { value: 'First.Name', title: 'First Name' },
+                                            { value: 'Email', title: 'Email' },
+                                        ],
+                                        ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
+                                    });
+                                </script>
+                                <textarea name="productContent">{{ $productDetail->productContent }}</textarea>
+
+                                <label class="mt-3">Ürün Teknik Bilgileri
+                                    <span class="d-block" style="font-size: 12px; font-weight: 300;">Stokta olan beden ebatlarını arasına "," (virgül) işareti koyarak sıralayın. Örneği aşağıda yer almaktadır.</span></label>
+                                <input type="text" class="form-control mb-3" name="info" value="{{ $productDetail->productInfo }}">
+
+
+
+                                <button type="submit" class="btn btn-success mt-3 w-100" style="background-color: #C8815F; border-color: #C8815F; padding: 10px 0;">Ürün Güncelle</button>
+                            </form>
+                        </div>
+                    @endif
+
+                    <!---Update--->
 
                 </div>
             </div>

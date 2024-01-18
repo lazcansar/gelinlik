@@ -61,3 +61,6 @@ Route::get('/admin-panel/product/ekle', [AdminpageController::class, 'adminProdu
 Route::post('/admin-panel/product/ekle', [AdminpageController::class, 'adminProductInsert'])->name('product-insert');
 Route::get('/admin-panel/product-gallery', [AdminpageController::class, 'adminProductGallery'])->name('product-gallery');
 Route::post('/admin-panel/product-gallery/ekle', [AdminpageController::class, 'adminProductGallery'])->name('product-gallery-insert');
+Route::get('/admin-panel/product-gallery/delete/{id}', [AdminpageController::class, 'adminProductDelete'])->name('product-delete');
+Route::get('/admin-panel/product-gallery/detay/{id}', [AdminpageController::class, 'adminProductDetail'])->name('product-update-detail');
+Route::post('/admin-panel/product-gallery/guncelle/{id}', [AdminpageController::class, 'adminProductDetail'])->name('product-update');

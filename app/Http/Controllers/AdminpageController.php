@@ -21,15 +21,18 @@ class AdminpageController extends Controller
             $listProduct = Urunler::paginate(2);
             $insertCategory = "";
             $allGalleryProduct = "";
-            return view('admin-panel.admin-product', compact('listProduct', 'insertCategory', 'allGalleryProduct'));
+            $productDetail = "";
+            return view('admin-panel.admin-product', compact('listProduct', 'insertCategory', 'allGalleryProduct', 'productDetail'));
     }
     public function adminProductInsert(Request $request)
     {
         if($request->method()=="GET") {
             $listProduct = "";
             $allGalleryProduct = "";
+            $productDetail = "";
             $insertCategory = Urunler::all();
-            return view('admin-panel.admin-product', compact('listProduct', 'insertCategory', 'allGalleryProduct'));
+            $categorySelect = Category::all();
+            return view('admin-panel.admin-product', compact('listProduct', 'insertCategory', 'allGalleryProduct', 'productDetail', 'categorySelect'));
         }
         else if($request->method()=="POST") {
             $title = $request->title;
@@ -39,8 +42,7 @@ class AdminpageController extends Controller
             $content = $request->productContent;
             $info = $request->info;
             $category = $request->category;
-            $foldername = Str::lower($title);
-            $foldername = Str::replace(' ', '-', $foldername);
+            $foldername = Str::lower($url);
             $target_folder = public_path().'/images/product/'.$foldername;
             File::makeDirectory($target_folder, $mode =0775, true, true);
             $image = $request->image->getClientOriginalName();
@@ -62,9 +64,10 @@ class AdminpageController extends Controller
     {
         if ($request->method() == "GET") {
             $listProduct = "";
+            $productDetail = "";
             $insertCategory = "";
             $allGalleryProduct = Urunler::all();
-            return view('admin-panel.admin-product', compact('listProduct', 'insertCategory', 'allGalleryProduct'));
+            return view('admin-panel.admin-product', compact('listProduct', 'insertCategory', 'allGalleryProduct', 'productDetail'));
         }
         else if ($request->method() == "POST") {
             $targetFolder = $request->product;
@@ -81,6 +84,45 @@ class AdminpageController extends Controller
             }
 
         }
+    }
+
+    public function adminProductDetail(Request $request, $id) {
+        if ($request->method() == "GET") {
+            $allGalleryProduct = '';
+            $listProduct = '';
+            $insertCategory = '';
+            $productDetail = Urunler::whereproductid($id)->first();
+            return view('admin-panel.admin-product', compact('productDetail', 'allGalleryProduct', 'listProduct', 'insertCategory'));
+        }
+        else if($request->method() == "POST") {
+            $title = $request->title;
+            $price = $request->price;
+            $url = $request->url;
+            $stock = $request->stock;
+            $pcontent = $request->productContent;
+            $info = $request->info;
+            $foldername = Str::lower($url);
+            $target_folder = public_path().'/images/product/'.$foldername;
+            File::makeDirectory($target_folder, $mode =0775, true, true);
+            Urunler::whereproductid($id)->update([
+                "productTitle" => $title,
+                "productUrl" => $url,
+                "productPrice" => $price,
+                "productStock" => $stock,
+                "productContent" => $pcontent,
+                "productInfo" => $info,
+            ]);
+            return redirect()->back()->with('update', 'Ürün başarılı bir şekilde güncellendi');
+        }
+    }
+
+    public function adminProductDelete($id) {
+        $folderDelete = Urunler::whereproductid($id)->first();
+        $deleteFolder = $folderDelete->productUrl;
+        File::deleteDirectory(public_path("images/product/$deleteFolder"));
+
+        $deleteProduct = Urunler::whereproductid($id)->delete();
+        return back()->with('delete', 'Ürün başarılı bir şekilde silindi.');
     }
 
 
