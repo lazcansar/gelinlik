@@ -65,6 +65,34 @@ margin-bottom: 1rem;
 
 
                 <div class="col-lg-9">
+                    <!---Gallery Image Delete-->
+                    @if($imageDelete)
+                        <div class="row">
+                            <?php
+                                $images = "images/product/$imageDelete->productUrl";
+                                $allImages = glob("$images/*", GLOB_BRACE);
+                                $dizin = $imageDelete->productUrl;
+                                ?>
+                            @foreach($allImages as $image)
+                                <?php
+                                    $newImage = pathinfo($image);
+                                    $newImage = $newImage['basename'];
+                                    ?>
+                                <div class="col-md-3">
+                                    <img src="http://localhost:8000/{{ $image }}" class="img-fluid">
+                                    <a href="{{ route('delete-image', [$dizin, $newImage]) }}" class="btn btn-danger w-100 rounded-0">Resim Sil</a>
+
+                                </div>
+                            @endforeach
+
+
+                        </div>
+
+
+                    @endif
+
+
+
                     <!-- Gallery Image Insert--->
                     @if($allGalleryProduct)
 
@@ -111,6 +139,7 @@ margin-bottom: 1rem;
                                     <td>
                                         <a href="{{ route('product-update-detail', $product->productId) }}" class="btn btn-primary">Güncelle</a>
                                         <a onclick="return confirm('Silmek istediğinize emin misiniz?')"  href="{{ route('product-delete', $product->productId) }}" class="btn btn-danger">Sil</a>
+                                        <a href="{{ route('image-delete', $product->productId) }}" class="btn btn-warning">Resim Sil</a>
                                     </td>
                                 </tr>
                             @endforeach

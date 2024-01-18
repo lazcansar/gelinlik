@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\AdminpageController;
+use Illuminate\Support\Str;
 
 
 /*
@@ -64,3 +65,5 @@ Route::post('/admin-panel/product-gallery/ekle', [AdminpageController::class, 'a
 Route::get('/admin-panel/product-gallery/delete/{id}', [AdminpageController::class, 'adminProductDelete'])->name('product-delete');
 Route::get('/admin-panel/product-gallery/detay/{id}', [AdminpageController::class, 'adminProductDetail'])->name('product-update-detail');
 Route::post('/admin-panel/product-gallery/guncelle/{id}', [AdminpageController::class, 'adminProductDetail'])->name('product-update');
+Route::get('/admin-panel/product-gallery/resim-goruntule/{id}', [AdminpageController::class, 'adminProductImageDelete'])->name('image-delete');
+Route::get('/admin-panel/product-gallery/resim-sil/{dizin}/{newImage}', [AdminpageController::class, 'deleteImage'])->name('delete-image');

@@ -21,8 +21,9 @@ class AdminpageController extends Controller
             $listProduct = Urunler::paginate(2);
             $insertCategory = "";
             $allGalleryProduct = "";
+            $imageDelete = "";
             $productDetail = "";
-            return view('admin-panel.admin-product', compact('listProduct', 'insertCategory', 'allGalleryProduct', 'productDetail'));
+            return view('admin-panel.admin-product', compact('listProduct', 'insertCategory', 'allGalleryProduct', 'productDetail', 'imageDelete'));
     }
     public function adminProductInsert(Request $request)
     {
@@ -30,9 +31,10 @@ class AdminpageController extends Controller
             $listProduct = "";
             $allGalleryProduct = "";
             $productDetail = "";
+            $imageDelete = "";
             $insertCategory = Urunler::all();
             $categorySelect = Category::all();
-            return view('admin-panel.admin-product', compact('listProduct', 'insertCategory', 'allGalleryProduct', 'productDetail', 'categorySelect'));
+            return view('admin-panel.admin-product', compact('listProduct', 'insertCategory', 'allGalleryProduct', 'productDetail', 'categorySelect', 'imageDelete'));
         }
         else if($request->method()=="POST") {
             $title = $request->title;
@@ -65,9 +67,10 @@ class AdminpageController extends Controller
         if ($request->method() == "GET") {
             $listProduct = "";
             $productDetail = "";
+            $imageDelete = "";
             $insertCategory = "";
             $allGalleryProduct = Urunler::all();
-            return view('admin-panel.admin-product', compact('listProduct', 'insertCategory', 'allGalleryProduct', 'productDetail'));
+            return view('admin-panel.admin-product', compact('listProduct', 'insertCategory', 'allGalleryProduct', 'productDetail', 'imageDelete'));
         }
         else if ($request->method() == "POST") {
             $targetFolder = $request->product;
@@ -91,8 +94,9 @@ class AdminpageController extends Controller
             $allGalleryProduct = '';
             $listProduct = '';
             $insertCategory = '';
+            $imageDelete = '';
             $productDetail = Urunler::whereproductid($id)->first();
-            return view('admin-panel.admin-product', compact('productDetail', 'allGalleryProduct', 'listProduct', 'insertCategory'));
+            return view('admin-panel.admin-product', compact('productDetail', 'allGalleryProduct', 'listProduct', 'insertCategory', 'imageDelete'));
         }
         else if($request->method() == "POST") {
             $title = $request->title;
@@ -124,6 +128,35 @@ class AdminpageController extends Controller
         $deleteProduct = Urunler::whereproductid($id)->delete();
         return back()->with('delete', 'Ürün başarılı bir şekilde silindi.');
     }
+    public function adminProductImageDelete($id) {
+        $imageDelete = Urunler::whereproductid($id)->first();
+        $allGalleryProduct = '';
+        $listProduct = '';
+        $insertCategory = '';
+        $productDetail = '';
+        return view('admin-panel.admin-product', compact('imageDelete', 'allGalleryProduct', 'listProduct', 'insertCategory', 'productDetail'));
+    }
+    public function deleteImage($dizin, $newImage)
+    {
+        $dizin = public_path("images/product/$dizin");
+        if(File::isDirectory($dizin)) {
+            if (File::exists($dizin."/".$newImage)) {
+                File::delete($dizin."/".$newImage);
+                return redirect()->back()->with('delete', 'Resim silindi');
+            }else {
+                return redirect()->back()->with('delete', 'Böyle bir dosya bulunamadı.');
+            }
+        }else {
+            return redirect()->back()->with('delete', 'Bu bir dizin değil');
+        }
+    }
+
+
+
+
+
+
+
 
 
 
