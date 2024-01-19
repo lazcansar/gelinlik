@@ -45,9 +45,11 @@ class PagesController extends Controller
     public function registerPageView() {
         return view('auth.register');
     }
-    public function productDetailView()
+    public function productDetailView($productUrl)
     {
-        return view('pages.product');
+        $categories = Category::all();
+        $productDetail = Urunler::whereproducturl($productUrl)->first();
+        return view('pages.product', compact('productDetail', 'categories'));
     }
     public function categoryView()
     {

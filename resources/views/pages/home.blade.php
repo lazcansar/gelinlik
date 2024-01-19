@@ -148,7 +148,7 @@
                                     ?>
                                 <div class="col-lg-3 mb-5 ">
                                     <div class="model-main">
-                                        <a href="#">
+                                        <a href="{{ route('product-detail', $product->productUrl) }}">
                                             <div class="model-image">
                                                 <img src="{{ $coverImage }}" class="img-fluid image-one">
                                                     <?php
@@ -160,7 +160,7 @@
                                                 <a href="#" class="w-100 p-2 bg-dark text-white d-block text-center insert-card">Sepete Ekle</a>
                                             </div></a>
                                         <div class="model-title">
-                                            <a href="#">{{ $product->productTitle }}</a>
+                                            <a href="{{ route('product-detail', $product->productUrl) }}">{{ $product->productTitle }}</a>
                                         </div>
                                         <div class="model-price">
                                             ₺{{ $product->productPrice }}
@@ -191,7 +191,7 @@
                                             ?>
                                         <div class="col-lg-3 mb-5 ">
                                             <div class="model-main">
-                                                <a href="#">
+                                                <a href="{{ route('product-detail', $product->productUrl) }}">
                                                     <div class="model-image">
                                                         <img src="{{ $coverImage }}" class="img-fluid image-one">
                                                             <?php
@@ -203,7 +203,7 @@
                                                         <a href="#" class="w-100 p-2 bg-dark text-white d-block text-center insert-card">Sepete Ekle</a>
                                                     </div></a>
                                                 <div class="model-title">
-                                                    <a href="#">{{ $product->productTitle }}</a>
+                                                    <a href="{{ route('product-detail', $product->productUrl) }}">{{ $product->productTitle }}</a>
                                                 </div>
                                                 <div class="model-price">
                                                     ₺{{ $product->productPrice }}

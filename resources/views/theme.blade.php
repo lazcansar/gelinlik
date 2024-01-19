@@ -25,7 +25,6 @@
     <a class="btn btn-primary" href="{{ route('showroom-page') }}">Showroom</a>
     <a class="btn btn-primary" href="{{ route('login-page') }}">Giriş Yap</a>
     <a class="btn btn-primary" href="{{ route('register-page') }}">Kayıt Ol</a>
-    <a class="btn btn-primary" href="{{ route('product-detail') }}">Ürün Detay</a>
     <a class="btn btn-primary" href="{{ route('category-page') }}">Kategori</a>
     <a class="btn btn-primary" href="{{ route('checkout-page') }}">Ödeme</a>
     <a class="btn btn-primary" href="{{ route('checkout-success') }}">Ödeme Onay</a>

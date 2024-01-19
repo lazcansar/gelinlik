@@ -6,11 +6,15 @@
         <div class="container">
             <a href="">Anasayfa</a>
             <i class="bi bi-arrow-right-short"></i>
-            <a href="">Ürünler</a>
+            <a href="{{ route('category-page') }}">Ürünler</a>
             <i class="bi bi-arrow-right-short"></i>
-            <a href="">Gelinlik</a>
+            @foreach($categories as $category)
+                @if($category->categoryId == $productDetail->categoryId)
+                    <a href="{{ route('category-page') }}">{{ $category->categoryTitle }}</a>
+                @endif
+            @endforeach
             <i class="bi bi-arrow-right-short"></i>
-            <span>Gelinlik Model 01</span>
+            <span>{{ $productDetail->productTitle }}</span>
         </div>
     </div>
 
@@ -26,7 +30,14 @@
                         <div class="swiper-container gallery-main">
                             <div class="swiper-wrapper">
                                 <div class="swiper-slide">
-                                    <img src="https://beyazdusler.com/wp-content/uploads/2023/12/ge-1.jpg" alt="Slide 01">
+                                    <?php
+                                    $productImage = $productDetail->productCoverImage;
+                                    $productUrl = $productDetail->productUrl;
+                                    $baseImage = pathinfo($productImage);
+                                    $baseImage = $baseImage['basename'];
+                                    $coverImage = "images/product/".$productUrl."/".$baseImage;
+                                    ?>
+                                    <img src="../{{ $coverImage }}" alt="Slide 01">
                                 </div>
                                 <div class="swiper-slide">
                                     <img src="https://beyazdusler.com/wp-content/uploads/2023/12/ge-2.jpg" alt="Slide 02">
@@ -42,7 +53,7 @@
                         <div class="swiper-container gallery-thumbs">
                             <div class="swiper-wrapper">
                                 <div class="swiper-slide">
-                                    <img src="https://beyazdusler.com/wp-content/uploads/2023/12/ge-1.jpg" alt="Slide 01"></div>
+                                    <img src="../{{ $coverImage }}" alt="Slide 01"></div>
                                 <div class="swiper-slide">
                                     <img src="https://beyazdusler.com/wp-content/uploads/2023/12/ge-2.jpg" alt="Slide 02"></div>
                                 <div class="swiper-slide">
@@ -100,10 +111,10 @@
                 <div class="col-lg-6">
                     <div class="product-detail-head-right">
                         <div class="product-detail-title">
-                            Gelinlik Model 01
+                           {{ $productDetail->productTitle }}
                         </div>
                         <div class="product-detail-price">
-                            ₺17.500,00
+                            ₺{{ $productDetail->productPrice }}
                         </div>
                         <div class="product-detail-beden-tablo">
                             <img src="https://beyazdusler.com/wp-content/uploads/2023/12/beyaz-dusler-beden-tablosu-300x288.jpeg" class="img-fluid">
@@ -119,7 +130,11 @@
                         <hr>
                         <div class="product-detail-info">
                             <p><span>Stok Kodu:</span> 15</p>
-                            <p><span>Kategori:</span> Gelinlik</p>
+                            <p><span>Kategori:</span> @foreach($categories as $category)
+                                                       @if($category->categoryId == $productDetail->categoryId)
+                                                           {{ $category->categoryTitle }}
+                                                       @endif
+                            @endforeach</p>
                             <p><span>Paylaş:</span> <i class="bi bi-facebook"></i> <i class="bi bi-instagram"></i> <i class="bi bi-twitter"></i></p>
                         </div>
                     </div>
@@ -157,8 +172,16 @@
         </ul>
     </div>
     <div class="tab-content" id="pills-tabContent">
-        <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">...</div>
-        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">...</div>
+        <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
+            {!! $productDetail->productContent !!}
+        </div>
+        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">
+            <p class="mb-2">Modellerimizi canlı görmek için Fatih / İstanbul adresinde bulunan mağazımızı ziyaret edebilirsiniz. Online ödeme seçeneği, online ölçü alma seçeneği, canlı ürün gösterim seçeneği ile hizmetinizdeyiz.</p>
+            <p class="mb-2">Gelinlik, Nişanlık, Kınalık ve Abiye modellerimizde Türkiye başta olmak üzere, dünyanın tüm ülkelerine kargo ile gönderim mevcuttur.</p>
+            <p class="mb-2">Aksesuar seçeneklerine göz atmak için lütfen bizimle iletişime geçin! Stokta olan ürünlerimiz aynı gün mesai saatleri içerisinde kargoya teslim edilir.</p>
+            <p class="mb-2">Sipariş verilen ürünlerin aşamalarını hesap profilinizden görüntüleyebilirsiniz. Ayrıca sipariş numaranız ile web sayfamız üzerinden ürününüzün hangi aşamada olduğunu kolaylıkla kontrol edebilirsiniz.</p>
+            <p>Web sitemizde yer alan modellerimizi mağazamızda görmek isterseniz, mağaza personeline Stock Kod Numarası'nı iletin.</p>
+        </div>
         <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab" tabindex="0">...</div>
         <div class="tab-pane fade" id="pills-disabled" role="tabpanel" aria-labelledby="pills-disabled-tab" tabindex="0">...</div>
     </div>

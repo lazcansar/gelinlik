@@ -24,7 +24,8 @@ Route::get('/hakkimizda', [PagesController::class, 'aboutPageView'])->name('abou
 Route::get('/musteri-hizmetleri', [PagesController::class, 'customerPageView'])->name('customer-page');
 Route::get('/online-gelinlik-dikimi', [PagesController::class, 'weddingPageView'])->name('wedding-create');
 Route::get('/showroom', [PagesController::class, 'showroomPageView'])->name('showroom-page');
-Route::get('/urun-detay', [PagesController::class, 'productDetailView'])->name('product-detail');
+Route::get('/urun-detay/{productUrl}', [PagesController::class, 'productDetailView'])->name('product-detail');
+
 Route::get('/kategori', [PagesController::class, 'categoryView'])->name('category-page');
 Route::get('/odeme', [PagesController::class, 'checkoutView'])->name('checkout-page');
 Route::get('/odeme-basarili', [PagesController::class, 'checkoutSuccess'])->name('checkout-success');
