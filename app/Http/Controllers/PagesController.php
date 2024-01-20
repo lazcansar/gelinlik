@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Contact;
 use App\Models\Musterihizmetleri;
 use App\Models\SssModel;
 use App\Models\Urunler;
@@ -15,53 +16,87 @@ class PagesController extends Controller
     {
         $listProduct = Urunler::all();
         $listCategory = Category::all();
-        return view('pages.home', compact('listProduct', 'listCategory'));
+        $listContact = Contact::all();
+        return view('pages.home', compact('listProduct', 'listCategory', 'listContact'));
     }
     public function contactPageView () {
-        return view('pages.contact');
+        $listContact = Contact::all();
+        return view('pages.contact', compact('listContact'));
     }
     public function sssPageView () {
         $sss = SssModel::all();
-        return view('pages.sss', compact('sss'));
+        $listContact = Contact::all();
+        return view('pages.sss', compact('sss', 'listContact'));
     }
     public function aboutPageView () {
-        return view('pages.about');
+        $listContact = Contact::all();
+        return view('pages.about', compact('listContact'));
     }
     public function customerPageView ()
     {
         $customer = Musterihizmetleri::all();
-        return view('pages.costumer', compact('customer'));
+        $listContact = Contact::all();
+        return view('pages.costumer', compact('customer', 'listContact'));
     }
     public function weddingPageView()
     {
-        return view('pages.weddingcreate');
+        $listContact = Contact::all();
+        return view('pages.weddingcreate', compact('listContact'));
     }
     public function showroomPageView() {
-        return view('pages.showroom');
+        $listContact = Contact::all();
+        return view('pages.showroom', compact('listContact'));
     }
     public function loginPageView() {
-        return view('auth.login');
+        $listContact = Contact::all();
+        return view('auth.login', compact('listContact'));
     }
     public function registerPageView() {
-        return view('auth.register');
+        $listContact = Contact::all();
+        return view('auth.register', compact('listContact'));
     }
     public function productDetailView($productUrl)
     {
         $likeProduct = Urunler::all();
         $categories = Category::all();
+        $listContact = Contact::all();
         $productDetail = Urunler::whereproducturl($productUrl)->first();
-        return view('pages.product', compact('productDetail', 'categories', 'likeProduct'));
+        return view('pages.product', compact('productDetail', 'categories', 'likeProduct', 'listContact'));
     }
     public function categoryView()
     {
-        return view('pages.category');
+        $products = '';
+        $listProduct = Urunler::paginate(9);
+        $listCategory = Category::all();
+        $listContact = Contact::all();
+        return view('pages.category',compact('listContact', 'listProduct', 'listCategory', 'products'));
     }
+    public function categorySearch (Request $request) {
+        $listProduct = Urunler::paginate(9);
+        $listCategory = Category::all();
+        $listContact = Contact::all();
+
+        $stmt = Urunler::query();
+        if(isset($request->category) && $request->category !=null) {
+            $stmt->whereHas('kategori', function($q) use ($request){
+                $q->where('categoryId', $request->category);
+            });
+        }
+        $products = $stmt->get();
+
+
+
+        return view('pages.category',compact('listContact', 'listProduct', 'listCategory', 'products'));
+    }
+
     public function checkoutView()
     {
-        return view('pages.checkout');
+        $listContact = Contact::all();
+        return view('pages.checkout', compact('listContact'));
     }
     public function checkoutSuccess()
     {
-        return view('pages.checkout-succes');
+        $listContact = Contact::all();
+        return view('pages.checkout-succes', compact('listContact'));
     }
 }

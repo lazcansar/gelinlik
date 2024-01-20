@@ -27,6 +27,7 @@ Route::get('/showroom', [PagesController::class, 'showroomPageView'])->name('sho
 Route::get('/urun-detay/{productUrl}', [PagesController::class, 'productDetailView'])->name('product-detail');
 
 Route::get('/kategori', [PagesController::class, 'categoryView'])->name('category-page');
+Route::get('/kategori/filter', [PagesController::class, 'categorySearch'])->name('category-filter');
 Route::get('/odeme', [PagesController::class, 'checkoutView'])->name('checkout-page');
 Route::get('/odeme-basarili', [PagesController::class, 'checkoutSuccess'])->name('checkout-success');
 

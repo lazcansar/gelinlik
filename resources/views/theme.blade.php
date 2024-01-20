@@ -15,6 +15,56 @@
 </head>
 <body>
 
+<section class="nav-head">
+    <div class="side-menu" id="menuList">
+        <div class="text-end">
+            <button class="btn" onclick="toggleMenu()"><i class="bi bi-x-lg"></i></button>
+        </div>
+        <ul>
+            <li><a href="#">Anasayfa</a></li>
+            <li><a href="#">Hakkımızda</a></li>
+            <li><a href="#">Showroom</a></li>
+            <li><a href="#">Online Gelinlik Dikimi</a></li>
+            <li><a href="#">Sıkça Sorulan Sorular</a></li>
+            <li><a href="#">Müşteri Hizmetleri</a></li>
+            <li><a href="#">İletişim</a></li>
+        </ul>
+    </div>
+    <div class="container">
+        <div class="nav-head-main">
+            <div class="navhead-menu-toogle">
+                <button class="btn" onclick="toggleMenu();"><i class="bi bi-list"></i></button>
+            </div>
+            <div class="nav-menu-logo">
+                <a href="{{ route('home-page') }}"><img src="{{ URL::asset('images/logo/gelinlik-beyazdusler-logo.png') }}" height="72"></a>
+            </div>
+            <div class="nav-menu-action">
+                <a href="{{ route('login-page') }}"><i class="bi bi-person"></i></a>
+                <a href="#" class="translate-link" onclick="dropDown();"><i class="bi bi-translate"></i></a>
+                <div class="translate" id="translate-menu">
+                    <ul>
+                        <li><a href="">Türkçe</a></li>
+                        <li><a href="">English</a></li>
+                        <li><a href="">Arabic</a></li>
+                        <li><a href="">Deutsch</a></li>
+                    </ul>
+                </div>
+                <a href=""><i class="bi bi-cart"></i></a>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    function dropDown() {
+        var dropDown = document.getElementById("translate-menu");
+        dropDown.classList.toggle("show-translate");
+    }
+
+    function toggleMenu() {
+        var sideMenu = document.getElementById("menuList");
+        sideMenu.classList.toggle("showSideMenu");
+    }
+</script>
 <div class="container-fluid bg-dark p-3">
     <a class="btn btn-primary" href="/">Anasayfa</a>
     <a class="btn btn-primary" href="iletisim">İletişim</a>
@@ -47,18 +97,18 @@
                     <div class="footerLinks">
                         <h6>Beyazdusler.com</h6>
                         <p>Güzelliğiniz bizimle parlıyor. Özel anlarınıza özel gelinlik çeşitleri beyazdusler.com adresinde…</p>
-                        <a class="linkMailPhone" href="">E-Posta: bilgi@beyazdusler.com</a>
-                        <a class="linkMailPhone" href="">Telefon: 0531 354 20 84</a>
+                        <a class="linkMailPhone" href="mailto:{{ $listContact[0]->mail }}">E-Posta: bilgi@beyazdusler.com</a>
+                        <a class="linkMailPhone" href="tel:{{ $listContact[0]->phone }}">Telefon: {{ $listContact[0]->phone }}</a>
                     </div>
                 </div>
                 <div class="col-lg-2">
                     <div class="footerLinks">
                         <h6>Hakkımızda</h6>
                         <ul>
-                            <li><a href="">Hakkımızda</a> </li>
-                            <li><a href="">Müşteri Hizmetleri</a></li>
-                            <li><a href="">Sıkça Sorulan Sorular</a></li>
-                            <li><a href="">İletişim</a></li>
+                            <li><a href="{{ route('about-page') }}">Hakkımızda</a> </li>
+                            <li><a href="{{ route('customer-page') }}">Müşteri Hizmetleri</a></li>
+                            <li><a href="{{ route('sss-page') }}">Sıkça Sorulan Sorular</a></li>
+                            <li><a href="{{ route('contact-page') }}">İletişim</a></li>
                         </ul>
 
                     </div>
@@ -67,9 +117,9 @@
                     <div class="footerLinks">
                         <h6>Yardım Masası</h6>
                         <ul>
-                            <li><a href="">Beden Kılavuzu</a></li>
-                            <li><a href="">Soru & Cevap</a></li>
-                            <li><a href="">Ödeme İadesi</a></li>
+                            <li><a href="{{ route('customer-page') }}">Beden Kılavuzu</a></li>
+                            <li><a href="{{ route('sss-page') }}">Soru & Cevap</a></li>
+                            <li><a href="{{ route('customer-page') }}">Ödeme İadesi</a></li>
                         </ul>
                     </div>
                 </div>
@@ -77,10 +127,10 @@
                     <div class="footerLinks">
                         <h6>Hızlı Bağlantılar</h6>
                         <ul>
-                            <li><a href="">Ödeme Yöntemleri</a></li>
-                            <li><a href="">Kargo Bilgileri</a></li>
-                            <li><a href="">Gizlilik Politikası</a></li>
-                            <li><a href="">Kullanım Şartları</a></li>
+                            <li><a href="{{ route('customer-page') }}">Ödeme Yöntemleri</a></li>
+                            <li><a href="{{ route('customer-page') }}">Kargo Bilgileri</a></li>
+                            <li><a href="{{ route('customer-page') }}">Gizlilik Politikası</a></li>
+                            <li><a href="{{ route('customer-page') }}">Kullanım Şartları</a></li>
                         </ul>
                     </div>
                 </div>
@@ -88,7 +138,7 @@
                     <div class="footerLinks">
                         <h6>Bizi Takip Edin</h6>
                         <ul>
-                            <li>Instagram</li>
+                            <li><a href="{{$listContact[0]->instagra}}"><i class="bi bi-instagram"></i> Instagram</a></li>
                         </ul>
 
                     </div>
@@ -106,12 +156,12 @@
         <div class="footerBottom">
             <p>Copyright © 2023 Beyazdusler.com – Tüm hakları saklıdır. </p>
             <div class="reg-social d-flex justify-content-between flex-wrap align-items-center">
-                <div class="reg"><i class="bi bi-code-slash"></i> afyazilim.com</div>
+                <div class="reg"><a href="https://afyazilim.com" class="text-warning" target="_blank"><i class="bi bi-code-slash"></i> afyazilim.com</a></div>
                 <div class="social">
-                    <i class="bi bi-instagram"></i>
-                    <i class="bi bi-telephone"></i>
-                    <i class="bi bi-envelope"></i>
-                    <i class="bi bi-geo-alt-fill"></i>
+                    <a style="color: #fff" href="{{ $listContact[0]->instagram }}" target="_blank"><i class="bi bi-instagram"></i></a>
+                    <a style="color: #fff" href="tel:{{ $listContact[0]->phone }}"><i class="bi bi-telephone"></i></a>
+                    <a style="color: #fff" href="mailto:{{ $listContact[0]->mail }}"><i class="bi bi-envelope"></i></a>
+                    <a style="color: #fff;" href="{{ route('contact-page') }}"><i class="bi bi-geo-alt-fill"></i></a>
                 </div>
             </div>
         </div>

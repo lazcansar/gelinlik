@@ -44,21 +44,15 @@
                     <hr>
                     <div class="filter-category-cat">
                         <span>Kategoriler</span>
-                        <form action="" method="get">
-                            <div class="category-list">
-                                <input type="checkbox" id="gelinlik">
-                                <label for="gelinlik">Gelinlik</label>
-                            </div>
-                            <div class="category-list">
-                                <input type="checkbox" id="nisanlik">
-                                <label for="nisanlik">Nişanlık</label>
-                            </div>
+                        <form action="{{ route('category-filter') }}" method="get">
+@csrf
 
-                            <div class="category-list">
-                                <input type="checkbox" id="abiye">
-                                <label for="abiye">Abiye</label>
-                            </div>
-
+                            @foreach($listCategory as $filterCategory)
+                                <div class="category-list">
+                                    <input type="checkbox" name="category[]" value="{{ $filterCategory->categoryId }}" id="{{ $filterCategory->categoryUrl }}">
+                                    <label for="{{ $filterCategory->categoryUrl }}">{{ $filterCategory->categoryTitle }}</label>
+                                </div>
+                            @endforeach
                             <hr>
 
                             <span>Beden Tablosu</span>
@@ -86,19 +80,19 @@
                             <span>Fiyat</span>
 
                             <div class="category-list">
-                                <input type="checkbox" id="1">
+                                <input type="checkbox" id="1" name="1000-5000">
                                 <label for="1">1.000,00 TL - 5.000,00 TL</label>
                             </div>
                             <div class="category-list">
-                                <input type="checkbox" id="2">
+                                <input type="checkbox" id="2" name="5000-10000">
                                 <label for="2">5.000,00 TL - 10.000,00 TL</label>
                             </div>
                             <div class="category-list">
-                                <input type="checkbox" id="3">
+                                <input type="checkbox" id="3" name="10000-20000">
                                 <label for="1">10.000,00 TL - 20.000,00 TL</label>
                             </div>
                             <div class="category-list">
-                                <input type="checkbox" id="4">
+                                <input type="checkbox" id="4" name="20000-40000">
                                 <label for="4">20.000,00 TL - 40.000,00 TL</label>
                             </div>
                             <hr>
@@ -118,28 +112,77 @@
                     * Web sitemizde kayıtlı toplam 13 adet Abiye, Gelinlik ve Nişanlık modeli bulunmaktadır.
                 </div>
                     <div class="row">
-                        <?php
-                            for($i = 1; $i<=9; $i++) {
-                                echo '<div class="col-lg-4 mb-5 ">
-                            <div class="model-main">
-                                <div class="model-image">
-                                    <img src="https://beyazdusler.com/wp-content/uploads/2023/12/abiy-2-270x350.jpg" class="img-fluid image-one">
-                                    <img src="https://beyazdusler.com/wp-content/uploads/2023/12/abiy-1.jpg" class="img-fluid image-two">
-                                    <a href="#" class="w-100 p-2 bg-dark text-white d-block text-center insert-card">Sepete Ekle</a>
+                        @if($products)
+                            @foreach($products as $product)
+                                    <?php
+                                    $productUrl = $product->productUrl;
+                                    $productImage = $product->productCoverImage;
+                                    $baseImage = pathinfo($productImage);
+                                    $baseImage = $baseImage['basename'];
+                                    $coverImage = "images/product/".$productUrl."/".$baseImage;
+                                    ?>
+                                <div class="col-lg-4 mb-5 ">
+                                    <div class="model-main">
+                                        <a href="{{ route('product-detail', $product->productUrl) }}">
+                                            <div class="model-image">
+                                                <img src="../{{ $coverImage }}" class="img-fluid image-one">
+                                                    <?php
+                                                    $images = "images/product/".$productUrl;
+                                                    $allImages = glob("$images/*", GLOB_BRACE);
+                                                    echo '
+                            <img src="../'.$allImages[0].'" class="img-fluid image-two">';
+                                                    ?>
+                                                <a href="#" class="w-100 p-2 bg-dark text-white d-block text-center insert-card">Sepete Ekle</a>
+                                            </div></a>
+                                        <div class="model-title">
+                                            <a href="{{ route('product-detail', $product->productUrl) }}">{{ $product->productTitle }}</a>
+                                        </div>
+                                        <div class="model-price">
+                                            ₺{{ $product->productPrice }}
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="model-title">
-                                    <a href="#">Abiye Model - İşleme Detay</a>
-                                </div>
-                                <div class="model-price">
-                                    ₺17.500,00
+                            @endforeach
+                        @elseif($listProduct)
+
+
+                        @foreach($listProduct as $product)
+                                <?php
+                                $productUrl = $product->productUrl;
+                                $productImage = $product->productCoverImage;
+                                $baseImage = pathinfo($productImage);
+                                $baseImage = $baseImage['basename'];
+                                $coverImage = "images/product/".$productUrl."/".$baseImage;
+                                ?>
+                            <div class="col-lg-4 mb-5 ">
+                                <div class="model-main">
+                                    <a href="{{ route('product-detail', $product->productUrl) }}">
+                                        <div class="model-image">
+                                            <img src="../{{ $coverImage }}" class="img-fluid image-one">
+                                                <?php
+                                                $images = "images/product/".$productUrl;
+                                                $allImages = glob("$images/*", GLOB_BRACE);
+                                                echo '
+                            <img src="../'.$allImages[0].'" class="img-fluid image-two">';
+                                                ?>
+                                            <a href="#" class="w-100 p-2 bg-dark text-white d-block text-center insert-card">Sepete Ekle</a>
+                                        </div></a>
+                                    <div class="model-title">
+                                        <a href="{{ route('product-detail', $product->productUrl) }}">{{ $product->productTitle }}</a>
+                                    </div>
+                                    <div class="model-price">
+                                        ₺{{ $product->productPrice }}
+                                    </div>
                                 </div>
                             </div>
-                        </div>';
-                            }
-                            ?>
-
-
+                        @endforeach
+                        @endif
                     </div>
+                <div class="container">
+                    <div class="d-flex justify-content-center">
+                        {{ $listProduct->links() }}
+                    </div>
+                </div>
                 <!--More Product-->
 
             </div>

@@ -42,6 +42,85 @@ ul li {
     --footerTextColor: #FFFFFFCC;
 }
 
+
+/**
+Navbar
+ */
+.nav-head {
+    padding: 0;
+    font-family: 'Jost', sans-serif;
+    background-color: #EDDCD3;
+}
+.side-menu {
+    display: none;
+    height: 100%;
+    width: 25%;
+    background-color: #fefefe;
+    padding: 10px 30px;
+    transition: .3s ease-in-out;
+}
+.side-menu li {
+    font-weight: 400;
+    padding: 10px 0;
+}
+.side-menu li a {
+    color: #555555;
+    font-weight: 500;
+    transition: .3s ease;
+}
+.side-menu li a:hover {
+    color: #111111;
+}
+.showSideMenu {
+    display: block;
+    box-shadow: 0 0 5px rgba(0,0,0,.1);
+    position: fixed;
+    left: 0;
+    height: 100%;
+    transition: .3s ease-in-out;
+    z-index: 99999999999999;
+}
+.nav-head-main {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.nav-menu-action a {
+    color: #424242;
+}
+.nav-head-main i {
+    font-size: 28px;
+}
+.bi-person, .bi-translate {
+    margin-right: 15px;
+    display: inline-block;
+    position: relative;
+}
+.nav-menu-action {
+    overflow: hidden;
+}
+.translate {
+    display: none;
+    position: absolute;
+    top: 20;
+    z-index: 9;
+    height: max-content;
+    background-color: #fefefe;
+    padding: 15px 25px;
+    border-radius: 15px 0 15px 0;
+    box-shadow: 0 0 5px rgba(0,0,0,.1);
+}
+.translate ul li {
+    border-bottom: 1px dashed #555555;
+}
+.translate ul li a::before {
+    content: '»';
+    margin-right: 10px;
+}
+.show-translate {
+    display: block;
+}
 /**
 Checkout Page
  */

@@ -19,7 +19,7 @@
 
     <!--Maps-->
 <div class="contact-google-maps">
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3010.1891311787303!2d28.943780476129536!3d41.02111797134858!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14caba22100f3c67%3A0x2eed459b93577d4c!2zQWxpIEt1xZ_Dp3UsIEZldnppIFBhxZ9hIENkLiBObzo0NiBLYXQ6MSwgMzQwODMgRmF0aWgvxLBzdGFuYnVs!5e0!3m2!1str!2str!4v1704908109317!5m2!1str!2str" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    {!! $listContact[0]->google_maps !!}
 </div>
 
 
@@ -33,17 +33,19 @@
                     Adres
                 </div>
                 <div class="contact-adress-content">
-                    Ali Kuşçu Mah. Fevzipaşa Caddesi No:46 Kat:1 Fatih / İstanbul
+                    {{ $listContact[0]->adress }}
                 </div>
                 <div class="contact-adress-title">
                     İletişim
                 </div>
                 <div class="contact-adress-content">
                     <div class="contact-adress-line">
-                        <span>Telefon:</span> +90 (531) 354 20 84
+                        <span>Telefon:</span>
+                        {{ $listContact[0]->phone }}
                     </div>
                     <div class="contact-adress-line">
-                        <span>E-Posta:</span> bilgi@beyazdusler.com
+                        <span>E-Posta:</span>
+                        {{ $listContact[0]->mail }}
                     </div>
                 </div>
                 <div class="contact-adress-title">

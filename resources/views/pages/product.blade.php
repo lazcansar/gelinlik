@@ -228,13 +228,15 @@
                     ?>
                 <div class="col-lg-3">
                     <div class="model-main">
+                        <a href="{{ $likeUrl }}">
                         <div class="model-image">
                             <img src="../{{ $likeCoverImage }}" class="img-fluid image-one">
                             <img src="https://beyazdusler.com/wp-content/uploads/2023/12/abiy-1.jpg" class="img-fluid image-two">
                             <a href="#" class="w-100 p-2 bg-dark text-white d-block text-center insert-card">Sepete Ekle</a>
                         </div>
+                        </a>
                         <div class="model-title">
-                            <a href="#">{{ $like->productTitle }}</a>
+                            <a href="{{ $likeUrl }}">{{ $like->productTitle }}</a>
                         </div>
                         <div class="model-price">
                             ₺{{ $like->productPrice }}
