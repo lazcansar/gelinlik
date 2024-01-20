@@ -47,9 +47,10 @@ class PagesController extends Controller
     }
     public function productDetailView($productUrl)
     {
+        $likeProduct = Urunler::all();
         $categories = Category::all();
         $productDetail = Urunler::whereproducturl($productUrl)->first();
-        return view('pages.product', compact('productDetail', 'categories'));
+        return view('pages.product', compact('productDetail', 'categories', 'likeProduct'));
     }
     public function categoryView()
     {

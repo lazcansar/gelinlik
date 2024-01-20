@@ -218,66 +218,33 @@
     <div class="container" style="max-width: 80%; padding: 50px 0; font-family: 'Jost', sans-serif;">
         <h2 class="text-center mb-3">Bunlarda Hoşunuza Gidebilir</h2>
         <div class="row">
-            <div class="col-lg-3">
-                <div class="model-main">
-                    <div class="model-image">
-                        <img src="https://beyazdusler.com/wp-content/uploads/2023/12/abiy-2-270x350.jpg" class="img-fluid image-one">
-                        <img src="https://beyazdusler.com/wp-content/uploads/2023/12/abiy-1.jpg" class="img-fluid image-two">
-                        <a href="#" class="w-100 p-2 bg-dark text-white d-block text-center insert-card">Sepete Ekle</a>
-                    </div>
-                    <div class="model-title">
-                        <a href="#">Abiye Model - İşleme Detay</a>
-                    </div>
-                    <div class="model-price">
-                        ₺17.500,00
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3">
-                <div class="model-main">
-                    <div class="model-image">
-                        <img src="https://beyazdusler.com/wp-content/uploads/2023/12/abiy-2-270x350.jpg" class="img-fluid image-one">
-                        <img src="https://beyazdusler.com/wp-content/uploads/2023/12/abiy-1.jpg" class="img-fluid image-two">
-                        <a href="#" class="w-100 p-2 bg-dark text-white d-block text-center insert-card">Sepete Ekle</a>
-                    </div>
-                    <div class="model-title">
-                        <a href="#">Abiye Model - İşleme Detay</a>
-                    </div>
-                    <div class="model-price">
-                        ₺17.500,00
+            @foreach($likeProduct as $like)
+                <?php
+                    $likeImage = $like->productCoverImage;
+                    $likeUrl = $like->productUrl;
+                    $likeBaseImage = pathinfo($likeImage);
+                    $likeBaseImage = $likeBaseImage['basename'];
+                    $likeCoverImage = "images/product/".$likeUrl."/".$likeBaseImage;
+                    ?>
+                <div class="col-lg-3">
+                    <div class="model-main">
+                        <div class="model-image">
+                            <img src="../{{ $likeCoverImage }}" class="img-fluid image-one">
+                            <img src="https://beyazdusler.com/wp-content/uploads/2023/12/abiy-1.jpg" class="img-fluid image-two">
+                            <a href="#" class="w-100 p-2 bg-dark text-white d-block text-center insert-card">Sepete Ekle</a>
+                        </div>
+                        <div class="model-title">
+                            <a href="#">{{ $like->productTitle }}</a>
+                        </div>
+                        <div class="model-price">
+                            ₺{{ $like->productPrice }}
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-3">
-                <div class="model-main">
-                    <div class="model-image">
-                        <img src="https://beyazdusler.com/wp-content/uploads/2023/12/abiy-2-270x350.jpg" class="img-fluid image-one">
-                        <img src="https://beyazdusler.com/wp-content/uploads/2023/12/abiy-1.jpg" class="img-fluid image-two">
-                        <a href="#" class="w-100 p-2 bg-dark text-white d-block text-center insert-card">Sepete Ekle</a>
-                    </div>
-                    <div class="model-title">
-                        <a href="#">Abiye Model - İşleme Detay</a>
-                    </div>
-                    <div class="model-price">
-                        ₺17.500,00
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3">
-                <div class="model-main">
-                    <div class="model-image">
-                        <img src="https://beyazdusler.com/wp-content/uploads/2023/12/abiy-2-270x350.jpg" class="img-fluid image-one">
-                        <img src="https://beyazdusler.com/wp-content/uploads/2023/12/abiy-1.jpg" class="img-fluid image-two">
-                        <a href="#" class="w-100 p-2 bg-dark text-white d-block text-center insert-card">Sepete Ekle</a>
-                    </div>
-                    <div class="model-title">
-                        <a href="#">Abiye Model - İşleme Detay</a>
-                    </div>
-                    <div class="model-price">
-                        ₺17.500,00
-                    </div>
-                </div>
-            </div>
+            @endforeach
+
+
+
 
         </div>
     </div>
