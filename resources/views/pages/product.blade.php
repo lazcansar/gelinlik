@@ -37,14 +37,21 @@
                                     $baseImage = $baseImage['basename'];
                                     $coverImage = "images/product/".$productUrl."/".$baseImage;
                                     ?>
-                                    <img src="../{{ $coverImage }}" alt="Slide 01">
+                                    <img src="../{{ $coverImage }}" >
                                 </div>
-                                <div class="swiper-slide">
-                                    <img src="https://beyazdusler.com/wp-content/uploads/2023/12/ge-2.jpg" alt="Slide 02">
-                                </div>
-                                <div class="swiper-slide">
-                                    <img src="https://beyazdusler.com/wp-content/uploads/2023/12/ge-3.jpg" alt="Slide 03">
-                                </div>
+                                <?php
+                                $images = "images/product/".$productUrl;
+                                $allImages = glob("$images/*", GLOB_BRACE);
+                                ?>
+                                @foreach($allImages as $imageSlider)
+                                    <div class="swiper-slide">
+                                        <img src="../{{ $imageSlider }}">
+                                    </div>
+                                @endforeach
+
+
+
+
 
                             </div>
                             <div class="swiper-button-prev"></div>
@@ -53,11 +60,18 @@
                         <div class="swiper-container gallery-thumbs">
                             <div class="swiper-wrapper">
                                 <div class="swiper-slide">
-                                    <img src="../{{ $coverImage }}" alt="Slide 01"></div>
-                                <div class="swiper-slide">
-                                    <img src="https://beyazdusler.com/wp-content/uploads/2023/12/ge-2.jpg" alt="Slide 02"></div>
-                                <div class="swiper-slide">
-                                    <img src="https://beyazdusler.com/wp-content/uploads/2023/12/ge-3.jpg" alt="Slide 03"></div>
+                                    <img src="../{{ $coverImage }}"></div>
+                                <?php
+                                $images = "images/product/".$productUrl;
+                                $allImages = glob("$images/*", GLOB_BRACE);
+                                ?>
+
+                                @foreach($allImages as $imageSlider)
+                                    <div class="swiper-slide">
+                                        <img src="../{{ $imageSlider }}"></div>
+                                @endforeach
+
+
 
 
                             </div>
@@ -135,7 +149,17 @@
                                                            {{ $category->categoryTitle }}
                                                        @endif
                             @endforeach</p>
-                            <p><span>Paylaş:</span> <i class="bi bi-facebook"></i> <i class="bi bi-instagram"></i> <i class="bi bi-twitter"></i></p>
+                            <p><span>Paylaş:</span>
+                                <a href="https://www.facebook.com/sharer/sharer.php?u={{ $socialUrl = url()->full(); }}" target="_blank">
+                                    <i class="bi bi-facebook"></i>
+                                </a>
+                                <a href="https://twitter.com/intent/tweet?text={{ $productDetail->productTitle }}&url={{ $socialUrl = url()->full(); }}" target="_blank">
+                                    <i class="bi bi-twitter"></i>
+                                </a>
+                                <a href="https://wa.me/?text={{ $productDetail->productTitle }}%20{{ $socialUrl = url()->full(); }}" target="_blank">
+                                    <i class="bi bi-whatsapp"></i>
+                                </a>
+                                  </p>
                         </div>
                     </div>
                 </div>
