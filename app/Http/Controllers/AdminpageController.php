@@ -339,6 +339,12 @@ class AdminpageController extends Controller
     //Sıkça Sorulan Sorular Bağlantısı Biter
 
 
+    //Sirket bilgileri
+    public function companyInfo($id)
+    {
 
-
+        $listContact = Contact::all();
+        $companyInfo = Contact::whereId($id)->first();
+        return view('admin-panel.admin-contact', compact('listContact', 'companyInfo'));
+    }
 }

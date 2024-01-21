@@ -82,6 +82,7 @@
     <a class="btn btn-danger" href="{{ route('customer-view') }}">Müşteri Hizmetleri Yönet</a>
     <a class="btn btn-danger" href="{{ route('category-view') }}">Kategoriler</a>
     <a class="btn btn-danger" href="{{ route('product-view') }}">Ürünler</a>
+    <a class="btn btn-danger" href="{{ route('company-info', $id=1) }}">İletişim Bilgileri</a>
 </div>
 
 @yield('govde')

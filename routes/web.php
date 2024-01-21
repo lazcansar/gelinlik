@@ -69,3 +69,6 @@ Route::get('/admin-panel/product-gallery/detay/{id}', [AdminpageController::clas
 Route::post('/admin-panel/product-gallery/guncelle/{id}', [AdminpageController::class, 'adminProductDetail'])->name('product-update');
 Route::get('/admin-panel/product-gallery/resim-goruntule/{id}', [AdminpageController::class, 'adminProductImageDelete'])->name('image-delete');
 Route::get('/admin-panel/product-gallery/resim-sil/{dizin}/{newImage}', [AdminpageController::class, 'deleteImage'])->name('delete-image');
+
+//Admin Contact
+Route::get('/admin-panel/company-info/{id}', [AdminpageController::class, 'companyInfo'])->name('company-info');

@@ -89,7 +89,6 @@
 
             <div class="col-lg-8">
                 <div class="total-item-count">
-                    * Web sitemizde kayıtlı toplam 13 adet Abiye, Gelinlik ve Nişanlık modeli bulunmaktadır.
                 </div>
                     <div class="row">
                         @if($products)
