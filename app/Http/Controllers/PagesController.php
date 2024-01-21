@@ -82,6 +82,12 @@ class PagesController extends Controller
                 $q->whereIn('categoryId', $request->category);
             });
         }
+        if(isset($request->beden) && $request->beden !=null) {
+            $bedens = $request->beden;
+            $bedens = implode(',', $bedens);
+            $bedens = "%".$bedens."%";
+            $stmt->where('productInfo', "LIKE", $bedens);
+        }
         $products = $stmt->get();
 
 

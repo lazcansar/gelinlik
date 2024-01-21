@@ -57,42 +57,23 @@
                             <span>Beden Tablosu</span>
 
                             <div class="category-list">
-                                <input type="checkbox" id="xl">
+                                <input type="checkbox" name="beden[]" value="xl" id="xl">
                                 <label for="xl">XL</label>
                             </div>
 
                             <div class="category-list">
-                                <input type="checkbox" id="l">
+                                <input type="checkbox" name="beden[]" value="l" id="l">
                                 <label for="l">L</label>
                             </div>
 
                             <div class="category-list">
-                                <input type="checkbox" id="m">
+                                <input type="checkbox" name="beden[]" value="m" id="m">
                                 <label for="m">M</label>
                             </div>
 
                             <div class="category-list">
-                                <input type="checkbox" id="s">
+                                <input type="checkbox" name="beden[]" value="s" id="s">
                                 <label for="s">S</label>
-                            </div>
-                            <hr>
-                            <span>Fiyat</span>
-
-                            <div class="category-list">
-                                <input type="checkbox" id="1" name="1000-5000">
-                                <label for="1">1.000,00 TL - 5.000,00 TL</label>
-                            </div>
-                            <div class="category-list">
-                                <input type="checkbox" id="2" name="5000-10000">
-                                <label for="2">5.000,00 TL - 10.000,00 TL</label>
-                            </div>
-                            <div class="category-list">
-                                <input type="checkbox" id="3" name="10000-20000">
-                                <label for="1">10.000,00 TL - 20.000,00 TL</label>
-                            </div>
-                            <div class="category-list">
-                                <input type="checkbox" id="4" name="20000-40000">
-                                <label for="4">20.000,00 TL - 40.000,00 TL</label>
                             </div>
                             <hr>
                             <button type="submit" class="btn btn-success" style="padding:10px 30px; background-color: #C8815F;">Uygula</button>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Contact;
 use App\Models\SssModel;
 use App\Models\Musterihizmetleri;
 use App\Models\Category;
@@ -23,7 +24,8 @@ class AdminpageController extends Controller
             $allGalleryProduct = "";
             $imageDelete = "";
             $productDetail = "";
-            return view('admin-panel.admin-product', compact('listProduct', 'insertCategory', 'allGalleryProduct', 'productDetail', 'imageDelete'));
+            $listContact = Contact::all();
+            return view('admin-panel.admin-product', compact('listProduct', 'insertCategory', 'allGalleryProduct', 'productDetail', 'imageDelete','listContact'));
     }
     public function adminProductInsert(Request $request)
     {
@@ -34,7 +36,8 @@ class AdminpageController extends Controller
             $imageDelete = "";
             $insertCategory = Urunler::all();
             $categorySelect = Category::all();
-            return view('admin-panel.admin-product', compact('listProduct', 'insertCategory', 'allGalleryProduct', 'productDetail', 'categorySelect', 'imageDelete'));
+            $listContact = Contact::all();
+            return view('admin-panel.admin-product', compact('listProduct', 'insertCategory', 'allGalleryProduct', 'productDetail', 'categorySelect', 'imageDelete', 'listContact'));
         }
         else if($request->method()=="POST") {
             $title = $request->title;
@@ -70,7 +73,8 @@ class AdminpageController extends Controller
             $imageDelete = "";
             $insertCategory = "";
             $allGalleryProduct = Urunler::all();
-            return view('admin-panel.admin-product', compact('listProduct', 'insertCategory', 'allGalleryProduct', 'productDetail', 'imageDelete'));
+            $listContact = Contact::all();
+            return view('admin-panel.admin-product', compact('listProduct', 'insertCategory', 'allGalleryProduct', 'productDetail', 'imageDelete','listContact'));
         }
         else if ($request->method() == "POST") {
             $targetFolder = $request->product;
@@ -95,8 +99,9 @@ class AdminpageController extends Controller
             $listProduct = '';
             $insertCategory = '';
             $imageDelete = '';
+            $listContact = Contact::all();
             $productDetail = Urunler::whereproductid($id)->first();
-            return view('admin-panel.admin-product', compact('productDetail', 'allGalleryProduct', 'listProduct', 'insertCategory', 'imageDelete'));
+            return view('admin-panel.admin-product', compact('productDetail', 'allGalleryProduct', 'listProduct', 'insertCategory', 'imageDelete', 'listContact'));
         }
         else if($request->method() == "POST") {
             $title = $request->title;
@@ -134,7 +139,8 @@ class AdminpageController extends Controller
         $listProduct = '';
         $insertCategory = '';
         $productDetail = '';
-        return view('admin-panel.admin-product', compact('imageDelete', 'allGalleryProduct', 'listProduct', 'insertCategory', 'productDetail'));
+        $listContact = Contact::all();
+        return view('admin-panel.admin-product', compact('imageDelete', 'allGalleryProduct', 'listProduct', 'insertCategory', 'productDetail', 'listContact'));
     }
     public function deleteImage($dizin, $newImage)
     {
@@ -167,7 +173,8 @@ class AdminpageController extends Controller
         $categoryFake = '';
         $categoryDetail = '';
         $category = Category::all();
-        return view('admin-panel.category', compact('category', 'categoryFake', 'categoryDetail'));
+        $listContact = Contact::all();
+        return view('admin-panel.category', compact('category', 'categoryFake', 'categoryDetail', 'listContact'));
     }
     public function adminCategoryInsert(Request $request)
     {
@@ -175,7 +182,8 @@ class AdminpageController extends Controller
             $categoryFake = Category::all();
             $category = '';
             $categoryDetail = '';
-            return view('admin-panel.category', compact('categoryFake', 'category', 'categoryDetail'));
+            $listContact = Contact::all();
+            return view('admin-panel.category', compact('categoryFake', 'category', 'categoryDetail', 'listContact'));
         }
         else if($request->method() == "POST") {
             $title = $request->categoryTitle;
@@ -201,7 +209,8 @@ class AdminpageController extends Controller
             $categoryDetail = Category::wherecategoryid($id)->first();
             $categoryFake = '';
             $category = '';
-            return view('admin-panel.category', compact('categoryDetail', 'categoryFake', 'category'));
+            $listContact = Contact::all();
+            return view('admin-panel.category', compact('categoryDetail', 'categoryFake', 'category', 'listContact'));
         }
         else if ($request->method() == "POST") {
             Category::wherecategoryid($id)->update([
@@ -221,7 +230,8 @@ class AdminpageController extends Controller
         $customerInsert = '';
         $customerDetail = '';
         $customerAll = Musterihizmetleri::all();
-        return view('admin-panel.admin-musteri-hizmetleri', compact('customerInsert', 'customerAll', 'customerDetail'));
+        $listContact = Contact::all();
+        return view('admin-panel.admin-musteri-hizmetleri', compact('customerInsert', 'customerAll', 'customerDetail', 'listContact'));
     }
 
     public function adminCustomerServiceOlustur(Request $request)
@@ -230,7 +240,8 @@ class AdminpageController extends Controller
             $customerAll = '';
             $customerDetail = '';
             $customerInsert = Musterihizmetleri::all();
-            return view('admin-panel.admin-musteri-hizmetleri', compact('customerInsert', 'customerAll', 'customerDetail'));
+            $listContact = Contact::all();
+            return view('admin-panel.admin-musteri-hizmetleri', compact('customerInsert', 'customerAll', 'customerDetail', 'listContact'));
         }
         else if($request->method() == 'POST') {
             $title = $request->customTitle;
@@ -255,7 +266,8 @@ class AdminpageController extends Controller
             $customerAll = '';
             $customerInsert = '';
             $customerDetail = Musterihizmetleri::whereId($id)->first();
-            return view('admin-panel.admin-musteri-hizmetleri', compact('customerAll', 'customerInsert', 'customerDetail'));
+            $listContact = Contact::all();
+            return view('admin-panel.admin-musteri-hizmetleri', compact('customerAll', 'customerInsert', 'customerDetail', 'listContact'));
         }
         else if($request->method() == "POST") {
             Musterihizmetleri::whereId($id)->update([
@@ -278,14 +290,16 @@ class AdminpageController extends Controller
         $sssKayit = SssModel::all();
         $sssEkle = '';
         $sssGoruntule = '';
-        return view('admin-panel.admin-sss', compact('sssKayit', 'sssEkle', 'sssGoruntule'));
+        $listContact = Contact::all();
+        return view('admin-panel.admin-sss', compact('sssKayit', 'sssEkle', 'sssGoruntule', 'listContact'));
     }
     public function adminSssOlustur()
     {
         $sssGoruntule = '';
         $sssKayit = '';
         $sssEkle = SssModel::all();
-        return view('admin-panel.admin-sss', compact('sssKayit', 'sssEkle', 'sssGoruntule'));
+        $listContact = Contact::all();
+        return view('admin-panel.admin-sss', compact('sssKayit', 'sssEkle', 'sssGoruntule', 'listContact'));
     }
     public function adminSssCreateReg(Request $request)
     {
@@ -302,8 +316,9 @@ class AdminpageController extends Controller
         $sssEkle = '';
         $sssKayit = '';
         $sssDetay = SssModel::all();
+        $listContact = Contact::all();
         $sssGoruntule = SssModel::whereId($id)->first();
-        return view('admin-panel.admin-sss', compact('sssDetay', 'sssGoruntule', 'sssEkle', 'sssKayit'));
+        return view('admin-panel.admin-sss', compact('sssDetay', 'sssGoruntule', 'sssEkle', 'sssKayit', 'listContact'));
     }
     public function sssUpdate(Request $request, $id)
     {
