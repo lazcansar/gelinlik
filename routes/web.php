@@ -72,3 +72,4 @@ Route::get('/admin-panel/product-gallery/resim-sil/{dizin}/{newImage}', [Adminpa
 
 //Admin Contact
 Route::get('/admin-panel/company-info/{id}', [AdminpageController::class, 'companyInfo'])->name('company-info');
+Route::post('/admin-panel/company-info/{id}', [AdminpageController::class, 'companyInfo'])->name('company-update');

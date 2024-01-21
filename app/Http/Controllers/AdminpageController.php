@@ -340,11 +340,38 @@ class AdminpageController extends Controller
 
 
     //Sirket bilgileri
-    public function companyInfo($id)
+    public function companyInfo(Request $request, $id)
     {
-
-        $listContact = Contact::all();
-        $companyInfo = Contact::whereId($id)->first();
-        return view('admin-panel.admin-contact', compact('listContact', 'companyInfo'));
+        if($request->method() == "GET") {
+            $listContact = Contact::all();
+            $companyInfo = Contact::whereId($id)->first();
+            return view('admin-panel.admin-contact', compact('listContact', 'companyInfo'));
+        }
+        else if ($request->method() == "POST") {
+            $phone = $request->phone;
+            $mail = $request->mail;
+            $facebook = $request->facebook;
+            $instagram = $request->instagram;
+            $twitter = $request->twitter;
+            $linkedin = $request->linkedin;
+            $tiktok = $request->tiktok;
+            $youtube = $request->youtube;
+            $adress = $request->adres;
+            $maps = $request->google_maps;
+            Contact::whereId($id)->update([
+                "phone" => $phone,
+                "mail" => $mail,
+                "adress" => $adress,
+                "google_maps" => $maps,
+                "facebook" => $facebook,
+                "instagram" => $instagram,
+                "twitter" => $twitter,
+                "linkedin" => $linkedin,
+                "tiktok" => $tiktok,
+                "youtube" => $youtube,
+            ]);
+            return redirect()->back()->with("update", 'Bilgiler güncellendi');
+        }
     }
+
 }

@@ -139,9 +139,27 @@
                     <div class="footerLinks">
                         <h6>Bizi Takip Edin</h6>
                         <ul>
-                            <li><a href="{{$listContact[0]->instagra}}"><i class="bi bi-instagram"></i> Instagram</a></li>
+                            @foreach($listContact as $socialMedia)
+                                    @if($socialMedia->facebook !=Null)
+                                        <li><a href="{{$listContact[0]->facebook}}"><i class="bi bi-facebook"></i> Facebook</a></li>
+                                    @endif
+                                    @if($socialMedia->instagram !=Null)
+                                        <li><a href="{{$listContact[0]->instagram}}"><i class="bi bi-instagram"></i> Instagram</a></li>
+                                    @endif
+                                    @if($socialMedia->twitter !=Null)
+                                        <li><a href="{{$listContact[0]->twitter}}"><i class="bi bi-twitter"></i> Twitter</a></li>
+                                    @endif
+                                    @if($socialMedia->linkedin !=Null)
+                                        <li><a href="{{$listContact[0]->linkedin}}"><i class="bi bi-linkedin"></i> LinkedIn</a></li>
+                                    @endif
+                                    @if($socialMedia->tiktok !=Null)
+                                        <li><a href="{{$listContact[0]->tiktok}}"><i class="bi bi-tiktok"></i> Tiktok</a></li>
+                                    @endif
+                                    @if($socialMedia->youtube !=Null)
+                                        <li><a href="{{$listContact[0]->youtube}}"><i class="bi bi-youtube"></i> Youtube</a></li>
+                                    @endif
+                            @endforeach
                         </ul>
-
                     </div>
                 </div>
             </div>
