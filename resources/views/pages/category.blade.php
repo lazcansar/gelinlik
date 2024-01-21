@@ -45,7 +45,6 @@
                     <div class="filter-category-cat">
                         <span>Kategoriler</span>
                         <form action="{{ route('category-filter') }}" method="get">
-@csrf
 
                             @foreach($listCategory as $filterCategory)
                                 <div class="category-list">

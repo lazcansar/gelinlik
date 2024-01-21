@@ -79,7 +79,7 @@ class PagesController extends Controller
         $stmt = Urunler::query();
         if(isset($request->category) && $request->category !=null) {
             $stmt->whereHas('kategori', function($q) use ($request){
-                $q->where('categoryId', $request->category);
+                $q->whereIn('categoryId', $request->category);
             });
         }
         $products = $stmt->get();
