@@ -21,13 +21,19 @@
             <button class="btn" onclick="toggleMenu()"><i class="bi bi-x-lg"></i></button>
         </div>
         <ul>
-            <li><a href="#">Anasayfa</a></li>
-            <li><a href="#">Hakkımızda</a></li>
-            <li><a href="#">Showroom</a></li>
-            <li><a href="#">Online Gelinlik Dikimi</a></li>
-            <li><a href="#">Sıkça Sorulan Sorular</a></li>
-            <li><a href="#">Müşteri Hizmetleri</a></li>
-            <li><a href="#">İletişim</a></li>
+            @auth
+                @if(Auth::user()->rol == 1)
+                    <li><a href="{{ route('product-view') }}">Yönetim Paneli</a></li>
+                @endif
+            @endauth
+            <li><a href="{{ route('home-page') }}">Anasayfa</a></li>
+            <li><a href="{{ route('about-page') }}">Hakkımızda</a></li>
+            <li><a href="{{ route('category-page') }}">Tüm Ürünler</a> </li>
+            <li><a href="{{ route('showroom-page') }}">Showroom</a></li>
+            <li><a href="{{ route('wedding-create') }}">Online Gelinlik Dikimi</a></li>
+            <li><a href="{{ route('sss-page') }}">Sıkça Sorulan Sorular</a></li>
+            <li><a href="{{ route('customer-page') }}">Müşteri Hizmetleri</a></li>
+            <li><a href="{{ route('contact-page') }}">İletişim</a></li>
         </ul>
     </div>
     <div class="container">
@@ -39,7 +45,14 @@
                 <a href="{{ route('home-page') }}"><img src="{{ URL::asset('images/logo/gelinlik-beyazdusler-logo.png') }}" height="72"></a>
             </div>
             <div class="nav-menu-action">
-                <a href="{{ route('login-page') }}"><i class="bi bi-person"></i></a>
+
+                @auth
+                    <a href="{{ route('logout')  }}"><i class="bi bi-box-arrow-right"></i></a>
+                    <a href="#" class="me-2"><i class="bi bi-person-circle"></i> {{ Auth::user()->name }}</a>
+                @endauth
+                @guest
+                        <a href="{{ route('login-page') }}"><i class="bi bi-person"></i></a>
+                @endguest
                 <a href="#" class="translate-link" onclick="dropDown();"><i class="bi bi-translate"></i></a>
                 <div class="translate" id="translate-menu">
                     <ul>
@@ -65,17 +78,7 @@
         sideMenu.classList.toggle("showSideMenu");
     }
 </script>
-<div class="container-fluid bg-dark p-3">
-    <a class="btn btn-primary" href="/">Anasayfa</a>
-    <a class="btn btn-primary" href="iletisim">İletişim</a>
-    <a class="btn btn-primary" href="sikca-sorulan-sorular">SSS</a>
-    <a class="btn btn-primary" href="hakkimizda">Hakkımızda</a>
-    <a class="btn btn-primary" href="{{ route('customer-page') }}">Müşteri hizmetleri</a>
-    <a class="btn btn-primary" href="{{ route('wedding-create') }}">Online Gelinlik Dikimi</a>
-    <a class="btn btn-primary" href="{{ route('showroom-page') }}">Showroom</a>
-    <a class="btn btn-primary" href="{{ route('login-page') }}">Giriş Yap</a>
-    <a class="btn btn-primary" href="{{ route('register-page') }}">Kayıt Ol</a>
-    <a class="btn btn-primary" href="{{ route('category-page') }}">Kategori</a>
+<div class="container-fluid bg-dark p-3 d-none">
     <a class="btn btn-primary" href="{{ route('checkout-page') }}">Ödeme</a>
     <a class="btn btn-primary" href="{{ route('checkout-success') }}">Ödeme Onay</a>
     <a class="btn btn-danger" href="{{ route('sss-yonetim') }}">SSS Yönet</a>

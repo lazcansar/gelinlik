@@ -1,6 +1,5 @@
-@extends('theme')
-@section('title') Giriş Yap @endsection
-@section('govde')
+<?php $__env->startSection('title'); ?> Giriş Yap <?php $__env->stopSection(); ?>
+<?php $__env->startSection('govde'); ?>
 
 
 
@@ -10,12 +9,12 @@
                 Giriş Yap
             </div>
             <div class="login-sub-info">
-                Hesabın yok mu? <a href="{{ route('register-page') }}">Hemen hesap oluştur.</a>
+                Hesabın yok mu? <a href="<?php echo e(route('register-page')); ?>">Hemen hesap oluştur.</a>
             </div>
 
             <div class="login-form">
-                <form action="{{ route('login-insert') }}" method="POST">
-                    @csrf
+                <form action="<?php echo e(route('login-insert')); ?>" method="POST">
+                    <?php echo csrf_field(); ?>
 
                     <label for="email">E-Posta*</label>
                     <input type="email" class="form-control mb-3" name="email" required>
@@ -32,4 +31,6 @@
         </div>
     </section>
 
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('theme', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /Applications/XAMPP/xamppfiles/htdocs/gelinlik/resources/views/auth/login.blade.php ENDPATH**/ ?>

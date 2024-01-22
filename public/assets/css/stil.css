@@ -92,7 +92,7 @@ Navbar
 .nav-head-main i {
     font-size: 28px;
 }
-.bi-person, .bi-translate {
+.bi-person, .bi-translate, .bi-box-arrow-right {
     margin-right: 15px;
     display: inline-block;
     position: relative;

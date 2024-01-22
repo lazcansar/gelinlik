@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\AdminpageController;
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Str;
 
 
@@ -26,14 +27,17 @@ Route::get('/online-gelinlik-dikimi', [PagesController::class, 'weddingPageView'
 Route::get('/showroom', [PagesController::class, 'showroomPageView'])->name('showroom-page');
 Route::get('/urun-detay/{productUrl}', [PagesController::class, 'productDetailView'])->name('product-detail');
 
-Route::get('/kategori', [PagesController::class, 'categoryView'])->name('category-page');
-Route::get('/kategori/filter', [PagesController::class, 'categorySearch'])->name('category-filter');
+Route::get('/urunler', [PagesController::class, 'categoryView'])->name('category-page');
+Route::get('/urunler/filter', [PagesController::class, 'categorySearch'])->name('category-filter');
 Route::get('/odeme', [PagesController::class, 'checkoutView'])->name('checkout-page');
 Route::get('/odeme-basarili', [PagesController::class, 'checkoutSuccess'])->name('checkout-success');
 
 
-Route::get('/giris-yap', [PagesController::class, 'loginPageView'])->name('login-page');
-Route::get('/kayit-ol', [PagesController::class, 'registerPageView'])->name('register-page');
+Route::get('/giris-yap', [AuthController::class, 'login'])->name('login-page');
+Route::post('/giris-yap', [AuthController::class, 'loginController'])->name('login-insert');
+Route::get('/kayit-ol', [AuthController::class, 'register'])->name('register-page');
+Route::post('/kayit-ol', [AuthController::class, 'register'])->name('register-insert');
+Route::get('/cikis-yap', [AuthController::class, 'logout'])->name('logout');
 
 
 //SSS

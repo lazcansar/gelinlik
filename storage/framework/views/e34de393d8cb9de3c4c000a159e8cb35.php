@@ -1,6 +1,5 @@
-@extends('theme')
-@section('title') Ürünler @endsection
-@section('stilAlani')
+<?php $__env->startSection('title'); ?> Ürünler <?php $__env->stopSection(); ?>
+<?php $__env->startSection('stilAlani'); ?>
     .category-page-title .container {
     font-weight: 500;
     font-size: 46px;
@@ -12,8 +11,8 @@
         font-weight: 300;
     }
 
-@endsection
-@section('govde')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('govde'); ?>
 
 <section class="category-page">
     <div class="category-page-bread">
@@ -44,14 +43,14 @@
                     <hr>
                     <div class="filter-category-cat">
                         <span>Kategoriler</span>
-                        <form action="{{ route('category-filter') }}" method="get">
+                        <form action="<?php echo e(route('category-filter')); ?>" method="get">
 
-                            @foreach($listCategory as $filterCategory)
+                            <?php $__currentLoopData = $listCategory; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $filterCategory): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <div class="category-list">
-                                    <input type="checkbox" name="category[]" value="{{ $filterCategory->categoryId }}" id="{{ $filterCategory->categoryUrl }}">
-                                    <label for="{{ $filterCategory->categoryUrl }}">{{ $filterCategory->categoryTitle }}</label>
+                                    <input type="checkbox" name="category[]" value="<?php echo e($filterCategory->categoryId); ?>" id="<?php echo e($filterCategory->categoryUrl); ?>">
+                                    <label for="<?php echo e($filterCategory->categoryUrl); ?>"><?php echo e($filterCategory->categoryTitle); ?></label>
                                 </div>
-                            @endforeach
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             <hr>
 
                             <span>Beden Tablosu</span>
@@ -91,8 +90,8 @@
                 <div class="total-item-count">
                 </div>
                     <div class="row">
-                        @if($products)
-                            @foreach($products as $product)
+                        <?php if($products): ?>
+                            <?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <?php
                                     $productUrl = $product->productUrl;
                                     $productImage = $product->productCoverImage;
@@ -102,9 +101,9 @@
                                     ?>
                                 <div class="col-lg-4 mb-5 ">
                                     <div class="model-main">
-                                        <a href="{{ route('product-detail', $product->productUrl) }}">
+                                        <a href="<?php echo e(route('product-detail', $product->productUrl)); ?>">
                                             <div class="model-image">
-                                                <img src="../{{ $coverImage }}" class="img-fluid image-one">
+                                                <img src="../<?php echo e($coverImage); ?>" class="img-fluid image-one">
                                                     <?php
                                                     $images = "images/product/".$productUrl;
                                                     $allImages = glob("$images/*", GLOB_BRACE);
@@ -114,18 +113,19 @@
                                                 <a href="#" class="w-100 p-2 bg-dark text-white d-block text-center insert-card">Sepete Ekle</a>
                                             </div></a>
                                         <div class="model-title">
-                                            <a href="{{ route('product-detail', $product->productUrl) }}">{{ $product->productTitle }}</a>
+                                            <a href="<?php echo e(route('product-detail', $product->productUrl)); ?>"><?php echo e($product->productTitle); ?></a>
                                         </div>
                                         <div class="model-price">
-                                            ₺{{ $product->productPrice }}
+                                            ₺<?php echo e($product->productPrice); ?>
+
                                         </div>
                                     </div>
                                 </div>
-                            @endforeach
-                        @elseif($listProduct)
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        <?php elseif($listProduct): ?>
 
 
-                        @foreach($listProduct as $product)
+                        <?php $__currentLoopData = $listProduct; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <?php
                                 $productUrl = $product->productUrl;
                                 $productImage = $product->productCoverImage;
@@ -135,9 +135,9 @@
                                 ?>
                             <div class="col-lg-4 mb-5 ">
                                 <div class="model-main">
-                                    <a href="{{ route('product-detail', $product->productUrl) }}">
+                                    <a href="<?php echo e(route('product-detail', $product->productUrl)); ?>">
                                         <div class="model-image">
-                                            <img src="../{{ $coverImage }}" class="img-fluid image-one">
+                                            <img src="../<?php echo e($coverImage); ?>" class="img-fluid image-one">
                                                 <?php
                                                 $images = "images/product/".$productUrl;
                                                 $allImages = glob("$images/*", GLOB_BRACE);
@@ -147,19 +147,21 @@
                                             <a href="#" class="w-100 p-2 bg-dark text-white d-block text-center insert-card">Sepete Ekle</a>
                                         </div></a>
                                     <div class="model-title">
-                                        <a href="{{ route('product-detail', $product->productUrl) }}">{{ $product->productTitle }}</a>
+                                        <a href="<?php echo e(route('product-detail', $product->productUrl)); ?>"><?php echo e($product->productTitle); ?></a>
                                     </div>
                                     <div class="model-price">
-                                        ₺{{ $product->productPrice }}
+                                        ₺<?php echo e($product->productPrice); ?>
+
                                     </div>
                                 </div>
                             </div>
-                        @endforeach
-                        @endif
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        <?php endif; ?>
                     </div>
                 <div class="container">
                     <div class="d-flex justify-content-center">
-                        {{ $listProduct->links() }}
+                        <?php echo e($listProduct->links()); ?>
+
                     </div>
                 </div>
                 <!--More Product-->
@@ -180,4 +182,6 @@
 
 
 
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('theme', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /Applications/XAMPP/xamppfiles/htdocs/gelinlik/resources/views/pages/category.blade.php ENDPATH**/ ?>

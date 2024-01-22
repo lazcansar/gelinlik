@@ -1,6 +1,5 @@
-@extends('theme')
-@section('title') Anasayfa @endsection
-@section('govde')
+<?php $__env->startSection('title'); ?> Anasayfa <?php $__env->stopSection(); ?>
+<?php $__env->startSection('govde'); ?>
 
 <div class="home-slider">
     <div class="swiper homeSlider">
@@ -113,31 +112,31 @@
     <!---Navs--->
     <div class="model-nav">
     <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-        @if($listCategory)
+        <?php if($listCategory): ?>
 
             <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="pills-{{ $listCategory[0]->categoryUrl }}-tab" data-bs-toggle="pill" data-bs-target="#pills-{{ $listCategory[0]->categoryUrl }}" type="button" role="tab" aria-controls="pills-{{ $listCategory[0]->categoryUrl }}" aria-selected="true">{{ $listCategory[0]->categoryTitle }}</button>
+                <button class="nav-link active" id="pills-<?php echo e($listCategory[0]->categoryUrl); ?>-tab" data-bs-toggle="pill" data-bs-target="#pills-<?php echo e($listCategory[0]->categoryUrl); ?>" type="button" role="tab" aria-controls="pills-<?php echo e($listCategory[0]->categoryUrl); ?>" aria-selected="true"><?php echo e($listCategory[0]->categoryTitle); ?></button>
             </li>
-            @foreach($listCategory as $category)
-                @if($category->categoryId > 1)
+            <?php $__currentLoopData = $listCategory; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <?php if($category->categoryId > 1): ?>
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="pills-{{ $category->categoryUrl }}-tab" data-bs-toggle="pill" data-bs-target="#pills-{{ $category->categoryUrl }}" type="button" role="tab" aria-controls="pills-{{ $category->categoryUrl }}" aria-selected="false">{{ $category->categoryTitle }}</button>
+                        <button class="nav-link" id="pills-<?php echo e($category->categoryUrl); ?>-tab" data-bs-toggle="pill" data-bs-target="#pills-<?php echo e($category->categoryUrl); ?>" type="button" role="tab" aria-controls="pills-<?php echo e($category->categoryUrl); ?>" aria-selected="false"><?php echo e($category->categoryTitle); ?></button>
                     </li>
-                @endif
+                <?php endif; ?>
 
-            @endforeach
-        @endif
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+        <?php endif; ?>
 
     </ul>
     </div>
     <div class="tab-content" id="pills-tabContent">
-        @if($listCategory)
-            <div class="tab-pane fade show active" id="pills-{{ $listCategory[0]->categoryUrl }}" role="tabpanel" aria-labelledby="pills-{{ $listCategory[0]->categoryUrl }}-tab" tabindex="0">
+        <?php if($listCategory): ?>
+            <div class="tab-pane fade show active" id="pills-<?php echo e($listCategory[0]->categoryUrl); ?>" role="tabpanel" aria-labelledby="pills-<?php echo e($listCategory[0]->categoryUrl); ?>-tab" tabindex="0">
                 <!---->
                 <div class="row">
-                    @if($listProduct)
-                        @foreach($listProduct as $product)
-                            @if($product->categoryId == $listCategory[0]->categoryId)
+                    <?php if($listProduct): ?>
+                        <?php $__currentLoopData = $listProduct; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <?php if($product->categoryId == $listCategory[0]->categoryId): ?>
                                     <?php
                                     $productUrl = $product->productUrl;
                                     $productImage = $product->productCoverImage;
@@ -147,9 +146,9 @@
                                     ?>
                                 <div class="col-lg-3 mb-5 ">
                                     <div class="model-main">
-                                        <a href="{{ route('product-detail', $product->productUrl) }}">
+                                        <a href="<?php echo e(route('product-detail', $product->productUrl)); ?>">
                                             <div class="model-image">
-                                                <img src="{{ $coverImage }}" class="img-fluid image-one">
+                                                <img src="<?php echo e($coverImage); ?>" class="img-fluid image-one">
                                                     <?php
                                                     $images = "images/product/".$productUrl;
                                                     $allImages = glob("$images/*", GLOB_BRACE);
@@ -159,28 +158,29 @@
                                                 <a href="#" class="w-100 p-2 bg-dark text-white d-block text-center insert-card">Sepete Ekle</a>
                                             </div></a>
                                         <div class="model-title">
-                                            <a href="{{ route('product-detail', $product->productUrl) }}">{{ $product->productTitle }}</a>
+                                            <a href="<?php echo e(route('product-detail', $product->productUrl)); ?>"><?php echo e($product->productTitle); ?></a>
                                         </div>
                                         <div class="model-price">
-                                            ₺{{ $product->productPrice }}
+                                            ₺<?php echo e($product->productPrice); ?>
+
                                         </div>
                                     </div>
                                 </div>
-                            @endif
-                        @endforeach
-                    @endif
+                            <?php endif; ?>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    <?php endif; ?>
 
                 </div>
                 <!---->
             </div>
-            @foreach($listCategory as $category)
-                @if($category->categoryId > 1)
-                    <div class="tab-pane fade" id="pills-{{ $category->categoryUrl }}" role="tabpanel" aria-labelledby="pills-{{ $category->categoryUrl }}-tab" tabindex="0">
+            <?php $__currentLoopData = $listCategory; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <?php if($category->categoryId > 1): ?>
+                    <div class="tab-pane fade" id="pills-<?php echo e($category->categoryUrl); ?>" role="tabpanel" aria-labelledby="pills-<?php echo e($category->categoryUrl); ?>-tab" tabindex="0">
                         <!------>
                         <div class="row">
-                            @if($listProduct)
-                                @foreach($listProduct as $product)
-                                    @if($product->categoryId == $category->categoryId)
+                            <?php if($listProduct): ?>
+                                <?php $__currentLoopData = $listProduct; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <?php if($product->categoryId == $category->categoryId): ?>
                                             <?php
                                             $productUrl = $product->productUrl;
                                             $productImage = $product->productCoverImage;
@@ -190,9 +190,9 @@
                                             ?>
                                         <div class="col-lg-3 mb-5 ">
                                             <div class="model-main">
-                                                <a href="{{ route('product-detail', $product->productUrl) }}">
+                                                <a href="<?php echo e(route('product-detail', $product->productUrl)); ?>">
                                                     <div class="model-image">
-                                                        <img src="{{ $coverImage }}" class="img-fluid image-one">
+                                                        <img src="<?php echo e($coverImage); ?>" class="img-fluid image-one">
                                                             <?php
                                                             $images = "images/product/".$productUrl;
                                                             $allImages = glob("$images/*", GLOB_BRACE);
@@ -202,25 +202,26 @@
                                                         <a href="#" class="w-100 p-2 bg-dark text-white d-block text-center insert-card">Sepete Ekle</a>
                                                     </div></a>
                                                 <div class="model-title">
-                                                    <a href="{{ route('product-detail', $product->productUrl) }}">{{ $product->productTitle }}</a>
+                                                    <a href="<?php echo e(route('product-detail', $product->productUrl)); ?>"><?php echo e($product->productTitle); ?></a>
                                                 </div>
                                                 <div class="model-price">
-                                                    ₺{{ $product->productPrice }}
+                                                    ₺<?php echo e($product->productPrice); ?>
+
                                                 </div>
                                             </div>
                                         </div>
-                                    @endif
-                                @endforeach
-                            @endif
+                                    <?php endif; ?>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            <?php endif; ?>
 
                         </div>
 
                         <!------>
                     </div>
-                @endif
+                <?php endif; ?>
 
-            @endforeach
-        @endif
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+        <?php endif; ?>
 
 
     </div>
@@ -253,4 +254,6 @@
 
 
 
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('theme', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /Applications/XAMPP/xamppfiles/htdocs/gelinlik/resources/views/pages/home.blade.php ENDPATH**/ ?>
