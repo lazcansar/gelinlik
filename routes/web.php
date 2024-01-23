@@ -5,7 +5,7 @@ use App\Http\Controllers\PagesController;
 use App\Http\Controllers\AdminpageController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Str;
-
+use App\Http\Controllers\UserPage;
 
 /*
 |--------------------------------------------------------------------------
@@ -77,3 +77,8 @@ Route::get('/admin-panel/product-gallery/resim-sil/{dizin}/{newImage}', [Adminpa
 //Admin Contact
 Route::get('/admin-panel/company-info/{id}', [AdminpageController::class, 'companyInfo'])->name('company-info');
 Route::post('/admin-panel/company-info/{id}', [AdminpageController::class, 'companyInfo'])->name('company-update');
+
+
+//User Account Page
+Route::get('/hesabim', [UserPage::class, 'userPage'])->name('my-account');
+

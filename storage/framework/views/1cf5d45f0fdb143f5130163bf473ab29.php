@@ -48,7 +48,7 @@
 
                 <?php if(auth()->guard()->check()): ?>
                     <a href="<?php echo e(route('logout')); ?>"><i class="bi bi-box-arrow-right"></i></a>
-                    <a href="#" class="me-2"><i class="bi bi-person-circle"></i> <?php echo e(Auth::user()->name); ?></a>
+                    <a href="<?php echo e(route('my-account')); ?>" class="me-2"><i class="bi bi-person-circle"></i> <?php echo e(Auth::user()->name); ?></a>
                 <?php endif; ?>
                 <?php if(auth()->guard()->guest()): ?>
                         <a href="<?php echo e(route('login-page')); ?>"><i class="bi bi-person"></i></a>

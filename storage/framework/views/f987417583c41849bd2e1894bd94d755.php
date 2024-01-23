@@ -1,6 +1,5 @@
-@extends('theme')
-@section('title') Ürün Detay @endsection
-@section('stilAlani')
+<?php $__env->startSection('title'); ?> Ürün Detay <?php $__env->stopSection(); ?>
+<?php $__env->startSection('stilAlani'); ?>
     .category-page-title .container {
     font-weight: 500;
     font-size: 46px;
@@ -12,8 +11,8 @@
     font-weight: 300;
     }
 
-@endsection
-@section('govde')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('govde'); ?>
 
     <section class="category-page">
         <div class="category-page-bread">
@@ -146,4 +145,6 @@
             </div>
         </div>
 
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('theme', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /Applications/XAMPP/xamppfiles/htdocs/gelinlik/resources/views/pages/checkout.blade.php ENDPATH**/ ?>

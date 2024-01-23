@@ -844,3 +844,33 @@ Footer
 .footerLinks li {
     margin-bottom: 10px;
 }
+
+
+/**
+Account Page
+ */
+.my-account {
+    font-family: 'Jost', sans-serif;
+    padding: 0 0 50px 0;
+}
+.account-menu {
+    background-color: #F8F9FC;
+}
+.account-menu li {
+    padding: 10px 20px;
+    background-color: #7e7e7e;
+    border-bottom: 1px solid #fff;
+}
+.account-menu li a {
+    color: #fff;
+    position: relative;
+    display: block;
+    overflow: hidden;
+}
+.account-menu li a span {
+    position: absolute;
+    right: 0;
+}
+.account-info .user-name {
+    font-weight: 500;
+}

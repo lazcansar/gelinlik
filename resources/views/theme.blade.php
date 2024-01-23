@@ -48,7 +48,7 @@
 
                 @auth
                     <a href="{{ route('logout')  }}"><i class="bi bi-box-arrow-right"></i></a>
-                    <a href="#" class="me-2"><i class="bi bi-person-circle"></i> {{ Auth::user()->name }}</a>
+                    <a href="{{ route('my-account') }}" class="me-2"><i class="bi bi-person-circle"></i> {{ Auth::user()->name }}</a>
                 @endauth
                 @guest
                         <a href="{{ route('login-page') }}"><i class="bi bi-person"></i></a>
