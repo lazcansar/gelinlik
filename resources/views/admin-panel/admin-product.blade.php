@@ -21,7 +21,7 @@ margin-bottom: 1rem;
 
     <div class="bread-line">
         <div class="container">
-                <a href="">Admin Paneli</a>
+                <a href="{{ route('admin-home') }}">Admin Paneli</a>
                 <i class="bi bi-arrow-right-short"></i>
                 <span>Ürünler</span>
         </div>

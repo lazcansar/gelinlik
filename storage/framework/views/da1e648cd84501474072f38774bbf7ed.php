@@ -1,6 +1,5 @@
-@extends('theme')
-@section('title') Anasayfa @endsection
-@section('stilAlani')
+<?php $__env->startSection('title'); ?> Anasayfa <?php $__env->stopSection(); ?>
+<?php $__env->startSection('stilAlani'); ?>
     .admin-sss-page {
     margin-bottom: 3rem;
     }
@@ -15,40 +14,40 @@
     margin-bottom: 1rem;
     }
 
-@endsection
-@section('govde')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('govde'); ?>
 
     <div class="bread-line">
         <div class="container">
-            @if($sssEkle)
-                <a href="{{ route('admin-home') }}">Admin Paneli</a>
+            <?php if($sssEkle): ?>
+                <a href="<?php echo e(route('admin-home')); ?>">Admin Paneli</a>
                 <i class="bi bi-arrow-right-short"></i>
-                <a href="{{ route('sss-yonetim') }}">Sıkça Sorulan Sorular</a>
+                <a href="<?php echo e(route('sss-yonetim')); ?>">Sıkça Sorulan Sorular</a>
                 <i class="bi bi-arrow-right-short"></i>
                 <span>Kayıt Ekle</span>
-            @elseif($sssKayit)
-                <a href="{{ route('admin-home') }}">Admin Paneli</a>
+            <?php elseif($sssKayit): ?>
+                <a href="<?php echo e(route('admin-home')); ?>">Admin Paneli</a>
                 <i class="bi bi-arrow-right-short"></i>
                 <span>Sıkça Sorulan Sorular</span>
-            @endif
+            <?php endif; ?>
         </div>
     </div>
 
-    @if(session('success'))
+    <?php if(session('success')): ?>
         <div class="container">
-            <div class="alert alert-success">{{ session('success') }}</div>
+            <div class="alert alert-success"><?php echo e(session('success')); ?></div>
         </div>
-    @endif
-    @if(session('delete'))
+    <?php endif; ?>
+    <?php if(session('delete')): ?>
         <div class="container">
-            <div class="alert alert-warning">{{ session('delete') }}</div>
+            <div class="alert alert-warning"><?php echo e(session('delete')); ?></div>
         </div>
-    @endif
-    @if(session('update'))
+    <?php endif; ?>
+    <?php if(session('update')): ?>
         <div class="container">
-            <div class="alert alert-warning">{{ session('update') }}</div>
+            <div class="alert alert-warning"><?php echo e(session('update')); ?></div>
         </div>
-    @endif
+    <?php endif; ?>
 
     <section class="admin-sss-page">
         <div class="container">
@@ -56,26 +55,26 @@
                 <div class="col-lg-3">
                     <ul class="nav flex-column bg-light">
                         <li class="nav-item border-bottom">
-                            <a class="nav-link" href="{{ route('sss-yonetim') }}"><i class="bi bi-house-fill"></i> Sıkça Sorulan Sorular</a>
+                            <a class="nav-link" href="<?php echo e(route('sss-yonetim')); ?>"><i class="bi bi-house-fill"></i> Sıkça Sorulan Sorular</a>
                         </li>
                         <li class="nav-item border-bottom">
-                            <a class="nav-link" href="{{ route('sss-kayit') }}"><i class="bi bi-upload"></i> Sıkça Sorulan Soru Ekle</a>
+                            <a class="nav-link" href="<?php echo e(route('sss-kayit')); ?>"><i class="bi bi-upload"></i> Sıkça Sorulan Soru Ekle</a>
                         </li>
                     </ul>
                 </div>
 
 
                 <div class="col-lg-9">
-                    @if($sssGoruntule)
+                    <?php if($sssGoruntule): ?>
                         <div class="admin-sss-page-form">
                             <div class="alert text-center bg-secondary text-white">
-                                - {{ $sssGoruntule->title }} - isimli kaydı güncelliyorsunuz...
+                                - <?php echo e($sssGoruntule->title); ?> - isimli kaydı güncelliyorsunuz...
                             </div>
-                            <form action="{{ route('sss-guncelle', $sssGoruntule->id) }}" method="POST">
-                                @csrf
+                            <form action="<?php echo e(route('sss-guncelle', $sssGoruntule->id)); ?>" method="POST">
+                                <?php echo csrf_field(); ?>
 
                                 <label for="sss-title">Sıkça Sorulan Soru Başlığı *</label>
-                                <input type="text" name="sssTitle" class="form-control mb-4" value="{{ $sssGoruntule->title }}">
+                                <input type="text" name="sssTitle" class="form-control mb-4" value="<?php echo e($sssGoruntule->title); ?>">
 
                                 <label for="sss-content">Metin...</label>
                                 <!-- Place the first <script> tag in your HTML's <head> -->
@@ -96,17 +95,17 @@
                                         ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
                                     });
                                 </script>
-                                <textarea id="sss-content" name="sssContent">{{ $sssGoruntule->content }}</textarea>
+                                <textarea id="sss-content" name="sssContent"><?php echo e($sssGoruntule->content); ?></textarea>
                                 <button type="submit" class="btn btn-success mt-3 w-100" style="background-color: #C8815F; border-color: #C8815F; padding: 10px 0;">Kayıt Güncelle</button>
                             </form>
                         </div>
 
-                    @endif
+                    <?php endif; ?>
 
 
                     <!------------------------>
 
-                    @if($sssKayit)
+                    <?php if($sssKayit): ?>
                     <!---List Sss-->
                     <table class="table table-striped table-hover">
                         <thead>
@@ -116,27 +115,27 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @if($sssKayit)
-                            @foreach($sssKayit as $sss)
+                        <?php if($sssKayit): ?>
+                            <?php $__currentLoopData = $sssKayit; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $sss): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <tr>
-                                    <td>{{ $sss->title }}</td>
+                                    <td><?php echo e($sss->title); ?></td>
                                     <td>
-                                        <a class="btn btn-primary" href="{{ route('sss-goruntule', $sss->id) }}">Güncelle</a>
-                                        <a class="btn btn-danger" onclick="return confirm('Silmek istediğinize emin misiniz?')" href="{{ route('sss-sil', $sss->id) }}">Sil</a>
+                                        <a class="btn btn-primary" href="<?php echo e(route('sss-goruntule', $sss->id)); ?>">Güncelle</a>
+                                        <a class="btn btn-danger" onclick="return confirm('Silmek istediğinize emin misiniz?')" href="<?php echo e(route('sss-sil', $sss->id)); ?>">Sil</a>
                                     </td>
                                 </tr>
-                            @endforeach
-                        @endif
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        <?php endif; ?>
                         </tbody>
 
                     </table>
-                    @endif
+                    <?php endif; ?>
                     <!---List Sss-->
 
-                    @if($sssEkle)
+                    <?php if($sssEkle): ?>
                     <div class="admin-sss-page-form">
-                        <form action="{{ route('sss-kayit-ekle') }}" method="POST">
-                            @csrf
+                        <form action="<?php echo e(route('sss-kayit-ekle')); ?>" method="POST">
+                            <?php echo csrf_field(); ?>
 
                             <label for="sss-title">Sıkça Sorulan Soru Başlığı *</label>
                             <input type="text" name="sssTitle" placeholder="Örn. Gelinlik Fiyatı Nedir?" class="form-control mb-4">
@@ -164,7 +163,7 @@
                             <button type="submit" class="btn btn-success mt-3 w-100" style="background-color: #C8815F; border-color: #C8815F; padding: 10px 0;">Kayıt Ekle</button>
                         </form>
                     </div>
-                    @endif
+                    <?php endif; ?>
 
 
                 </div>
@@ -174,4 +173,6 @@
 
 
 
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('theme', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /Applications/XAMPP/xamppfiles/htdocs/gelinlik/resources/views/admin-panel/admin-sss.blade.php ENDPATH**/ ?>

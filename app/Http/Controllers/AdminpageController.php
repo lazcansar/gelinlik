@@ -15,6 +15,13 @@ use Illuminate\Support\Facades\File;
 
 class AdminpageController extends Controller
 {
+    //Admin Home Page
+    public function adminIndex () {
+        $listContact = Contact::all();
+        return view('admin-panel.admin-home', compact('listContact'));
+    }
+
+
     // Urun ekleme sayfası
 
     public function adminProductView()

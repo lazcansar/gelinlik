@@ -23,7 +23,7 @@
         <ul>
             @auth
                 @if(Auth::user()->rol == 1)
-                    <li><a href="{{ route('product-view') }}">Yönetim Paneli</a></li>
+                    <li><a href="{{ route('admin-home') }}">Yönetim Paneli</a></li>
                 @endif
             @endauth
             <li><a href="{{ route('home-page') }}">Anasayfa</a></li>
@@ -62,6 +62,7 @@
                         <li><a href="">Deutsch</a></li>
                     </ul>
                 </div>
+                    <a href="{{ route('search-page') }}"><i class="bi bi-search-heart"></i> </a>
                 <a href=""><i class="bi bi-cart"></i></a>
             </div>
         </div>
@@ -78,15 +79,6 @@
         sideMenu.classList.toggle("showSideMenu");
     }
 </script>
-<div class="container-fluid bg-dark p-3 d-none">
-    <a class="btn btn-primary" href="{{ route('checkout-page') }}">Ödeme</a>
-    <a class="btn btn-primary" href="{{ route('checkout-success') }}">Ödeme Onay</a>
-    <a class="btn btn-danger" href="{{ route('sss-yonetim') }}">SSS Yönet</a>
-    <a class="btn btn-danger" href="{{ route('customer-view') }}">Müşteri Hizmetleri Yönet</a>
-    <a class="btn btn-danger" href="{{ route('category-view') }}">Kategoriler</a>
-    <a class="btn btn-danger" href="{{ route('product-view') }}">Ürünler</a>
-    <a class="btn btn-danger" href="{{ route('company-info', $id=1) }}">İletişim Bilgileri</a>
-</div>
 
 @yield('govde')
 

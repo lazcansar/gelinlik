@@ -20,13 +20,13 @@
     <div class="bread-line">
         <div class="container">
             @if($categoryFake)
-                <a href="/admin-panel">Admin Paneli</a>
+                <a href="{{ route('admin-home') }}">Admin Paneli</a>
                 <i class="bi bi-arrow-right-short"></i>
                 <a href="{{ route('category-view') }}">Kategoriler</a>
                 <i class="bi bi-arrow-right-short"></i>
                 <span>Kategori Ekle</span>
             @elseif($category)
-                <a href="">Admin Paneli</a>
+                <a href="{{ route('admin-home') }}">Admin Paneli</a>
                 <i class="bi bi-arrow-right-short"></i>
                 <span>Kategoriler</span>
             @endif

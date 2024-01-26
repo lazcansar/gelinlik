@@ -136,7 +136,7 @@
                         </div>
                         <div class="product-detail-buy">
                             <a href="" class="btn btn-dark">Sepete Ekle</a>
-                            <a href="" class="btn btn-success">Satın Al</a>
+                            <a href="<?php echo e(route('buy', $productDetail->productId)); ?>" class="btn btn-success">Satın Al</a>
                         </div>
                         <div class="product-detail-secure">
                             <span>Güvenli Ödeme</span>

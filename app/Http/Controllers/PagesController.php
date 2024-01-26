@@ -5,12 +5,34 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Contact;
 use App\Models\Musterihizmetleri;
+use App\Models\Order;
 use App\Models\SssModel;
 use App\Models\Urunler;
 use Illuminate\Http\Request;
+use function Symfony\Component\String\s;
 
 class PagesController extends Controller
 {
+
+    public function searchPage()
+    {
+        $listContact = Contact::all();
+        $resultSearch = "";
+        return view('pages.search', compact('listContact', 'resultSearch'));
+    }
+
+    public function searhExecute(Request $request)
+    {
+        $productAll = Urunler::all();
+        $listContact = Contact::all();
+        $stmt = Urunler::query();
+        if(isset($request->search)) {
+            $searchText = "%".$request->search."%";
+            $stmt->where('productTitle', "LIKE", $searchText);
+        }
+        $resultSearch = $stmt->get();
+        return view('pages.search', compact('resultSearch', 'listContact', 'productAll'));
+    }
 
     public function homePageView()
     {
@@ -98,6 +120,7 @@ class PagesController extends Controller
     public function checkoutView()
     {
         $listContact = Contact::all();
+
         return view('pages.checkout', compact('listContact'));
     }
     public function checkoutSuccess()
@@ -105,4 +128,61 @@ class PagesController extends Controller
         $listContact = Contact::all();
         return view('pages.checkout-succes', compact('listContact'));
     }
+
+
+
+
+    //Order Page Test
+    public function orderPage (Request $request, $id)
+    {
+        $listContact = Contact::all();
+        $productSelect = Urunler::whereproductid($id)->first();
+        return view('pages.checkout', compact('listContact', 'productSelect'));
+    }
+
+    public function orderSubmit (Request $request)
+    {
+        $total_price = 3245;
+        $order_number = $request->order_number;
+        $ship = $request->ship_method;
+        $order = $request->order_method;
+        $onay = $request->sart_kosul;
+
+
+
+        if(isset($onay)) {
+            Order::create([
+                'name' => $request->name,
+                'surname' => $request->surname,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'country' => $request->country,
+                'city' => $request->city,
+                'adress' => $request->adress,
+                'postal_code' => $request->postal_code,
+                'message' => $request->message,
+                'ship_method' => $ship,
+                'order_method' => $order,
+                'total_price' => $total_price,
+                'productId' => $request->productId,
+                'userId' => $request->userId,
+                'order_number' => $order_number,
+            ]);
+            return redirect()->route('checkout-success')->with('order_success', 'Siparişiniz oluşturuldu!');
+        }else {
+            return redirect()->back()->with('error', 'Lütfen şartlar ve koşulları okuduğunuzu ve onayladığınızı işaretleyin!');
+        }
+
+    }
+
+
+
+
+
+
+
+
+
 }
+
+

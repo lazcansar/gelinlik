@@ -26,6 +26,8 @@ Route::get('/musteri-hizmetleri', [PagesController::class, 'customerPageView'])-
 Route::get('/online-gelinlik-dikimi', [PagesController::class, 'weddingPageView'])->name('wedding-create');
 Route::get('/showroom', [PagesController::class, 'showroomPageView'])->name('showroom-page');
 Route::get('/urun-detay/{productUrl}', [PagesController::class, 'productDetailView'])->name('product-detail');
+Route::get('/ara', [PagesController::class, 'searchPage'])->name('search-page');
+Route::get('/ara/urun', [PagesController::class, 'searhExecute'])->name('search-execute');
 
 Route::get('/urunler', [PagesController::class, 'categoryView'])->name('category-page');
 Route::get('/urunler/filter', [PagesController::class, 'categorySearch'])->name('category-filter');
@@ -40,6 +42,9 @@ Route::post('/kayit-ol', [AuthController::class, 'register'])->name('register-in
 Route::get('/cikis-yap', [AuthController::class, 'logout'])->name('logout');
 
 
+
+//Admin Page Home
+Route::get('/admin-panel', [AdminpageController::class, 'adminIndex'])->name('admin-home');
 //SSS
 Route::get('/admin-panel/sss-yonetim', [AdminpageController::class, 'adminSssCreate'])->name('sss-yonetim');
 Route::get('/admin-panel/sss-yonetim/ekle', [AdminpageController::class, 'adminSssOlustur'])->name('sss-kayit');
@@ -81,4 +86,10 @@ Route::post('/admin-panel/company-info/{id}', [AdminpageController::class, 'comp
 
 //User Account Page
 Route::get('/hesabim', [UserPage::class, 'userPage'])->name('my-account');
+Route::get('/hesabim/siparislerim', [UserPage::class, 'myOrders'])->name('my-orders');
 
+
+
+//Order Page
+Route::get('/odeme/{productId}', [PagesController::class, 'orderPage'])->name('buy');
+Route::post('/odeme/satin-al', [PagesController::class, 'orderSubmit'])->name('buy-submit');
