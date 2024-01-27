@@ -12,6 +12,16 @@
     .category-page-bread .container span {
     font-weight: 300;
     }
+    .orderNumber {
+    color: #ff6600;
+    font-weight: 500;
+    }
+    .orderInfo span {
+    font-weight: 500;
+    }
+    .myProfileForm label {
+    margin-bottom: 10px;
+    }
 
 @endsection
 @section('govde')
@@ -34,8 +44,8 @@
                         <ul>
                             <li><a href="{{ route('my-account') }}">Pano <span><i class="bi bi-person-check"></i></span></a></li>
                             <li><a href="{{ route('my-orders') }}">Siparişler <span><i class="bi bi-bag"></i></span></a></li>
-                            <li><a href="">Adresler <span><i class="bi bi-pin-map"></i></span></a></li>
-                            <li><a href="">Hesap Detayları <span><i class="bi bi-person-lines-fill"></i> </span></a></li>
+                            <li><a href="{{ route('my-adress') }}">Adresler <span><i class="bi bi-pin-map"></i></span></a></li>
+                            <li><a href="{{ route('my-profile', Auth::user()->id) }}">Hesap Detayları <span><i class="bi bi-person-lines-fill"></i> </span></a></li>
                             <li><a href="{{ route('logout') }}">Oturumu Kapat <span><i class="bi bi-escape"></i></span></a></li>
                         </ul>
                     </div>
@@ -43,15 +53,114 @@
 
                 <div class="col-md-8">
                     <div class="account-info">
-                        @if($myOrders)
+                        @if(session('error'))
+                            <div class="alert alert-warning">
+                                <p>{{ session('error') }}</p>
+                            </div>
+                        @endif
+                        @if(session('success'))
+                            <div class="alert alert-success">
+                                <p>{{ session('success') }}</p>
+                            </div>
+                        @endif
+
+                        @if($myAdress)
+
+                        @elseif($userProfile)
+                            @if($userProfile->id == Auth::user()->id)
+                                <div class="myProfileForm">
+                                    <form action="{{ route('my-profile-update') }}" method="POST">
+                                        @csrf
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Ad</label>
+                                                <input type="text" name="ad" class="form-control" value="{{ $userProfile->name }}">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label>Soyad</label>
+                                                <input type="text" name="soyad" class="form-control" value="{{ $userProfile->surname }}">
+                                            </div>
+                                            <div class="col-md-12 mt-3">
+                                                <label>T.C. Kimlik No</label>
+                                                <input type="number" class="form-control" name="kimlikno" value="{{ $userProfile->identification }}">
+                                            </div>
+                                            <div class="col-md-12 mt-3">
+                                                <label>Şifreniz</label>
+                                                <input type="password" name="password" class="form-control" placeholder="*****">
+                                            </div>
+                                            <div class="col-md-12 mt-3">
+                                                <label>Yeni Şifreniz</label>
+                                                <input type="password" name="newpassword" class="form-control" placeholder="*****">
+                                            </div>
+                                            <div class="col-md-12 mt-3">
+                                                <label>Tekrar Yeni Şifreniz</label>
+                                                <input type="password" name="newpassword2" class="form-control" placeholder="*****">
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-outline-success mt-3">Bilgilerimi Güncelle</button>
+                                    </form>
+                                </div>
+                            @else
+                                <p>Lütfen kendi profil sayfanızı düzenleyin!</p>
+                                <p class="fw-bold text-danger">Tekrar edilen denemeler halinde hesabınız kalıcı olarak kapatılacaktır!</p>
+                            @endif
+
+
+
+                        @elseif($orderDetail)
+                            <div class="orderNumber">
+                                Sipariş Numarası: {{ $orderDetail->order_number }}
+                                <p class="text-black ">Sipariş Durumu: <span class="fw-normal">{{ $orderDetail->order_status }}</span></p>
+                            </div>
+                            <hr>
+                            <div class="orderInfo">
+                                <p><span>Ad Soyad:</span> {{ $orderDetail->name }} {{ $orderDetail->surname }}</p>
+                                <hr>
+                                <p><span>E-Mail:</span> {{ $orderDetail->email }}</p>
+                                <hr>
+                                <p><span>GSM No:</span> {{ $orderDetail->phone }}</p>
+                                <hr>
+                                <p class="text-capitalize"><span>Adres:</span> {{ $orderDetail->adress }} {{ $orderDetail->city }} {{ $orderDetail->country }}</p>
+                                <hr>
+                                <p><span>Ödeme Yönetemi:</span> {{ $orderMethod = str_replace(['havale-eft', 'kapida-odeme', 'revolut-pay', 'bitcoin-pay'],['Havale/EFT', 'Kapıda Ödeme', 'Revolut', 'Bitcoin'],$orderDetail->order_method)  }}</p>
+                                <hr>
+                                <p><span>Teslimat Şekli:</span> {{ $shipMethod = str_replace(['ucretsiz-gonderi', 'sabit-fiyat', 'magaza-teslim'],['Ücretsiz Gönderi', 'Ücretli Gönderi', 'Mağazadan Teslim'], $orderDetail->ship_method)  }}</p>
+                                <hr>
+                                <p><span>Sipariş Tarihi:</span> {{ $orderDetail->created_at }}</p>
+                                <hr>
+                                <p><span>Sipariş Verilen Ürün:</span>
+                                    @if($orderDetail->userId == Auth::user()->id)
+                                        @foreach($allProduct as $myProduct)
+                                            @if($orderDetail->productId == $myProduct->productId)
+                                                <?php
+                                                $productUrl = $myProduct->productUrl;
+                                                $productImage = $myProduct->productCoverImage;
+                                                $baseImage = pathinfo($productImage);
+                                                $baseImage = $baseImage['basename'];
+                                                $coverImage = "images/product/".$productUrl."/".$baseImage;
+                                                ?>
+                                            <a href="{{ route('product-detail', $myProduct->productUrl) }}">
+                                                {{ $myProduct->productTitle }}
+                                                <img src="/{{ $coverImage }}" class="border border-3 p-1" height="150">
+                                            </a>
+                                            @endif
+                                                @endforeach
+                                            @endif</p>
+                            </div>
+
+
+
+
+                        @elseif($myOrders)
                             <table class="table table-striped table-striped">
                                 <thead>
                                 <tr>
                                     <th>Sipariş No</th>
-                                    <th>Ödeme Yöntemi</th>
-                                    <th>Gönderim Şekli</th>
+                                        <th>Ödeme Şekli</th>
                                     <th>Fiyat</th>
                                     <th>Ürün Bilgisi</th>
+                                    <th>Sipariş Tarihi</th>
+                                    <th>Detay</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -62,9 +171,10 @@
                                                 <tr>
                                                     <td>{{ $order->order_number }}</td>
                                                     <td>{{ $orderMethod = str_replace(['havale-eft', 'kapida-odeme', 'revolut-pay', 'bitcoin-pay'],['Havale/EFT', 'Kapıda Ödeme', 'Revolut', 'Bitcoin'],$order->order_method)  }}</td>
-                                                    <td>{{ $shipMethod = str_replace(['sabit-fiyat', 'magaza-teslim', 'ucretsiz-gonder'], ['Ücretli Gönderi', 'Mağazadan Teslim', 'Ücretsiz Gönderi'], $order->ship_method ) }}</td>
-                                                    <td>{{ $order->total_price }}</td>
+                                                    <td>{{ $order->total_price }} TL</td>
                                                     <td>{{ $myProduct->productTitle }}</td>
+                                                    <td>{{ $myProduct->created_at }}</td>
+                                                    <td><a href="{{ route('my-orders-detail', $order->order_number) }}" class="btn btn-outline-primary btn-sm">Sipariş Detayı</a> </td>
                                                 </tr>
                                             @endif
                                         @endforeach
@@ -78,8 +188,8 @@
 
                         @else
                             <p class="mb-3">Merhaba, <span class="user-name">{{ Auth::user()->name }} {{ Auth::user()->surname }}</span></p>
-                            <p class="mb-3">Hesap panosundan <a href="">Son Siparişlerinizi</a> görüntüleyebilir, <a href="">Gönderim ve Fatura Adreslerinizi</a> yönetebilir ve <a href="">Şifreniz ile Hesap Ayrıntılarınızı</a> düzenleyebilirsiniz. </p>
-                            <p>Siparişiniz hakkında bilgi almak için veya destek talebiniz için <a href=""> bilgi@beyazdusler.com</a> adresine E-Posta gönderebilirsiniz.</p>
+                            <p class="mb-3">Hesap panosundan <a href="{{ route('my-orders') }}">Son Siparişlerinizi</a> görüntüleyebilir, <a href="">Gönderim ve Fatura Adreslerinizi</a> yönetebilir ve <a href="{{ route('my-profile', Auth::user()->id) }}">Şifreniz ile Hesap Ayrıntılarınızı</a> düzenleyebilirsiniz. </p>
+                            <p>Siparişiniz hakkında bilgi almak için veya destek talebiniz için <a href="mailto:{{ $listContact[0]->mail }}"> {{ $listContact[0]->mail }}</a> adresine E-Posta gönderebilirsiniz.</p>
                         @endif
 
                     </div>

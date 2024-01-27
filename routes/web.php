@@ -87,6 +87,10 @@ Route::post('/admin-panel/company-info/{id}', [AdminpageController::class, 'comp
 //User Account Page
 Route::get('/hesabim', [UserPage::class, 'userPage'])->name('my-account');
 Route::get('/hesabim/siparislerim', [UserPage::class, 'myOrders'])->name('my-orders');
+Route::get('/hesabim/siparislerim/{order_number}', [UserPage::class, 'showOrder'])->name('my-orders-detail');
+Route::get('/hesabim/hesap-bilgilerim/{id}', [UserPage::class, 'myProfile'])->name('my-profile');
+Route::post('/hesabim/hesap-bilgilerim/', [UserPage::class, 'myProfileUpdate'])->name('my-profile-update');
+Route::get('/hesabim/adreslerim', [UserPage::class, 'myAdress'])->name('my-adress');
 
 
 
