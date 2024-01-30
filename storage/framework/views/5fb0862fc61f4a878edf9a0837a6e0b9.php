@@ -63,8 +63,71 @@
                                 <p><?php echo e(session('success')); ?></p>
                             </div>
                         <?php endif; ?>
+                            <?php if(session('updated')): ?>
+                                <div class="alert alert-success">
+                                    <p><?php echo e(session('updated')); ?></p>
+                                </div>
+                            <?php endif; ?>
 
-                        <?php if($myAdress): ?>
+                        <?php if($myAdress[0]): ?>
+                                    <?php if($myAdress[0]->user_id == auth()->user()->id): ?>
+                                        <div class="myProfileForm">
+                                            <form action="<?php echo e(route('my-adress-updated', $myAdress[0]->id)); ?>" method="POST">
+
+                                                <?php echo csrf_field(); ?>
+                                                <label>Adres Tipi</label>
+                                                <input type="text" class="form-control mb-3" name="adres_type" value="<?php echo e($myAdress[0]->adress_type); ?>">
+
+                                                <label>Telefon No</label>
+                                                <input type="text" class="form-control mb-3" name="phone" value="<?php echo e($myAdress[0]->adress_phone); ?>">
+                                                <label>Açık Adres</label>
+                                                <textarea class="form-control mb-3" rows="5" name="open_adres"><?php echo e($myAdress[0]->adress_long); ?></textarea>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <label>İlçe</label>
+                                                        <input type="text" class="form-control mb-3" name="city_in" value="<?php echo e($myAdress[0]->adress_in_city); ?>">
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label>İl</label>
+                                                        <input type="text" class="form-control mb-3" name="city" value="<?php echo e($myAdress[0]->adress_city); ?>">
+                                                    </div>
+                                                </div>
+                                                <label>Ülke</label>
+                                                <input type="text" class="form-control mb-3" name="country" value="<?php echo e($myAdress[0]->adress_country); ?>">
+
+                                                <button type="submit" class="btn btn-outline-success">Güncelle</button>
+                                            </form>
+                                        </div>
+                                <?php endif; ?>
+                        <?php elseif($myAdress[1]): ?>
+                                        <div class="myProfileForm">
+                                            <form action="<?php echo e(route('my-adress-update')); ?>" method="POST">
+
+                                                <?php echo csrf_field(); ?>
+                                                <label>Adres Tipi</label>
+                                                <input type="text" class="form-control mb-3" name="adres_type" placeholder="Ev veya İş vb.">
+
+                                                <label>Telefon No</label>
+                                                <input type="text" class="form-control mb-3" name="phone" placeholder="0(530) 123 45 67">
+                                                <label>Açık Adres</label>
+                                                <textarea class="form-control mb-3" rows="5" name="open_adres" placeholder="Örnek Mah. Örnek Cad. No:123 D:18 Fatih / İstanbul"></textarea>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <label>İlçe</label>
+                                                        <input type="text" class="form-control mb-3" name="city_in" placeholder="İlçe">
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label>İl</label>
+                                                        <input type="text" class="form-control mb-3" name="city" placeholder="Şehir">
+                                                    </div>
+                                                </div>
+                                                <label>Ülke</label>
+                                                <input type="text" class="form-control mb-3" name="country" placeholder="Ülke">
+
+                                                <button type="submit" class="btn btn-outline-success">Ekle</button>
+                                            </form>
+                                        </div>
+
 
                         <?php elseif($userProfile): ?>
                             <?php if($userProfile->id == Auth::user()->id): ?>
@@ -190,7 +253,7 @@
 
                         <?php else: ?>
                             <p class="mb-3">Merhaba, <span class="user-name"><?php echo e(Auth::user()->name); ?> <?php echo e(Auth::user()->surname); ?></span></p>
-                            <p class="mb-3">Hesap panosundan <a href="<?php echo e(route('my-orders')); ?>">Son Siparişlerinizi</a> görüntüleyebilir, <a href="">Gönderim ve Fatura Adreslerinizi</a> yönetebilir ve <a href="<?php echo e(route('my-profile', Auth::user()->id)); ?>">Şifreniz ile Hesap Ayrıntılarınızı</a> düzenleyebilirsiniz. </p>
+                            <p class="mb-3">Hesap panosundan <a href="<?php echo e(route('my-orders')); ?>">Son Siparişlerinizi</a> görüntüleyebilir, <a href="<?php echo e(route('my-adress')); ?>">Gönderim ve Fatura Adreslerinizi</a> yönetebilir ve <a href="<?php echo e(route('my-profile', Auth::user()->id)); ?>">Şifreniz ile Hesap Ayrıntılarınızı</a> düzenleyebilirsiniz. </p>
                             <p>Siparişiniz hakkında bilgi almak için veya destek talebiniz için <a href="mailto:<?php echo e($listContact[0]->mail); ?>"> <?php echo e($listContact[0]->mail); ?></a> adresine E-Posta gönderebilirsiniz.</p>
                         <?php endif; ?>
 

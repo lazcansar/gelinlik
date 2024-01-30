@@ -91,6 +91,8 @@ Route::get('/hesabim/siparislerim/{order_number}', [UserPage::class, 'showOrder'
 Route::get('/hesabim/hesap-bilgilerim/{id}', [UserPage::class, 'myProfile'])->name('my-profile');
 Route::post('/hesabim/hesap-bilgilerim/', [UserPage::class, 'myProfileUpdate'])->name('my-profile-update');
 Route::get('/hesabim/adreslerim', [UserPage::class, 'myAdress'])->name('my-adress');
+Route::post('/hesabim/adreslerim/ekle', [UserPage::class, 'myAdressUpdate'])->name('my-adress-update');
+Route::post('/hesabim/adreslerim/guncelle/{id}', [UserPage::class, 'myAdressUpdated'])->name('my-adress-updated');
 
 
 

@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Adress;
 use App\Models\Contact;
 use App\Models\Order;
 use App\Models\Urunler;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Queue\RedisQueue;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Termwind\Question;
 
@@ -17,7 +20,7 @@ class UserPage extends Controller
         $myOrders = "";
         $orderDetail = "";
         $userProfile = '';
-        $myAdress = '';
+        $myAdress = array('', '');
         return view('users.account', compact('listContact', 'myOrders', 'orderDetail', 'userProfile', 'myAdress'));
     }
     public function myOrders()
@@ -27,7 +30,7 @@ class UserPage extends Controller
         $allProduct = Urunler::all();
         $orderDetail = '';
         $userProfile = '';
-        $myAdress = '';
+        $myAdress = array('', '');
         return view('users.account', compact('listContact', 'myOrders', 'allProduct', 'orderDetail', 'userProfile', 'myAdress'));
 
     }
@@ -37,7 +40,7 @@ class UserPage extends Controller
         $allProduct = Urunler::all();
         $myOrders = "";
         $userProfile = '';
-        $myAdress = '';
+        $myAdress = array('', '');
         $orderDetail = Order::whereorderNumber($ordernumber)->first();
         return view('users.account', compact('listContact', 'allProduct', 'orderDetail', 'myOrders', 'userProfile', 'myAdress'));
     }
@@ -48,7 +51,7 @@ class UserPage extends Controller
         $allProduct = Urunler::all();
         $myOrders = "";
         $orderDetail = '';
-        $myAdress = '';
+        $myAdress = array('', '');
         $userProfile = User::whereId($id)->first();
         return view('users.account', compact('listContact', 'allProduct', 'orderDetail', 'myOrders', 'userProfile', 'myAdress'));
     }
@@ -60,6 +63,12 @@ class UserPage extends Controller
         $currentpassword = $request->password;
         $newpassword = $request->newpassword;
         $newpassword2 = $request->newpassword2;
+        if (isset($identification)) {
+            User::whereId(auth()->user()->id)->update([
+                'identification' => $identification,
+            ]);
+            return redirect()->back()->with('success', 'Bilgiler güncellendi');
+        }
         if(Hash::check($currentpassword, auth()->user()->password)) {
             if ($newpassword == $newpassword2) {
                 User::whereId(auth()->user()->id)->update([
@@ -83,11 +92,51 @@ class UserPage extends Controller
         $myOrders = "";
         $orderDetail = "";
         $userProfile = '';
-        $myAdress = 'test';
+        $myRegAdress = Adress::whereuserId(Auth::user()->id)->first();
+        $myNotRegAdress = 'Trabzon';
+        $myAdress = array($myRegAdress, $myNotRegAdress);
         return view('users.account', compact('listContact', 'myOrders', 'orderDetail', 'userProfile', 'myAdress'));
     }
 
+    public function myAdressUpdate(Request $request)
+    {
+        $adres_type = $request->adres_type;
+        $phone = $request->phone;
+        $open_adres = $request->open_adres;
+        $city_in = $request->city_in;
+        $city = $request->city;
+        $country = $request->country;
+        $user_id = auth()->user()->id;
+        Adress::create([
+            'adress_type' => $adres_type,
+            'adress_phone' => $phone,
+            'adress_long' => $open_adres,
+            'adress_in_city' => $city_in,
+            'adress_city' => $city,
+            'adress_country' => $country,
+            'user_id' => $user_id,
+        ]);
+        return redirect()->back()->with('updated', 'Adres güncellendi / Eklendi');
+    }
 
+    public function myAdressUpdated(Request $request, $id)
+    {
+        $adres_type = $request->adres_type;
+        $phone = $request->phone;
+        $open_adres = $request->open_adres;
+        $city_in = $request->city_in;
+        $city = $request->city;
+        $country = $request->country;
+        Adress::whereId($id)->update([
+            'adress_type' => $adres_type,
+            'adress_phone' => $phone,
+            'adress_long' => $open_adres,
+            'adress_in_city' => $city_in,
+            'adress_city' => $city,
+            'adress_country' => $country,
+        ]);
+        return redirect()->back()->with('updated', 'Adres güncellendi / Eklendi');
+    }
 
 
 }

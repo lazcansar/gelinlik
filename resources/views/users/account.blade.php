@@ -63,8 +63,71 @@
                                 <p>{{ session('success') }}</p>
                             </div>
                         @endif
+                            @if(session('updated'))
+                                <div class="alert alert-success">
+                                    <p>{{ session('updated') }}</p>
+                                </div>
+                            @endif
 
-                        @if($myAdress)
+                        @if($myAdress[0])
+                                    @if($myAdress[0]->user_id == auth()->user()->id)
+                                        <div class="myProfileForm">
+                                            <form action="{{ route('my-adress-updated', $myAdress[0]->id) }}" method="POST">
+
+                                                @csrf
+                                                <label>Adres Tipi</label>
+                                                <input type="text" class="form-control mb-3" name="adres_type" value="{{ $myAdress[0]->adress_type }}">
+
+                                                <label>Telefon No</label>
+                                                <input type="text" class="form-control mb-3" name="phone" value="{{ $myAdress[0]->adress_phone}}">
+                                                <label>Açık Adres</label>
+                                                <textarea class="form-control mb-3" rows="5" name="open_adres">{{ $myAdress[0]->adress_long }}</textarea>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <label>İlçe</label>
+                                                        <input type="text" class="form-control mb-3" name="city_in" value="{{ $myAdress[0]->adress_in_city }}">
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label>İl</label>
+                                                        <input type="text" class="form-control mb-3" name="city" value="{{ $myAdress[0]->adress_city }}">
+                                                    </div>
+                                                </div>
+                                                <label>Ülke</label>
+                                                <input type="text" class="form-control mb-3" name="country" value="{{ $myAdress[0]->adress_country }}">
+
+                                                <button type="submit" class="btn btn-outline-success">Güncelle</button>
+                                            </form>
+                                        </div>
+                                @endif
+                        @elseif($myAdress[1])
+                                        <div class="myProfileForm">
+                                            <form action="{{ route('my-adress-update') }}" method="POST">
+
+                                                @csrf
+                                                <label>Adres Tipi</label>
+                                                <input type="text" class="form-control mb-3" name="adres_type" placeholder="Ev veya İş vb.">
+
+                                                <label>Telefon No</label>
+                                                <input type="text" class="form-control mb-3" name="phone" placeholder="0(530) 123 45 67">
+                                                <label>Açık Adres</label>
+                                                <textarea class="form-control mb-3" rows="5" name="open_adres" placeholder="Örnek Mah. Örnek Cad. No:123 D:18 Fatih / İstanbul"></textarea>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <label>İlçe</label>
+                                                        <input type="text" class="form-control mb-3" name="city_in" placeholder="İlçe">
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label>İl</label>
+                                                        <input type="text" class="form-control mb-3" name="city" placeholder="Şehir">
+                                                    </div>
+                                                </div>
+                                                <label>Ülke</label>
+                                                <input type="text" class="form-control mb-3" name="country" placeholder="Ülke">
+
+                                                <button type="submit" class="btn btn-outline-success">Ekle</button>
+                                            </form>
+                                        </div>
+
 
                         @elseif($userProfile)
                             @if($userProfile->id == Auth::user()->id)
@@ -188,7 +251,7 @@
 
                         @else
                             <p class="mb-3">Merhaba, <span class="user-name">{{ Auth::user()->name }} {{ Auth::user()->surname }}</span></p>
-                            <p class="mb-3">Hesap panosundan <a href="{{ route('my-orders') }}">Son Siparişlerinizi</a> görüntüleyebilir, <a href="">Gönderim ve Fatura Adreslerinizi</a> yönetebilir ve <a href="{{ route('my-profile', Auth::user()->id) }}">Şifreniz ile Hesap Ayrıntılarınızı</a> düzenleyebilirsiniz. </p>
+                            <p class="mb-3">Hesap panosundan <a href="{{ route('my-orders') }}">Son Siparişlerinizi</a> görüntüleyebilir, <a href="{{ route('my-adress') }}">Gönderim ve Fatura Adreslerinizi</a> yönetebilir ve <a href="{{ route('my-profile', Auth::user()->id) }}">Şifreniz ile Hesap Ayrıntılarınızı</a> düzenleyebilirsiniz. </p>
                             <p>Siparişiniz hakkında bilgi almak için veya destek talebiniz için <a href="mailto:{{ $listContact[0]->mail }}"> {{ $listContact[0]->mail }}</a> adresine E-Posta gönderebilirsiniz.</p>
                         @endif
 
