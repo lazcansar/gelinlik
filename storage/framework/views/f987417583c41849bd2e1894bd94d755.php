@@ -129,10 +129,6 @@
                                         <p style="font-weight: 300; text-align: justify; text-indent: 30px; margin-top: 5px; font-size: 16px;">Ödemenizi doğrudan banka hesabımıza yapınız. Lütfen ilgili Sipariş Numarasını ödemenizin açıklama kısmına yazınız. Ödemeniz onaylanmadıkça siparişiniz gönderilmeyecektir.</p>
                                     </div>
                                     <div class="shipping-method-list">
-                                        <input type="radio" name="order_method" value="kapida-odeme" id="kapida-odeme">
-                                        <label for="kapida-odeme">Kapıda Ödeme</label>
-                                    </div>
-                                    <div class="shipping-method-list">
                                         <input type="radio" name="order_method" value="revolut-pay" id="revolut-pay">
                                         <label for="revolut-pay">Revolut Pay</label>
                                     </div>

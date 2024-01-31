@@ -31,6 +31,17 @@
     .admin-page-home-link a:hover {
     color: #424242;
     }
+    .admin-sss-page {
+    margin-bottom: 3rem;
+
+    }
+    .nav-item {
+    padding: 15px 0;
+    margin-bottom: 0
+    }
+    .admin-order-table * {
+    font-size: 14px;
+    }
 @endsection
 @section('govde')
 
@@ -67,7 +78,7 @@
                         <li class="nav-item border-bottom">
                             <a class="nav-link" href="{{ route('admin-siparisler') }}"><i class="bi bi-house-fill"></i> Sipariş Bilgileri Görüntüle</a>
                         </li>
-                        <li class="nav flex-column bg-light">
+                        <li class="nav-item border-bottom">
                             <a class="nav-link" href=""><i class="bi bi-search"></i> Sipariş Arama </a>
                         </li>
 
@@ -81,23 +92,21 @@
                             <thead>
                             <tr>
                                 <th>Sipariş No</th>
-                                <th>Ürün Bilgisi</th>
                                 <th>Sipariş Tarihi</th>
                                 <th>Sipariş Durumu</th>
                                 <th>Kargo Bilgisi</th>
                                 <th>Fiyat</th>
-                                <th>Ödeme Yöntemi</th>
+                                <th>İşlem</th>
                             </tr>
 
                             </thead>
                             <tbody>
                             @foreach($orderAll as $order)
-                                @foreach($orderProducts as $product)
-                                    @if($order->productId == $product->productId)
+                                @foreach($userAll as $user)
+                                    @if($order->userId == $user->id)
                                     <tr>
-                                        <td>{{ $order->order_number }}</td>
-                                        <td>{{ $product->productTitle }}</td>
-                                        <td>{{ $order->created_at }}</td>
+                                        <td>{{ $order->order_number }} - {{ $user->name }} {{ $user->surname }}</td>
+                                        <td>{{ $pureDate = substr($order->created_at, 0, 10) }}</td>
                                         <td>
                                             <form action="" method="post">
                                                 @csrf
@@ -120,17 +129,24 @@
                                             </form>
                                         </td>
                                         <td>
-                                            ₺ {{ $order->total_price }}
+                                            ₺{{ $order->total_price }}
                                         </td>
-                                        <td>{{ $orderMethod = str_replace(['havale-eft', 'kapida-odeme', 'revolut-pay', 'bitcoin-pay'],['Havale/EFT', 'Kapıda Ödeme', 'Revolut', 'Bitcoin'],$order->order_method)  }}</td>
+                                        <td>
+                                            <a class="d-block w-100 mb-2 btn btn-sm btn-outline-info" href="">Detay Gör</a>
+                                            <a class="d-block w-100 mb-2 btn btn-sm btn-outline-danger" href="">Sil</a>
+                                        </td>
                                     </tr>
                                     @endif
                                 @endforeach
                             @endforeach
-
-
                             </tbody>
                         </table>
+                    </div>
+
+                    <div class="container">
+                        <div class="d-flex justify-content-center">
+                            {{ $orderAll->links() }}
+                        </div>
                     </div>
 
                 </div>

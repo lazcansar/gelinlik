@@ -8,6 +8,7 @@ use App\Models\SssModel;
 use App\Models\Musterihizmetleri;
 use App\Models\Category;
 use App\Models\Urunler;
+use App\Models\Users;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
@@ -27,9 +28,9 @@ class AdminpageController extends Controller
     public function siparisler()
     {
         $listContact = Contact::all();
-        $orderAll = Order::all();
-        $orderProducts = Urunler::all();
-        return view('admin-panel.admin-orders', compact('listContact', 'orderAll', 'orderProducts'));
+        $orderAll = Order::paginate(5);
+        $userAll = Users::all();
+        return view('admin-panel.admin-orders', compact('listContact', 'orderAll', 'userAll'));
     }
 
 

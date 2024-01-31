@@ -30,6 +30,17 @@
     .admin-page-home-link a:hover {
     color: #424242;
     }
+    .admin-sss-page {
+    margin-bottom: 3rem;
+
+    }
+    .nav-item {
+    padding: 15px 0;
+    margin-bottom: 0
+    }
+    .admin-order-table * {
+    font-size: 14px;
+    }
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('govde'); ?>
 
@@ -66,7 +77,7 @@
                         <li class="nav-item border-bottom">
                             <a class="nav-link" href="<?php echo e(route('admin-siparisler')); ?>"><i class="bi bi-house-fill"></i> Sipariş Bilgileri Görüntüle</a>
                         </li>
-                        <li class="nav flex-column bg-light">
+                        <li class="nav-item border-bottom">
                             <a class="nav-link" href=""><i class="bi bi-search"></i> Sipariş Arama </a>
                         </li>
 
@@ -80,23 +91,21 @@
                             <thead>
                             <tr>
                                 <th>Sipariş No</th>
-                                <th>Ürün Bilgisi</th>
                                 <th>Sipariş Tarihi</th>
                                 <th>Sipariş Durumu</th>
                                 <th>Kargo Bilgisi</th>
                                 <th>Fiyat</th>
-                                <th>Ödeme Yöntemi</th>
+                                <th>İşlem</th>
                             </tr>
 
                             </thead>
                             <tbody>
                             <?php $__currentLoopData = $orderAll; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $order): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <?php $__currentLoopData = $orderProducts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                    <?php if($order->productId == $product->productId): ?>
+                                <?php $__currentLoopData = $userAll; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <?php if($order->userId == $user->id): ?>
                                     <tr>
-                                        <td><?php echo e($order->order_number); ?></td>
-                                        <td><?php echo e($product->productTitle); ?></td>
-                                        <td><?php echo e($order->created_at); ?></td>
+                                        <td><?php echo e($order->order_number); ?> - <?php echo e($user->name); ?> <?php echo e($user->surname); ?></td>
+                                        <td><?php echo e($pureDate = substr($order->created_at, 0, 10)); ?></td>
                                         <td>
                                             <form action="" method="post">
                                                 <?php echo csrf_field(); ?>
@@ -119,18 +128,26 @@
                                             </form>
                                         </td>
                                         <td>
-                                            ₺ <?php echo e($order->total_price); ?>
+                                            ₺<?php echo e($order->total_price); ?>
 
                                         </td>
-                                        <td><?php echo e($orderMethod = str_replace(['havale-eft', 'kapida-odeme', 'revolut-pay', 'bitcoin-pay'],['Havale/EFT', 'Kapıda Ödeme', 'Revolut', 'Bitcoin'],$order->order_method)); ?></td>
+                                        <td>
+                                            <a class="d-block w-100 mb-2 btn btn-sm btn-outline-info" href="">Detay Gör</a>
+                                            <a class="d-block w-100 mb-2 btn btn-sm btn-outline-danger" href="">Sil</a>
+                                        </td>
                                     </tr>
                                     <?php endif; ?>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-
-
                             </tbody>
                         </table>
+                    </div>
+
+                    <div class="container">
+                        <div class="d-flex justify-content-center">
+                            <?php echo e($orderAll->links()); ?>
+
+                        </div>
                     </div>
 
                 </div>
