@@ -29,6 +29,7 @@ return new class extends Migration
             $table->bigInteger('userId');
             $table->string('order_number');
             $table->string('order_status')->nullable();
+            $table->string('tracking_number')->nullable();
             $table->timestamps();
         });
     }

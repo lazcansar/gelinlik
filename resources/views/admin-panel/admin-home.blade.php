@@ -68,7 +68,7 @@
                 </div>
                 <div class="col-md-4 mb-3">
                     <div class="admin-page-home-link">
-                        <a href="#"><i class="bi bi-cart-fill"></i> Siparişler</a>
+                        <a href="{{ route('admin-siparisler') }}"><i class="bi bi-cart-fill"></i> Siparişler</a>
                     </div>
                 </div>
 

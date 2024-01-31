@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Contact;
+use App\Models\Order;
 use App\Models\SssModel;
 use App\Models\Musterihizmetleri;
 use App\Models\Category;
@@ -19,6 +20,16 @@ class AdminpageController extends Controller
     public function adminIndex () {
         $listContact = Contact::all();
         return view('admin-panel.admin-home', compact('listContact'));
+    }
+
+
+    //Wish List Admin
+    public function siparisler()
+    {
+        $listContact = Contact::all();
+        $orderAll = Order::all();
+        $orderProducts = Urunler::all();
+        return view('admin-panel.admin-orders', compact('listContact', 'orderAll', 'orderProducts'));
     }
 
 

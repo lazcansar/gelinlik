@@ -27,6 +27,7 @@ class Order extends Model
         'userId',
         'order_number',
         'order_status',
+        'tracking_number',
         'created_at',
         'updated_at'
     ];
