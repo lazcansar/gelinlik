@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Adress;
 use App\Models\Contact;
 use App\Models\Order;
 use App\Models\SssModel;
@@ -32,6 +33,26 @@ class AdminpageController extends Controller
         $userAll = Users::all();
         return view('admin-panel.admin-orders', compact('listContact', 'orderAll', 'userAll'));
     }
+
+    public function adminOrderDetail($order_number)
+    {
+        $listContact = Contact::all();
+        $orderDetail = Order::whereorderNumber($order_number)->first();
+        $userAll = Users::all();
+        $productAll = Urunler::all();
+        return view('admin-panel.admin-order-detail', compact('listContact', 'orderDetail', 'userAll', 'productAll'));
+    }
+    public function orderStatusUpdate(Request $request, $id)
+    {
+
+    }
+    public function trackingNumberUpdate(Request $request, $id)
+    {
+
+    }
+
+
+
 
 
     // Urun ekleme sayfası
