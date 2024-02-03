@@ -85,8 +85,8 @@ Route::post('/admin-panel/company-info/{id}', [AdminpageController::class, 'comp
 //Admin Wish List
 Route::get('/admin-panel/siparisler', [AdminpageController::class, 'siparisler'])->name('admin-siparisler');
 Route::get('/admin-panel/siparisler/detay/{order_number}', [AdminpageController::class, 'adminOrderDetail'])->name('admin-siparis-detay');
-Route::post('/admin-panel/siparisler/guncelle/{id}', [AdminpageController::class, 'orderStatusUpdate'])->name('siparis-durum-guncelle');
-Route::post('/admin-panel/siparisler/guncelle/{id}', [AdminpageController::class, 'trackingNumberUpdate'])->name('kargo-bilgi-guncelle');
+Route::post('/admin-panel/siparisler/order-status/{id}', [AdminpageController::class, 'orderStatusUpdate'])->name('order-status-update');
+Route::post('/admin-panel/siparisler/tracking-number/{id}', [AdminpageController::class, 'trackingNumberUpdate'])->name('order-tracking-update');
 
 
 

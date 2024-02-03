@@ -108,24 +108,22 @@
                                         <td>{{ $order->order_number }} - {{ $user->name }} {{ $user->surname }}</td>
                                         <td>{{ $pureDate = substr($order->created_at, 0, 10) }}</td>
                                         <td>
-                                            <form action="" method="post">
+                                            <form action="{{ route('order-status-update', $order->id) }}" method="post">
                                                 @csrf
-
-                                                <select class="form-select form-select-sm" name="order-status">
-                                                    <option value="">Sipariş alındı</option>
-                                                    <option value="">Ödeme alındı</option>
-                                                    <option value="">Sipariş hazırlanıyor</option>
-                                                    <option value="">Sipariş kargoya verildi</option>
+                                                <select class="form-select form-select-sm" name="orderStatus">
+                                                    <option @if($order->order_status == 'siparis-alindi') selected @endif value="siparis-alindi">Sipariş alındı</option>
+                                                    <option @if($order->order_status == 'odeme-alindi') selected @endif value="odeme-alindi">Ödeme alındı</option>
+                                                    <option @if($order->order_status == 'siparis-hazirlaniyor') selected @endif value="siparis-hazirlaniyor">Sipariş hazırlanıyor</option>
+                                                    <option @if($order->order_status == 'siparis-kargoya-verildi') selected @endif value="siparis-kargoya-verildi">Sipariş kargoya verildi</option>
                                                 </select>
-                                                <button type="submit" class="btn btn-sm btn-outline-primary w-100 mt-2">Güncelle</button>
+                                                <button type="submit" class="btn btn-sm btn-outline-primary mt-2 w-100">Güncelle</button>
                                             </form>
                                         </td>
                                         <td>
-                                            <form action="" method="post">
+                                            <form action="{{ route('order-tracking-update', $order->id) }}" method="post">
                                                 @csrf
-
-                                                <input type="text" class="form-control form-control-sm" placeholder="Kargo takip no" name="order-tracking">
-                                                <button type="submit" class="btn btn-sm btn-outline-primary w-100 mt-2">Ekle</button>
+                                                <input type="text" class="form-control form-control-sm" name="trackingNumber" @if($order->tracking_number !=Null) value="{{ $order->tracking_number }}" @else placeholder="Kargo Takip No" @endif>
+                                                <button type="submit" class="btn btn-sm btn-outline-primary mt-2 w-100">Güncelle</button>
                                             </form>
                                         </td>
                                         <td>

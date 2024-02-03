@@ -103,13 +103,13 @@
                                             <p>{{ $orderDetail->created_at }}</p>
                                             <hr>
                                             <p class="mb-2" style="font-weight: 500">Sipariş Durum:</p>
-                                            <form action="" method="post">
+                                            <form action="{{ route('order-status-update', $orderDetail->id) }}" method="post">
                                                 @csrf
-                                                <select class="form-select form-select-sm">
-                                                    <option>Sipariş alındı</option>
-                                                    <option>Ödeme alındı</option>
-                                                    <option>Sipariş hazırlanıyor</option>
-                                                    <option>Sipariş kargoya verildi</option>
+                                                <select class="form-select form-select-sm" name="orderStatus">
+                                                    <option @if($orderDetail->order_status == 'siparis-alindi') selected @endif value="siparis-alindi">Sipariş alındı</option>
+                                                    <option @if($orderDetail->order_status == 'odeme-alindi') selected @endif value="odeme-alindi">Ödeme alındı</option>
+                                                    <option @if($orderDetail->order_status == 'siparis-hazirlaniyor') selected @endif value="siparis-hazirlaniyor">Sipariş hazırlanıyor</option>
+                                                    <option @if($orderDetail->order_status == 'siparis-kargoya-verildi') selected @endif value="siparis-kargoya-verildi">Sipariş kargoya verildi</option>
                                                 </select>
                                                 <button type="submit" class="btn btn-sm btn-outline-primary mt-2 w-100">Güncelle</button>
                                             </form>
@@ -130,8 +130,9 @@
                                             <p class="text-capitalize">{{ $orderDetail->adress }} {{ $orderDetail->city }} {{ $orderDetail->country }}</p>
                                             <hr>
                                             <p class="mb-2" style="font-weight: 500">Kargo Takip No:</p>
-                                            <form action="" method="post">
-                                                <input type="text" class="form-control form-control-sm" placeholder="Kargo Takip No">
+                                            <form action="{{ route('order-tracking-update', $orderDetail->id) }}" method="post">
+                                                @csrf
+                                                <input type="text" class="form-control form-control-sm" name="trackingNumber" @if($orderDetail->tracking_number !=Null) value="{{ $orderDetail->tracking_number }}" @else placeholder="Kargo Takip No" @endif>
                                                 <button type="submit" class="btn btn-sm btn-outline-primary mt-2 w-100">Güncelle</button>
                                             </form>
                                             <hr>

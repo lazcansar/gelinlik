@@ -107,24 +107,22 @@
                                         <td><?php echo e($order->order_number); ?> - <?php echo e($user->name); ?> <?php echo e($user->surname); ?></td>
                                         <td><?php echo e($pureDate = substr($order->created_at, 0, 10)); ?></td>
                                         <td>
-                                            <form action="" method="post">
+                                            <form action="<?php echo e(route('order-status-update', $order->id)); ?>" method="post">
                                                 <?php echo csrf_field(); ?>
-
-                                                <select class="form-select form-select-sm" name="order-status">
-                                                    <option value="">Sipariş alındı</option>
-                                                    <option value="">Ödeme alındı</option>
-                                                    <option value="">Sipariş hazırlanıyor</option>
-                                                    <option value="">Sipariş kargoya verildi</option>
+                                                <select class="form-select form-select-sm" name="orderStatus">
+                                                    <option <?php if($order->order_status == 'siparis-alindi'): ?> selected <?php endif; ?> value="siparis-alindi">Sipariş alındı</option>
+                                                    <option <?php if($order->order_status == 'odeme-alindi'): ?> selected <?php endif; ?> value="odeme-alindi">Ödeme alındı</option>
+                                                    <option <?php if($order->order_status == 'siparis-hazirlaniyor'): ?> selected <?php endif; ?> value="siparis-hazirlaniyor">Sipariş hazırlanıyor</option>
+                                                    <option <?php if($order->order_status == 'siparis-kargoya-verildi'): ?> selected <?php endif; ?> value="siparis-kargoya-verildi">Sipariş kargoya verildi</option>
                                                 </select>
-                                                <button type="submit" class="btn btn-sm btn-outline-primary w-100 mt-2">Güncelle</button>
+                                                <button type="submit" class="btn btn-sm btn-outline-primary mt-2 w-100">Güncelle</button>
                                             </form>
                                         </td>
                                         <td>
-                                            <form action="" method="post">
+                                            <form action="<?php echo e(route('order-tracking-update', $order->id)); ?>" method="post">
                                                 <?php echo csrf_field(); ?>
-
-                                                <input type="text" class="form-control form-control-sm" placeholder="Kargo takip no" name="order-tracking">
-                                                <button type="submit" class="btn btn-sm btn-outline-primary w-100 mt-2">Ekle</button>
+                                                <input type="text" class="form-control form-control-sm" name="trackingNumber" <?php if($order->tracking_number !=Null): ?> value="<?php echo e($order->tracking_number); ?>" <?php else: ?> placeholder="Kargo Takip No" <?php endif; ?>>
+                                                <button type="submit" class="btn btn-sm btn-outline-primary mt-2 w-100">Güncelle</button>
                                             </form>
                                         </td>
                                         <td>

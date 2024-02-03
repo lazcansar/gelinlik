@@ -44,10 +44,19 @@ class AdminpageController extends Controller
     }
     public function orderStatusUpdate(Request $request, $id)
     {
-
+        $status = $request->orderStatus;
+        Order::whereId($id)->update([
+            "order_status" => $status,
+        ]);
+        return redirect()->back()->with('update', 'Sipariş durumu güncellendi');
     }
     public function trackingNumberUpdate(Request $request, $id)
     {
+        $trackingNumber = $request->trackingNumber;
+        Order::whereId($id)->update([
+            "tracking_number" => $trackingNumber,
+        ]);
+        return redirect()->back()->with('update', 'Kargo takip numarası güncellendi');
 
     }
 
