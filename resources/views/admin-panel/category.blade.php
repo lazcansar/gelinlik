@@ -1,3 +1,5 @@
+@auth
+    @if(Auth::user()->rol == 1)
 @extends('theme')
 @section('title') Anasayfa @endsection
 @section('stilAlani')
@@ -141,3 +143,10 @@
     </section>
 
 @endsection
+    @else
+        {!! redirect()->route('home-page'); !!}
+    @endif
+@endauth
+@guest
+    {!! redirect()->route('home-page'); !!}
+@endguest
