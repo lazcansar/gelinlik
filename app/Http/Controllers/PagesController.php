@@ -120,8 +120,9 @@ class PagesController extends Controller
     public function checkoutView()
     {
         $listContact = Contact::all();
+        $productSelect = Urunler::whereproductid(5)->first();
 
-        return view('pages.checkout', compact('listContact'));
+        return view('pages.checkout', compact('listContact', 'productSelect'));
     }
     public function checkoutSuccess()
     {

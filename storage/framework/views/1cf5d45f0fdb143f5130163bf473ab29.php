@@ -168,7 +168,10 @@
 
     <div class="container">
         <div class="footerBottom">
-            <p>Copyright © 2023 Beyazdusler.com – Tüm hakları saklıdır. </p>
+            <div class="d-flex justify-content-between flex-wrap align-items-center">
+                <p>Copyright © 2023 Beyazdusler.com – Tüm hakları saklıdır. </p>
+                <img src="<?php echo e(asset('images/logo_band_white.svg')); ?>">
+            </div>
             <div class="reg-social d-flex justify-content-between flex-wrap align-items-center">
                 <div class="reg"><a href="https://afyazilim.com" class="text-warning" target="_blank"><i class="bi bi-code-slash"></i> afyazilim.com</a></div>
                 <div class="social">
