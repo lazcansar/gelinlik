@@ -1,3 +1,6 @@
+<?php if(auth()->guard()->check()): ?>
+    <?php if(Auth::user()->rol == 1): ?>
+
 <?php $__env->startSection('title'); ?> Anasayfa <?php $__env->stopSection(); ?>
 <?php $__env->startSection('stilAlani'); ?>
     .admin-page-home {
@@ -86,7 +89,7 @@
 
 
                 <div class="col-lg-9">
-                    <div class="order-search">
+                    <div class="order-search mb-5">
                         <h3 class="mb-3">Sipariş Ara</h3>
                         <form action="<?php echo e(route('order-search-execute')); ?>" method="GET">
                             <input type="text" class="form-control mb-3" name="searchOrder" placeholder="Sipariş numarası, E-Posta veya Telefon No ile ara">
@@ -95,14 +98,31 @@
                     </div>
 
                     <?php if($resultSearch): ?>
+                        <h4 class="mb-3">Arama Sonuçları</h4>
+                        <div class="row">
                         <?php $__currentLoopData = $resultSearch; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $result): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                            <?php echo e($result->order_number); ?>
+                            <div class="col-md-4 mb-3 ">
+                                <div class="card shadow" style="font-size: 14px;">
+                                    <div class="card-header">
+                                        #<?php echo e($result->order_number); ?> - <?php echo e($result->name); ?> <?php echo e($result->surname); ?>
 
-                            <?php echo e($result->phone); ?>
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="text-capitalize mb-2">Adres: <?php echo e($result->adress); ?> <?php echo e($result->city); ?> <?php echo e($result->country); ?></p>
+                                        <p class="mb-2">Telefon: <?php echo e($result->phone); ?></p>
+                                        <p>E-Posta: <?php echo e($result->email); ?></p>
+                                        <a class="d-block mt-3 btn btn-sm btn-outline-success" href="<?php echo e(route('admin-siparis-detay', $result->order_number)); ?>">Detay Görüntüle</a>
 
-                            <?php echo e($result->email); ?>
+                                    </div>
+                                    <div class="card-footer">
+                                        Sipariş Tarihi: <?php echo e($cDate = substr($result->created_at, 0, 16)); ?>
+
+                                    </div>
+                                </div>
+                            </div>
 
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        </div>
                     <?php endif; ?>
 
 
@@ -115,5 +135,14 @@
 
 
 <?php $__env->stopSection(); ?>
+    <?php else: ?>
+        <?php echo redirect()->route('home-page'); ?>
+
+    <?php endif; ?>
+<?php endif; ?>
+<?php if(auth()->guard()->guest()): ?>
+    <?php echo redirect()->route('home-page'); ?>
+
+<?php endif; ?>
 
 <?php echo $__env->make('theme', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /Applications/XAMPP/xamppfiles/htdocs/gelinlik/resources/views/admin-panel/admin-order-search.blade.php ENDPATH**/ ?>

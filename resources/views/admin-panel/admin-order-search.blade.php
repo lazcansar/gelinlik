@@ -89,7 +89,7 @@
 
 
                 <div class="col-lg-9">
-                    <div class="order-search">
+                    <div class="order-search mb-5">
                         <h3 class="mb-3">Sipariş Ara</h3>
                         <form action="{{ route('order-search-execute') }}" method="GET">
                             <input type="text" class="form-control mb-3" name="searchOrder" placeholder="Sipariş numarası, E-Posta veya Telefon No ile ara">
@@ -98,11 +98,29 @@
                     </div>
 
                     @if($resultSearch)
+                        <h4 class="mb-3">Arama Sonuçları</h4>
+                        <div class="row">
                         @foreach($resultSearch as $result)
-                            {{ $result->order_number }}
-                            {{ $result->phone }}
-                            {{ $result->email }}
+                            <div class="col-md-4 mb-3 ">
+                                <div class="card shadow" style="font-size: 14px;">
+                                    <div class="card-header">
+                                        #{{ $result->order_number }} - {{ $result->name }} {{ $result->surname }}
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="text-capitalize mb-2">Adres: {{ $result->adress }} {{ $result->city }} {{ $result->country }}</p>
+                                        <p class="mb-2">Telefon: {{ $result->phone }}</p>
+                                        <p>E-Posta: {{ $result->email }}</p>
+                                        <a class="d-block mt-3 btn btn-sm btn-outline-success" href="{{ route('admin-siparis-detay', $result->order_number) }}">Detay Görüntüle</a>
+
+                                    </div>
+                                    <div class="card-footer">
+                                        Sipariş Tarihi: {{ $cDate = substr($result->created_at, 0, 16) }}
+                                    </div>
+                                </div>
+                            </div>
+
                         @endforeach
+                        </div>
                     @endif
 
 

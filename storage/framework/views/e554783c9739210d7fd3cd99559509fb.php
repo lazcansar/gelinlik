@@ -1,3 +1,6 @@
+<?php if(auth()->guard()->check()): ?>
+    <?php if(Auth::user()->rol == 1): ?>
+
 <?php $__env->startSection('title'); ?> Anasayfa <?php $__env->stopSection(); ?>
 <?php $__env->startSection('stilAlani'); ?>
     .admin-page-home {
@@ -223,5 +226,14 @@
 
 
 <?php $__env->stopSection(); ?>
+    <?php else: ?>
+        <?php echo redirect()->route('home-page'); ?>
+
+    <?php endif; ?>
+<?php endif; ?>
+<?php if(auth()->guard()->guest()): ?>
+    <?php echo redirect()->route('home-page'); ?>
+
+<?php endif; ?>
 
 <?php echo $__env->make('theme', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /Applications/XAMPP/xamppfiles/htdocs/gelinlik/resources/views/admin-panel/admin-order-detail.blade.php ENDPATH**/ ?>

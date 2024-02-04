@@ -123,11 +123,12 @@
 <?php $__env->stopSection(); ?>
 
         <?php else: ?>
-        <?php echo redirect()->back(); ?>
+        <?php echo redirect()->route('home-page'); ?>
 
     <?php endif; ?>
 <?php endif; ?>
 <?php if(auth()->guard()->guest()): ?>
+    <?php echo redirect()->route('home-page'); ?>
 
 <?php endif; ?>
 
