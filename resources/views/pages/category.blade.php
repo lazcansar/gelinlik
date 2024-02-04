@@ -110,9 +110,12 @@
                                                     $allImages = glob("$images/*", GLOB_BRACE);
                                                     echo '
                             <img src="../'.$allImages[0].'" class="img-fluid image-two">';
-                                                    ?>
-                                                <a href="#" class="w-100 p-2 bg-dark text-white d-block text-center insert-card">Sepete Ekle</a>
-                                            </div></a>
+                                                    ?></a>
+                                                <form action="" method="POST">
+                                                    <input type="hidden" name="productId" value="{{ $product->productId }}">
+                                                <button type="submit" class="w-100 p-2 rounded-0 btn btn-dark text-white d-block text-center insert-card">Sepete Ekle</button>
+                                                </form>
+                                            </div>
                                         <div class="model-title">
                                             <a href="{{ route('product-detail', $product->productUrl) }}">{{ $product->productTitle }}</a>
                                         </div>
@@ -143,9 +146,12 @@
                                                 $allImages = glob("$images/*", GLOB_BRACE);
                                                 echo '
                             <img src="../'.$allImages[0].'" class="img-fluid image-two">';
-                                                ?>
-                                            <a href="#" class="w-100 p-2 bg-dark text-white d-block text-center insert-card">Sepete Ekle</a>
-                                        </div></a>
+                                                ?></a>
+                                            <form action="" method="POST">
+                                                <input type="hidden" name="productId" value="{{ $product->productId }}">
+                                                <button type="submit" class="w-100 p-2 rounded-0 btn btn-dark text-white d-block text-center insert-card">Sepete Ekle</button>
+                                            </form>
+                                        </div>
                                     <div class="model-title">
                                         <a href="{{ route('product-detail', $product->productUrl) }}">{{ $product->productTitle }}</a>
                                     </div>

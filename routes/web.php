@@ -91,7 +91,8 @@ Route::get('/admin-panel/siparisler/ara', [AdminpageController::class, 'orderSea
 Route::get('/admin-panel/siparisler/bul', [AdminpageController::class, 'orderSearchExecute'])->name('order-search-execute');
 
 
-
+// Cart Add
+Route::post('sepete/ekle', [PagesController::class, 'addCart'])->name('add-cart');
 
 
 
