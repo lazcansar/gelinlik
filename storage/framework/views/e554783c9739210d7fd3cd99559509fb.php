@@ -78,7 +78,7 @@
                             <a class="nav-link" href="<?php echo e(route('admin-siparisler')); ?>"><i class="bi bi-house-fill"></i> Sipariş Bilgileri Görüntüle</a>
                         </li>
                         <li class="nav-item border-bottom">
-                            <a class="nav-link" href=""><i class="bi bi-search"></i> Sipariş Arama </a>
+                            <a class="nav-link" href="<?php echo e(route('order-search')); ?>"><i class="bi bi-search"></i> Sipariş Arama </a>
                         </li>
 
                     </ul>

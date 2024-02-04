@@ -59,7 +59,24 @@ class AdminpageController extends Controller
         return redirect()->back()->with('update', 'Kargo takip numarası güncellendi');
 
     }
-
+    public function orderSearch() {
+        $listContact = Contact::all();
+        $resultSearch = "";
+        return view('admin-panel.admin-order-search', compact('listContact', 'resultSearch'));
+    }
+    public function orderSearchExecute(Request $request)
+    {
+        $listContact = Contact::all();
+        $productAll = Urunler::all();
+        $orderAll = Order::all();
+        $stmt = Order::query();
+        if(isset($request->searchOrder)) {
+            $searchText = "%".$request->searchOrder."%";
+            $stmt->where('order_number', 'LIKE', $searchText)->orWhere('email', 'LIKE', $searchText)->orWhere('phone', 'LIKE', $searchText);
+        }
+        $resultSearch = $stmt->get();
+        return view('admin-panel.admin-order-search', compact('listContact', 'orderAll', 'productAll', 'resultSearch'));
+    }
 
 
 

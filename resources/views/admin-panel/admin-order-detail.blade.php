@@ -79,7 +79,7 @@
                             <a class="nav-link" href="{{ route('admin-siparisler') }}"><i class="bi bi-house-fill"></i> Sipariş Bilgileri Görüntüle</a>
                         </li>
                         <li class="nav-item border-bottom">
-                            <a class="nav-link" href=""><i class="bi bi-search"></i> Sipariş Arama </a>
+                            <a class="nav-link" href="{{ route('order-search') }}"><i class="bi bi-search"></i> Sipariş Arama </a>
                         </li>
 
                     </ul>
