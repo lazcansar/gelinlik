@@ -173,8 +173,11 @@
                         @elseif($orderDetail)
                             <div class="orderNumber">
                                 Sipariş Numarası: {{ $orderDetail->order_number }}
-                                <p class="text-black ">Sipariş Durumu: <span class="fw-normal">{{ $orderDetail->order_status }}</span></p>
+                                <hr>
+                                <p class="text-black ">Sipariş Durumu: <span class="fw-normal">@if($orderDetail->order_status == 'siparis-alindi') Sipariş alındı @elseif($orderDetail->order_status == 'siparis-kargoya-verildi') Sipariş kargoya verildi @elseif($orderDetail->order_status == 'odeme-alindi') Ödeme alındı @elseif($orderDetail->order_status == 'siparis-hazirlaniyor') Sipariş hazırlanıyor @endif</span></p>
                             </div>
+                            <hr>
+                            <p><span style="font-weight: 500;">Kargo Takip Numarası:</span> @if($orderDetail->tracking_number !=Null) {{ $orderDetail->tracking_number }} @else Kargo takip numarası henüz sistemi girilmedi @endif</p>
                             <hr>
                             <div class="orderInfo">
                                 <p><span>Ad Soyad:</span> {{ $orderDetail->name }} {{ $orderDetail->surname }}</p>

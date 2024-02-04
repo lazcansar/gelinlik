@@ -174,8 +174,11 @@
                             <div class="orderNumber">
                                 Sipariş Numarası: <?php echo e($orderDetail->order_number); ?>
 
-                                <p class="text-black ">Sipariş Durumu: <span class="fw-normal"><?php echo e($orderDetail->order_status); ?></span></p>
+                                <hr>
+                                <p class="text-black ">Sipariş Durumu: <span class="fw-normal"><?php if($orderDetail->order_status == 'siparis-alindi'): ?> Sipariş alındı <?php elseif($orderDetail->order_status == 'siparis-kargoya-verildi'): ?> Sipariş kargoya verildi <?php elseif($orderDetail->order_status == 'odeme-alindi'): ?> Ödeme alındı <?php elseif($orderDetail->order_status == 'siparis-hazirlaniyor'): ?> Sipariş hazırlanıyor <?php endif; ?></span></p>
                             </div>
+                            <hr>
+                            <p><span style="font-weight: 500;">Kargo Takip Numarası:</span> <?php if($orderDetail->tracking_number !=Null): ?> <?php echo e($orderDetail->tracking_number); ?> <?php else: ?> Kargo takip numarası henüz sistemi girilmedi <?php endif; ?></p>
                             <hr>
                             <div class="orderInfo">
                                 <p><span>Ad Soyad:</span> <?php echo e($orderDetail->name); ?> <?php echo e($orderDetail->surname); ?></p>
