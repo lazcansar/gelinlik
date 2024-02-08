@@ -1,5 +1,6 @@
-<?php $__env->startSection('title'); ?> Ürün Detay <?php $__env->stopSection(); ?>
-<?php $__env->startSection('stilAlani'); ?>
+@extends('theme')
+@section('title') Ürün Detay @endsection
+@section('stilAlani')
     .category-page-title .container {
     font-weight: 500;
     font-size: 46px;
@@ -11,8 +12,8 @@
     font-weight: 300;
     }
 
-<?php $__env->stopSection(); ?>
-<?php $__env->startSection('govde'); ?>
+@endsection
+@section('govde')
     <section class="category-page">
         <div class="category-page-bread">
             <div class="category-page-title">
@@ -30,20 +31,20 @@
 
         <div class="checkout-page">
             <div class="container">
-                <?php if(session('error')): ?>
+                @if(session('error'))
                     <div class="alert alert-warning">
-                        <?php echo e(session('error')); ?>
-
+                        {{ session('error') }}
                     </div>
-                <?php endif; ?>
+                @endif
                 <div class="row">
 
-<?php if(auth()->guard()->check()): ?>
+@auth
+
                     <div class="col-lg-6">
                         <div class="checkout-form">
                             <span>Fatura Detayları</span>
-                            <form action="<?php echo e(route('buy-submit')); ?>" method="post">
-                                <?php echo csrf_field(); ?>
+                            <form action="{{ route('buy-submit') }}" method="post">
+                                @csrf
 
                                 <div class="row">
                                     <div class="col-md-6">
@@ -63,8 +64,8 @@
                                 <input type="text" class="form-control mb-4" name="adress" placeholder="Adres *">
                                 <input type="text" class="form-control mb-4" name="postal_code" placeholder="Posta Kodu">
                                 <textarea class="form-control mb-4" name="message" placeholder="Sipariş ile ilgili notlar" rows="5"></textarea>
-                                <input type="hidden" name="userId" value="<?php echo e(Auth::user()->id); ?>">
-                                <input type="hidden" name="productId" value="<?php echo e($productSelect->productId); ?>">
+                                <input type="hidden" name="userId" value="{{ Auth::user()->id }}">
+                                <input type="hidden" name="productId" value="@if(session('cart'))@foreach(session('cart') as $id => $details) {{ $details['productId'] .',' }} @endforeach @endif">
                                 <input type="hidden" name="order_number" value="<?php echo rand(); ?>">
 
 
@@ -77,24 +78,27 @@
                             <div class="checkout-summary">
                                 <span class="text-uppercase" style="font-size: 18px; font-weight: 400">Ürün</span>
                                 <div class="row align-items-center">
-                                    <div class="col-md-4">
-                                        <?php
-                                        $productImage = $productSelect->productCoverImage;
-                                        $productUrl = $productSelect->productUrl;
-                                        $baseImage = pathinfo($productImage);
-                                        $baseImage = $baseImage['basename'];
-                                        $coverImage = "images/product/".$productUrl."/".$baseImage;
-                                        ?>
-                                        <img src="../<?php echo e($coverImage); ?>" class="img-fluid">
-                                    </div>
-                                    <div class="col-md-4">
-                                        <?php echo e($productSelect->productTitle); ?>
+                                    @if(session('cart'))
+                                        @foreach(session('cart') as $id => $details)
+                                            <div class="col-md-4 mb-2">
+                                                    <?php
+                                                    $productImage = $details['productImage'];
+                                                    $productUrl = $details['productUrl'];
+                                                    $baseImage = pathinfo($details['productImage']);
+                                                    $baseImage = $baseImage['basename'];
+                                                    $coverImage = "images/product/".$productUrl."/".$baseImage;
+                                                    ?>
+                                                <img src="../{{ $coverImage }}" class="img-fluid">
+                                            </div>
+                                            <div class="col-md-4 mb-2">
+                                                {{ $details['productTitle'] }}
+                                            </div>
+                                            <div class="col-md-4 mb-2">
+                                                &#8378; {{ $details['productPrice'] }}
+                                            </div>
+                                        @endforeach
+                                    @endif
 
-                                    </div>
-                                    <div class="col-md-4">
-                                        &#8378; <?php echo e($productSelect->productPrice); ?>
-
-                                    </div>
                                 </div>
                                 <hr>
                                 <div class="shipping-method">
@@ -116,7 +120,21 @@
                                 <div class="total-price">
                                     <div class="row">
                                         <div class="col-md-6">Toplam Tutar</div>
-                                        <div class="col-md-6 text-end">₺ <?php echo e($productSelect->productPrice); ?></div>
+                                        <div class="col-md-6 text-end">₺
+                                            <?php
+                                                $sum = 0;
+                                            if(session('cart')) {
+                                                foreach (session('cart') as $id => $details) {
+                                                   $sum += $details['productPrice'];
+                                                }
+                                                echo $sum;
+                                            }
+                                            ?>
+
+
+                                            <input type="hidden" name="productTotalPrice" value="{{$sum}}">
+
+                                        </div>
                                     </div>
                                 </div>
                                 <hr>
@@ -158,9 +176,9 @@
                 </div>
             </div>
         </div>
-    <?php endif; ?>
+    @endauth
 
-    <?php if(auth()->guard()->guest()): ?>
+    @guest
         <div class="p-5">
             <div class="alert alert-warning text-center shadow">
                 <h5>Sipariş oluşturabilmek için lütfen kullanıcı girişi yapın!</h5>
@@ -169,7 +187,5 @@
             </div>
         </div>
         </div></div></div>
-    <?php endif; ?>
-<?php $__env->stopSection(); ?>
-
-<?php echo $__env->make('theme', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /Applications/XAMPP/xamppfiles/htdocs/gelinlik/resources/views/pages/checkout.blade.php ENDPATH**/ ?>
+    @endguest
+@endsection

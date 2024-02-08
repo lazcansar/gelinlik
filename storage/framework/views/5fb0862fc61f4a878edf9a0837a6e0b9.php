@@ -196,24 +196,36 @@
                                 <p><span>Sipariş Tarihi:</span> <?php echo e($orderDetail->created_at); ?></p>
                                 <hr>
                                 <p><span>Sipariş Verilen Ürün:</span>
-                                    <?php if($orderDetail->userId == Auth::user()->id): ?>
-                                        <?php $__currentLoopData = $allProduct; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $myProduct): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                            <?php if($orderDetail->productId == $myProduct->productId): ?>
-                                                <?php
-                                                $productUrl = $myProduct->productUrl;
-                                                $productImage = $myProduct->productCoverImage;
-                                                $baseImage = pathinfo($productImage);
-                                                $baseImage = $baseImage['basename'];
-                                                $coverImage = "images/product/".$productUrl."/".$baseImage;
-                                                ?>
-                                            <a href="<?php echo e(route('product-detail', $myProduct->productUrl)); ?>">
-                                                <?php echo e($myProduct->productTitle); ?>
+                                    <?php $productIds = explode(',', $orderDetail->productId); ?>
+                                    <?php $__currentLoopData = $productIds; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $multiProduct): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <?php if($orderDetail->userId == Auth::user()->id): ?>
+                                            <?php $__currentLoopData = $allProduct; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $myProduct): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <?php if($multiProduct == $myProduct->productId): ?>
+                                                        <?php
+                                                        $productUrl = $myProduct->productUrl;
+                                                        $productImage = $myProduct->productCoverImage;
+                                                        $baseImage = pathinfo($productImage);
+                                                        $baseImage = $baseImage['basename'];
+                                                        $coverImage = "images/product/".$productUrl."/".$baseImage;
+                                                        ?>
+                                                    <a href="<?php echo e(route('product-detail', $myProduct->productUrl)); ?>">
+                                                        <div class="card d-inline-block mt-3">
+                                                            <div class="card-header">
+                                                                <div class="card-img-top text-center">
+                                                                    <img src="/<?php echo e($coverImage); ?>" class="border border-3 p-1" height="150">
+                                                                </div>
+                                                                <div class="card-body">
+                                                                    <?php echo e($myProduct->productTitle); ?>
 
-                                                <img src="/<?php echo e($coverImage); ?>" class="border border-3 p-1" height="150">
-                                            </a>
-                                            <?php endif; ?>
-                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                            <?php endif; ?></p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                <?php endif; ?>
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        <?php endif; ?>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    </p>
                             </div>
 
 
@@ -226,7 +238,6 @@
                                     <th>Sipariş No</th>
                                         <th>Ödeme Şekli</th>
                                     <th>Fiyat</th>
-                                    <th>Ürün Bilgisi</th>
                                     <th>Sipariş Tarihi</th>
                                     <th>Detay</th>
                                 </tr>
@@ -234,20 +245,13 @@
                                 <tbody>
                                 <?php $__currentLoopData = $myOrders; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $order): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <?php if($order->userId == Auth::user()->id): ?>
-                                        <?php $__currentLoopData = $allProduct; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $myProduct): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                            <?php if($order->productId == $myProduct->productId): ?>
-                                                <tr>
-                                                    <td><?php echo e($order->order_number); ?></td>
-                                                    <td><?php echo e($orderMethod = str_replace(['havale-eft', 'kapida-odeme', 'revolut-pay', 'bitcoin-pay'],['Havale/EFT', 'Kapıda Ödeme', 'Revolut', 'Bitcoin'],$order->order_method)); ?></td>
-                                                    <td><?php echo e($order->total_price); ?> TL</td>
-                                                    <td><?php echo e($myProduct->productTitle); ?></td>
-                                                    <td><?php echo e($myProduct->created_at); ?></td>
-                                                    <td><a href="<?php echo e(route('my-orders-detail', $order->order_number)); ?>" class="btn btn-outline-primary btn-sm">Sipariş Detayı</a> </td>
-                                                </tr>
-                                            <?php endif; ?>
-                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-
-
+                                        <tr>
+                                            <td><?php echo e($order->order_number); ?></td>
+                                            <td><?php echo e($orderMethod = str_replace(['havale-eft', 'kapida-odeme', 'revolut-pay', 'bitcoin-pay'],['Havale/EFT', 'Kapıda Ödeme', 'Revolut', 'Bitcoin'],$order->order_method)); ?></td>
+                                            <td> ₺<?php echo e($order->total_price); ?></td>
+                                            <td><?php echo e($order->created_at); ?></td>
+                                            <td><a href="<?php echo e(route('my-orders-detail', $order->order_number)); ?>" class="btn btn-outline-primary btn-sm">Sipariş Detayı</a></td>
+                                        </tr>
                                     <?php endif; ?>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </tbody>

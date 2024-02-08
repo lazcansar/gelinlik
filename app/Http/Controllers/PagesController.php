@@ -143,11 +143,12 @@ class PagesController extends Controller
 
     public function orderSubmit (Request $request)
     {
-        $total_price = 3245;
+        $total_price = $request->productTotalPrice;
         $order_number = $request->order_number;
         $ship = $request->ship_method;
         $order = $request->order_method;
         $onay = $request->sart_kosul;
+        $productId = str_replace(' ', '', $request->productId);
 
 
 
@@ -165,7 +166,7 @@ class PagesController extends Controller
                 'ship_method' => $ship,
                 'order_method' => $order,
                 'total_price' => $total_price,
-                'productId' => $request->productId,
+                'productId' => $productId,
                 'userId' => $request->userId,
                 'order_number' => $order_number,
             ]);
@@ -176,9 +177,34 @@ class PagesController extends Controller
 
     }
 
+    public function addCart(Request $request)
+    {
+     $pId = $request->productId;
+     $products = Urunler::findOrFail($pId);
+     $cart = session()->get('cart', []);
+     if (isset($cart[$pId])) {
+         $cart[$pId][]++;
+     }else {
+         $cart[$pId] = [
+             "productId" => $products->productId,
+             "productTitle" => $products->productTitle,
+             "productStock" => $products->productStock,
+             "productPrice" => $products->productPrice,
+             "productUrl" => $products->productUrl,
+             "productImage" => $products->productCoverImage,
+         ];
+     }
+     session()->put('cart', $cart);
+     return redirect()->back();
 
 
+    }
 
+    public function checkoutTest()
+    {
+        $listContact = Contact::all();
+        return view('pages.checkout-test', compact('listContact'));
+    }
 
 
 

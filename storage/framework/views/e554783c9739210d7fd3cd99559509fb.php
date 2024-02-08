@@ -167,7 +167,9 @@
                                     </thead>
                                     <tbody>
                                     <?php $__currentLoopData = $productAll; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                        <?php if($orderDetail->productId == $product->productId): ?>
+                                    <?php $productIds = explode(',', $orderDetail->productId); ?>
+                                    <?php $__currentLoopData = $productIds; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $multiOrder): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <?php if($multiOrder == $product->productId): ?>
                                             <tr>
                                                 <td>
                                                         <?php
@@ -187,23 +189,24 @@
                                                 <td>x 1</td>
                                                 <td>₺<?php echo e($product->productPrice); ?></td>
                                             </tr>
-                                            <tr>
-                                                <td>
-                                                    <p><i class="bi bi-truck" style="font-size: 28px; margin-right: 10px;"></i> Ücretsiz Gönderim</p>
-                                                </td>
-                                                <td></td>
-                                                <td></td>
-                                                <td>₺ 0,00</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Toplam Fiyat:</td>
-                                                <td></td>
-                                                <td></td>
-                                                <td>₺10.750,00</td>
-                                            </tr>
                                         <?php endif; ?>
-                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    <tr>
+                                        <td>
+                                            <p><i class="bi bi-truck" style="font-size: 28px; margin-right: 10px;"></i> <?php echo e($shipMethod = str_replace(['ucretsiz-gonderi', 'sabit-fiyat', 'magaza-teslim'],['Ücretsiz Gönderi', 'Ücretli Gönderi', 'Mağazadan Teslim'], $orderDetail->ship_method)); ?></p>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>₺ 0,00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Toplam Fiyat:</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>₺ <?php echo e($orderDetail->total_price); ?></td>
+                                    </tr>
                                     </tbody>
                                 </table>
 

@@ -39,6 +39,7 @@
                 <div class="row">
 
 <?php if(auth()->guard()->check()): ?>
+
                     <div class="col-lg-6">
                         <div class="checkout-form">
                             <span>Fatura Detayları</span>
@@ -64,7 +65,7 @@
                                 <input type="text" class="form-control mb-4" name="postal_code" placeholder="Posta Kodu">
                                 <textarea class="form-control mb-4" name="message" placeholder="Sipariş ile ilgili notlar" rows="5"></textarea>
                                 <input type="hidden" name="userId" value="<?php echo e(Auth::user()->id); ?>">
-                                <input type="hidden" name="productId" value="<?php echo e($productSelect->productId); ?>">
+                                <input type="hidden" name="productId" value="<?php if(session('cart')): ?><?php $__currentLoopData = session('cart'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $id => $details): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?> <?php echo e($details['productId'] .','); ?> <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?> <?php endif; ?>">
                                 <input type="hidden" name="order_number" value="<?php echo rand(); ?>">
 
 
@@ -77,24 +78,29 @@
                             <div class="checkout-summary">
                                 <span class="text-uppercase" style="font-size: 18px; font-weight: 400">Ürün</span>
                                 <div class="row align-items-center">
-                                    <div class="col-md-4">
-                                        <?php
-                                        $productImage = $productSelect->productCoverImage;
-                                        $productUrl = $productSelect->productUrl;
-                                        $baseImage = pathinfo($productImage);
-                                        $baseImage = $baseImage['basename'];
-                                        $coverImage = "images/product/".$productUrl."/".$baseImage;
-                                        ?>
-                                        <img src="../<?php echo e($coverImage); ?>" class="img-fluid">
-                                    </div>
-                                    <div class="col-md-4">
-                                        <?php echo e($productSelect->productTitle); ?>
+                                    <?php if(session('cart')): ?>
+                                        <?php $__currentLoopData = session('cart'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $id => $details): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <div class="col-md-4 mb-2">
+                                                    <?php
+                                                    $productImage = $details['productImage'];
+                                                    $productUrl = $details['productUrl'];
+                                                    $baseImage = pathinfo($details['productImage']);
+                                                    $baseImage = $baseImage['basename'];
+                                                    $coverImage = "images/product/".$productUrl."/".$baseImage;
+                                                    ?>
+                                                <img src="../<?php echo e($coverImage); ?>" class="img-fluid">
+                                            </div>
+                                            <div class="col-md-4 mb-2">
+                                                <?php echo e($details['productTitle']); ?>
 
-                                    </div>
-                                    <div class="col-md-4">
-                                        &#8378; <?php echo e($productSelect->productPrice); ?>
+                                            </div>
+                                            <div class="col-md-4 mb-2">
+                                                &#8378; <?php echo e($details['productPrice']); ?>
 
-                                    </div>
+                                            </div>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    <?php endif; ?>
+
                                 </div>
                                 <hr>
                                 <div class="shipping-method">
@@ -116,7 +122,21 @@
                                 <div class="total-price">
                                     <div class="row">
                                         <div class="col-md-6">Toplam Tutar</div>
-                                        <div class="col-md-6 text-end">₺ <?php echo e($productSelect->productPrice); ?></div>
+                                        <div class="col-md-6 text-end">₺
+                                            <?php
+                                                $sum = 0;
+                                            if(session('cart')) {
+                                                foreach (session('cart') as $id => $details) {
+                                                   $sum += $details['productPrice'];
+                                                }
+                                                echo $sum;
+                                            }
+                                            ?>
+
+
+                                            <input type="hidden" name="productTotalPrice" value="<?php echo e($sum); ?>">
+
+                                        </div>
                                     </div>
                                 </div>
                                 <hr>
@@ -172,4 +192,4 @@
     <?php endif; ?>
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('theme', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /Applications/XAMPP/xamppfiles/htdocs/gelinlik/resources/views/pages/checkout.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('theme', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /Applications/XAMPP/xamppfiles/htdocs/gelinlik/resources/views/pages/checkout-test.blade.php ENDPATH**/ ?>

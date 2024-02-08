@@ -63,7 +63,7 @@
                     </ul>
                 </div>
                     <a href="<?php echo e(route('search-page')); ?>"><i class="bi bi-search-heart"></i> </a>
-                <a href=""><i class="bi bi-cart"></i></a>
+                <a href="<?php echo e(route('test-checkout')); ?>"><i class="bi bi-cart"></i> <?php echo e(count((array) session('cart'))); ?></a>
             </div>
         </div>
     </div>

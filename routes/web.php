@@ -111,3 +111,8 @@ Route::post('/hesabim/adreslerim/guncelle/{id}', [UserPage::class, 'myAdressUpda
 //Order Page
 Route::get('/odeme/{productId}', [PagesController::class, 'orderPage'])->name('buy');
 Route::post('/odeme/satin-al', [PagesController::class, 'orderSubmit'])->name('buy-submit');
+
+
+//Test
+
+Route::get('/checkout', [PagesController::class, 'checkoutTest'])->name('test-checkout');

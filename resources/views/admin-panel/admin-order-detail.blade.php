@@ -166,7 +166,9 @@
                                     </thead>
                                     <tbody>
                                     @foreach($productAll as $product)
-                                        @if($orderDetail->productId == $product->productId)
+                                    @php $productIds = explode(',', $orderDetail->productId); @endphp
+                                    @foreach ($productIds as $multiOrder)
+                                        @if($multiOrder == $product->productId)
                                             <tr>
                                                 <td>
                                                         <?php
@@ -185,23 +187,24 @@
                                                 <td>x 1</td>
                                                 <td>₺{{ $product->productPrice }}</td>
                                             </tr>
-                                            <tr>
-                                                <td>
-                                                    <p><i class="bi bi-truck" style="font-size: 28px; margin-right: 10px;"></i> Ücretsiz Gönderim</p>
-                                                </td>
-                                                <td></td>
-                                                <td></td>
-                                                <td>₺ 0,00</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Toplam Fiyat:</td>
-                                                <td></td>
-                                                <td></td>
-                                                <td>₺10.750,00</td>
-                                            </tr>
                                         @endif
-                                    @endforeach
 
+                                    @endforeach
+                                    @endforeach
+                                    <tr>
+                                        <td>
+                                            <p><i class="bi bi-truck" style="font-size: 28px; margin-right: 10px;"></i> {{ $shipMethod = str_replace(['ucretsiz-gonderi', 'sabit-fiyat', 'magaza-teslim'],['Ücretsiz Gönderi', 'Ücretli Gönderi', 'Mağazadan Teslim'], $orderDetail->ship_method) }}</p>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>₺ 0,00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Toplam Fiyat:</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>₺ {{ $orderDetail->total_price }}</td>
+                                    </tr>
                                     </tbody>
                                 </table>
 

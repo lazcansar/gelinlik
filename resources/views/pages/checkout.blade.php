@@ -14,7 +14,6 @@
 
 @endsection
 @section('govde')
-
     <section class="category-page">
         <div class="category-page-bread">
             <div class="category-page-title">

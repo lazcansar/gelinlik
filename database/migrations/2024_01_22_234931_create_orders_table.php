@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('ship_method');
             $table->string('order_method');
             $table->string('total_price');
-            $table->bigInteger('productId');
+            $table->string('productId');
             $table->bigInteger('userId');
             $table->string('order_number');
             $table->string('order_status')->nullable();

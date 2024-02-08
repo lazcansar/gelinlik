@@ -147,7 +147,8 @@
                                                 echo '
                             <img src="../'.$allImages[0].'" class="img-fluid image-two">';
                                                 ?></a>
-                                            <form action="" method="POST">
+                                            <form action="{{ route('add-cart') }}" method="POST">
+                                                @csrf
                                                 <input type="hidden" name="productId" value="{{ $product->productId }}">
                                                 <button type="submit" class="w-100 p-2 rounded-0 btn btn-dark text-white d-block text-center insert-card">Sepete Ekle</button>
                                             </form>

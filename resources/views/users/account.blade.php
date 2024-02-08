@@ -195,23 +195,35 @@
                                 <p><span>Sipariş Tarihi:</span> {{ $orderDetail->created_at }}</p>
                                 <hr>
                                 <p><span>Sipariş Verilen Ürün:</span>
-                                    @if($orderDetail->userId == Auth::user()->id)
-                                        @foreach($allProduct as $myProduct)
-                                            @if($orderDetail->productId == $myProduct->productId)
-                                                <?php
-                                                $productUrl = $myProduct->productUrl;
-                                                $productImage = $myProduct->productCoverImage;
-                                                $baseImage = pathinfo($productImage);
-                                                $baseImage = $baseImage['basename'];
-                                                $coverImage = "images/product/".$productUrl."/".$baseImage;
-                                                ?>
-                                            <a href="{{ route('product-detail', $myProduct->productUrl) }}">
-                                                {{ $myProduct->productTitle }}
-                                                <img src="/{{ $coverImage }}" class="border border-3 p-1" height="150">
-                                            </a>
-                                            @endif
-                                                @endforeach
-                                            @endif</p>
+                                    @php $productIds = explode(',', $orderDetail->productId); @endphp
+                                    @foreach($productIds as $multiProduct)
+                                        @if($orderDetail->userId == Auth::user()->id)
+                                            @foreach($allProduct as $myProduct)
+                                                @if($multiProduct == $myProduct->productId)
+                                                        <?php
+                                                        $productUrl = $myProduct->productUrl;
+                                                        $productImage = $myProduct->productCoverImage;
+                                                        $baseImage = pathinfo($productImage);
+                                                        $baseImage = $baseImage['basename'];
+                                                        $coverImage = "images/product/".$productUrl."/".$baseImage;
+                                                        ?>
+                                                    <a href="{{ route('product-detail', $myProduct->productUrl) }}">
+                                                        <div class="card d-inline-block mt-3">
+                                                            <div class="card-header">
+                                                                <div class="card-img-top text-center">
+                                                                    <img src="/{{ $coverImage }}" class="border border-3 p-1" height="150">
+                                                                </div>
+                                                                <div class="card-body">
+                                                                    {{ $myProduct->productTitle }}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                @endif
+                                            @endforeach
+                                        @endif
+                                    @endforeach
+                                    </p>
                             </div>
 
 
@@ -224,7 +236,6 @@
                                     <th>Sipariş No</th>
                                         <th>Ödeme Şekli</th>
                                     <th>Fiyat</th>
-                                    <th>Ürün Bilgisi</th>
                                     <th>Sipariş Tarihi</th>
                                     <th>Detay</th>
                                 </tr>
@@ -232,20 +243,13 @@
                                 <tbody>
                                 @foreach($myOrders as $order)
                                     @if($order->userId == Auth::user()->id)
-                                        @foreach($allProduct as $myProduct)
-                                            @if($order->productId == $myProduct->productId)
-                                                <tr>
-                                                    <td>{{ $order->order_number }}</td>
-                                                    <td>{{ $orderMethod = str_replace(['havale-eft', 'kapida-odeme', 'revolut-pay', 'bitcoin-pay'],['Havale/EFT', 'Kapıda Ödeme', 'Revolut', 'Bitcoin'],$order->order_method)  }}</td>
-                                                    <td>{{ $order->total_price }} TL</td>
-                                                    <td>{{ $myProduct->productTitle }}</td>
-                                                    <td>{{ $myProduct->created_at }}</td>
-                                                    <td><a href="{{ route('my-orders-detail', $order->order_number) }}" class="btn btn-outline-primary btn-sm">Sipariş Detayı</a> </td>
-                                                </tr>
-                                            @endif
-                                        @endforeach
-
-
+                                        <tr>
+                                            <td>{{ $order->order_number }}</td>
+                                            <td>{{ $orderMethod = str_replace(['havale-eft', 'kapida-odeme', 'revolut-pay', 'bitcoin-pay'],['Havale/EFT', 'Kapıda Ödeme', 'Revolut', 'Bitcoin'],$order->order_method)  }}</td>
+                                            <td> ₺{{ $order->total_price }}</td>
+                                            <td>{{ $order->created_at }}</td>
+                                            <td><a href="{{ route('my-orders-detail', $order->order_number) }}" class="btn btn-outline-primary btn-sm">Sipariş Detayı</a></td>
+                                        </tr>
                                     @endif
                                 @endforeach
                                 </tbody>
