@@ -93,6 +93,7 @@ Route::get('/admin-panel/siparisler/bul', [AdminpageController::class, 'orderSea
 
 // Cart Add
 Route::post('sepete/ekle', [PagesController::class, 'addCart'])->name('add-cart');
+Route::get('sepete/sil/{id}', [PagesController::class, 'deleteProduct'])->name('delete-cart');
 
 
 

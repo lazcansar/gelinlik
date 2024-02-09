@@ -196,9 +196,22 @@ class PagesController extends Controller
      }
      session()->put('cart', $cart);
      return redirect()->back();
-
-
     }
+
+    public function deleteProduct($id)
+    {
+        if($id) {
+            $cart = session()->get('cart');
+            if(isset($cart[$id])) {
+                unset($cart[$id]);
+                session()->put('cart', $cart);
+            }
+            return redirect()->back()->with('delete', 'Ürün silindi');
+        }
+    }
+
+
+
 
     public function checkoutTest()
     {

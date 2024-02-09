@@ -39,7 +39,9 @@
                 <div class="row">
 
 @auth
-
+@if(session('cart') == Null)
+    {!! redirect()->route('category-page')->with('empty', 'Sepet boş! Lütfen sepetinize ürün ekleyin.') !!}
+@endif
                     <div class="col-lg-6">
                         <div class="checkout-form">
                             <span>Fatura Detayları</span>
@@ -88,7 +90,7 @@
                                                     $baseImage = $baseImage['basename'];
                                                     $coverImage = "images/product/".$productUrl."/".$baseImage;
                                                     ?>
-                                                <img src="../{{ $coverImage }}" class="img-fluid">
+                                                <a href="{{ route('delete-cart', $details['productId']) }}"><i class="bi bi-x"></i> Sil</a> <img src="../{{ $coverImage }}" class="img-fluid">
                                             </div>
                                             <div class="col-md-4 mb-2">
                                                 {{ $details['productTitle'] }}

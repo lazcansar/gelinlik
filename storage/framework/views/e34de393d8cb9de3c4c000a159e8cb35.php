@@ -28,6 +28,14 @@
         </div>
     </div>
 
+    <?php if(session('empty')): ?>
+        <div class="container mt-4">
+            <div class="alert alert-warning">
+                <?php echo e(session('empty')); ?>
+
+            </div>
+        </div>
+    <?php endif; ?>
 
     <!---Show Page--->
 

@@ -29,6 +29,13 @@
         </div>
     </div>
 
+    @if(session('empty'))
+        <div class="container mt-4">
+            <div class="alert alert-warning">
+                {{ session('empty') }}
+            </div>
+        </div>
+    @endif
 
     <!---Show Page--->
 
