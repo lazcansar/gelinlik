@@ -135,7 +135,11 @@
                             <img src="https://beyazdusler.com/wp-content/uploads/2023/12/beyaz-dusler-beden-tablosu-300x288.jpeg" class="img-fluid">
                         </div>
                         <div class="product-detail-buy">
-                            <a href="" class="btn btn-dark">Sepete Ekle</a>
+                            <form action="<?php echo e(route('add-cart')); ?>" method="POST" class="d-inline">
+                                <?php echo csrf_field(); ?>
+                                <input type="hidden" name="productId" value="<?php echo e($productDetail->productId); ?>">
+                                <button type="submit" class="btn btn-dark text-white">Sepete Ekle</button>
+                            </form>
                             <a href="<?php echo e(route('buy', $productDetail->productId)); ?>" class="btn btn-success">Satın Al</a>
                         </div>
                         <div class="product-detail-secure">
