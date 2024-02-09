@@ -59,6 +59,36 @@ Navbar
     padding: 10px 30px;
     transition: .3s ease-in-out;
 }
+@media only screen and (max-width: 760px) {
+    .side-menu {
+        width: 50%;
+        position: fixed;
+    }
+    .wedding-create-content {
+        padding: 0 !important;
+    }
+    .sss-page .w-50 {
+        width: 100% !important;
+    }
+    .costumer-main .nav {
+        display: flex !important;
+        flex-direction: row !important;
+        padding: 0 !important;
+        margin: 0 0 30px 0 !important;
+    }
+    .mobile-bottom {
+        margin-bottom: 30px;
+    }
+    .mobile-bottom:last-child {
+        margin-bottom: 0;
+    }
+    .contact-page .container{
+        padding: 50px 20px;
+    }
+    .login-page .container {
+        max-width: 100% !important;
+    }
+}
 .side-menu li {
     font-weight: 400;
     padding: 10px 0;

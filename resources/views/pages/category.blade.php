@@ -43,7 +43,7 @@
         <div class="row">
 
 
-            <div class="col-lg-4">
+            <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4">
                 <div class="filter-category">
                     <div class="filter-category-title">
                         Filtre
@@ -94,7 +94,7 @@
 
 
 
-            <div class="col-lg-8">
+            <div class="col-xxl-8 col-xl-8 col-lg-8 col-md-8">
                 <div class="total-item-count">
                 </div>
                     <div class="row">
@@ -107,7 +107,7 @@
                                     $baseImage = $baseImage['basename'];
                                     $coverImage = "images/product/".$productUrl."/".$baseImage;
                                     ?>
-                                <div class="col-lg-4 mb-5 ">
+                                <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-3 col-sm-6 mb-5 ">
                                     <div class="model-main">
                                         <a href="{{ route('product-detail', $product->productUrl) }}">
                                             <div class="model-image">
@@ -144,7 +144,7 @@
                                 $baseImage = $baseImage['basename'];
                                 $coverImage = "images/product/".$productUrl."/".$baseImage;
                                 ?>
-                            <div class="col-lg-4 mb-5 ">
+                            <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-3 col-sm-6 mb-5 ">
                                 <div class="model-main">
                                     <a href="{{ route('product-detail', $product->productUrl) }}">
                                         <div class="model-image">

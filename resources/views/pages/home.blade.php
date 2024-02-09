@@ -71,22 +71,22 @@
 <div class="home-feature">
     <div class="container">
         <div class="row">
-            <div class="col-lg-3">
+            <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-6">
                 <div class="home-feature-item">
                     <i class="bi bi-truck"></i> Tüm Ülkelere Gönderim
                 </div>
             </div>
-            <div class="col-lg-3">
+            <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-6">
                 <div class="home-feature-item">
                     <i class="bi bi-headphones"></i> Canlı Destek
                 </div>
             </div>
-            <div class="col-lg-3">
+            <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-6">
                 <div class="home-feature-item">
                     <i class="bi bi-shield-lock-fill"></i> Güvenli Ödeme
                 </div>
             </div>
-            <div class="col-lg-3">
+            <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-6">
                 <div class="home-feature-item">
                     <i class="bi bi-eye"></i> Sipariş İzleme
                 </div>
@@ -145,7 +145,7 @@
                                     $baseImage = $baseImage['basename'];
                                     $coverImage = "images/product/".$productUrl."/".$baseImage;
                                     ?>
-                                <div class="col-lg-3 mb-5 ">
+                                <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-4 col-sm-6 mb-5 ">
                                     <div class="model-main">
                                         <a href="{{ route('product-detail', $product->productUrl) }}">
                                             <div class="model-image">
@@ -192,7 +192,7 @@
                                             $baseImage = $baseImage['basename'];
                                             $coverImage = "images/product/".$productUrl."/".$baseImage;
                                             ?>
-                                        <div class="col-lg-3 mb-5 ">
+                                        <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-4 col-sm-6 mb-5 ">
                                             <div class="model-main">
                                                 <a href="{{ route('product-detail', $product->productUrl) }}">
                                                     <div class="model-image">
@@ -243,17 +243,17 @@
 
     <div class="container promotion" style="max-width: 80%; padding: 50px 0;">
         <div class="row align-items-center">
-            <div class="col-lg-6 m-0 p-0 h-100">
-                <img src="/images/promotion/1.png">
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 m-0 p-0 h-100">
+                <img src="/images/promotion/1.png" class="img-fluid">
             </div>
-            <div class="col-lg-6 m-0 p-0 h-100">
-                <img src="/images/promotion/2.png">
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 m-0 p-0 h-100">
+                <img src="/images/promotion/2.png" class="img-fluid">
             </div>
-            <div class="col-lg-8 m-0 p-0 h-100">
-                <img src="/images/promotion/3.jpeg">
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 m-0 p-0 h-100">
+                <img src="/images/promotion/3.jpeg" class="img-fluid">
             </div>
-            <div class="col-lg-4 m-0 p-0 h-100">
-                <img src="/images/promotion/4.jpeg">
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 m-0 p-0 h-100">
+                <img src="/images/promotion/4.jpeg" class="img-fluid">
             </div>
         </div>
     </div>

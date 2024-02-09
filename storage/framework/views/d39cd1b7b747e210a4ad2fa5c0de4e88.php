@@ -20,7 +20,7 @@
         <div class="row">
 
 
-            <div class="col-lg-3">
+            <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-12">
                 <!---Navs-->
                 <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                     <?php if($customer): ?>
@@ -38,7 +38,7 @@
 
 
 
-            <div class="col-lg-9">
+            <div class="col-xxl-9 col-xl-9 col-lg-9 col-md-12">
                 <!---Content-->
                 <div class="tab-content" id="v-pills-tabContent">
                     <?php if($customer): ?>

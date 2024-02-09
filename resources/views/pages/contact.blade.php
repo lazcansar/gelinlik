@@ -18,7 +18,7 @@
 </div>
 
     <!--Maps-->
-<div class="contact-google-maps">
+<div class="contact-google-maps mw-100">
     {!! $listContact[0]->google_maps !!}
 </div>
 
@@ -26,9 +26,9 @@
     <!--Maps-->
 
 
-    <div class="container contact-bottom">
+    <div class="container contact-bottom overflow-hidden">
         <div class="row">
-            <div class="col-lg-4">
+            <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-12">
                 <div class="contact-adress-title">
                     Adres
                 </div>
@@ -57,7 +57,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-8">
+            <div class="col-xxl-8 col-xl-8 col-lg-8 col-md-6 col-sm-12">
                 <div class="contact-form">
                     <div class="contact-form-title">
                         Bize Yazın

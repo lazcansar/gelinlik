@@ -89,7 +89,7 @@
     <div class="container">
         <div class="footerHead">
             <div class="row">
-                <div class="col-lg-4">
+                <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-md-3 mobile-bottom">
                     <div class="footerLinks">
                         <h6>Beyazdusler.com</h6>
                         <p>Güzelliğiniz bizimle parlıyor. Özel anlarınıza özel gelinlik çeşitleri beyazdusler.com adresinde…</p>
@@ -97,7 +97,7 @@
                         <a class="linkMailPhone" href="tel:{{ $listContact[0]->phone }}">Telefon: {{ $listContact[0]->phone }}</a>
                     </div>
                 </div>
-                <div class="col-lg-2">
+                <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-6 col-sm-12 mb-md-3 mobile-bottom">
                     <div class="footerLinks">
                         <h6>Hakkımızda</h6>
                         <ul>
@@ -109,7 +109,7 @@
 
                     </div>
                 </div>
-                <div class="col-lg-2">
+                <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-6 col-sm-12 mb-md-3 mobile-bottom">
                     <div class="footerLinks">
                         <h6>Yardım Masası</h6>
                         <ul>
@@ -119,7 +119,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-lg-2">
+                <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-6 col-sm-12 mb-md-3 mobile-bottom">
                     <div class="footerLinks">
                         <h6>Hızlı Bağlantılar</h6>
                         <ul>
@@ -130,7 +130,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-lg-2">
+                <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-6 col-sm-12 mb-md-3 mobile-bottom">
                     <div class="footerLinks">
                         <h6>Bizi Takip Edin</h6>
                         <ul>
@@ -169,10 +169,10 @@
     <div class="container">
         <div class="footerBottom">
             <div class="d-flex justify-content-between flex-wrap align-items-center">
-                <p>Copyright © 2023 Beyazdusler.com – Tüm hakları saklıdır. </p>
-                <img src="{{ asset('images/logo_band_white.svg') }}">
+                <p class="mb-md-5 mb-sm-5 mobile-bottom">Copyright © 2023 Beyazdusler.com – Tüm hakları saklıdır. </p>
+                <img src="{{ asset('images/logo_band_white.svg') }}" class="img-fluid">
             </div>
-            <div class="reg-social d-flex justify-content-between flex-wrap align-items-center">
+            <div class="reg-social d-flex justify-content-between flex-wrap flex-wrap-reverse align-items-center">
                 <div class="reg"><a href="https://afyazilim.com" class="text-warning" target="_blank"><i class="bi bi-code-slash"></i> afyazilim.com</a></div>
                 <div class="social">
                     <a style="color: #fff" href="{{ $listContact[0]->instagram }}" target="_blank"><i class="bi bi-instagram"></i></a>
