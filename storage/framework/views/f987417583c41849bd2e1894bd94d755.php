@@ -117,6 +117,7 @@
                                     <div class="row">
                                         <div class="col-md-6">Toplam Tutar</div>
                                         <div class="col-md-6 text-end">₺ <?php echo e($productSelect->productPrice); ?></div>
+                                        <input type="hidden" name="productTotalPrice" value="<?php echo e($productSelect->productPrice); ?>">
                                     </div>
                                 </div>
                                 <hr>

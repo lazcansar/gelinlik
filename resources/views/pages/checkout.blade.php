@@ -115,6 +115,7 @@
                                     <div class="row">
                                         <div class="col-md-6">Toplam Tutar</div>
                                         <div class="col-md-6 text-end">₺ {{ $productSelect->productPrice }}</div>
+                                        <input type="hidden" name="productTotalPrice" value="{{ $productSelect->productPrice }}">
                                     </div>
                                 </div>
                                 <hr>
