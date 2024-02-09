@@ -118,7 +118,8 @@
                                                     echo '
                             <img src="../'.$allImages[0].'" class="img-fluid image-two">';
                                                     ?></a>
-                                                <form action="" method="POST">
+                                                <form action="<?php echo e(route('add-cart')); ?>" method="POST">
+                                                    <?php echo csrf_field(); ?>
                                                     <input type="hidden" name="productId" value="<?php echo e($product->productId); ?>">
                                                 <button type="submit" class="w-100 p-2 rounded-0 btn btn-dark text-white d-block text-center insert-card">Sepete Ekle</button>
                                                 </form>
