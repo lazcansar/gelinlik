@@ -77,6 +77,12 @@ class AdminpageController extends Controller
         $resultSearch = $stmt->get();
         return view('admin-panel.admin-order-search', compact('listContact', 'orderAll', 'productAll', 'resultSearch'));
     }
+    // Siparis Delete
+    public function orderDelete($order_number)
+    {
+        $orderDelete = Order::whereorderNumber($order_number)->delete();
+        return redirect()->back()->with("delete", "Sipariş silindi");
+    }
 
 
 

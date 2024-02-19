@@ -133,7 +133,7 @@
                                         </td>
                                         <td>
                                             <a class="d-block w-100 mb-2 btn btn-sm btn-outline-info" href="{{ route('admin-siparis-detay', $order->order_number) }}">Detay Gör</a>
-                                            <a class="d-block w-100 mb-2 btn btn-sm btn-outline-danger" href="">Sil</a>
+                                            <a class="d-block w-100 mb-2 btn btn-sm btn-outline-danger" href="{{ route('admin-order-delete', $order->order_number) }}">Sil</a>
                                         </td>
                                     </tr>
                                     @endif

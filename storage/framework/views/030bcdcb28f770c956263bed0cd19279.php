@@ -3,12 +3,12 @@
 
 
     <?php if(session('register')): ?>
-        <div class="container">
+        <div class="container mt-5">
             <div class="alert alert-success"><?php echo e(session('register')); ?></div>
         </div>
     <?php endif; ?>
     <?php if(session('access')): ?>
-        <div class="container">
+        <div class="container mt-5">
             <div class="alert alert-success"><?php echo e(session('access')); ?></div>
         </div>
     <?php endif; ?>
@@ -17,7 +17,7 @@ $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>
-        <div class="container">
+        <div class="container mt-5">
             <div class="alert alert-success rounded-0"><?php echo e($message); ?></div>
         </div>
     <?php unset($message);

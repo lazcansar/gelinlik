@@ -4,17 +4,17 @@
 
 
     @if(session('register'))
-        <div class="container">
+        <div class="container mt-5">
             <div class="alert alert-success">{{ session('register') }}</div>
         </div>
     @endif
     @if(session('access'))
-        <div class="container">
+        <div class="container mt-5">
             <div class="alert alert-success">{{ session('access') }}</div>
         </div>
     @endif
     @error('email')
-        <div class="container">
+        <div class="container mt-5">
             <div class="alert alert-success rounded-0">{{ $message }}</div>
         </div>
     @enderror

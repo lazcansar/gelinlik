@@ -47,20 +47,20 @@
 
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <input type="text" class="form-control mb-4" name="name" placeholder="Ad *">
+                                        <input type="text" class="form-control mb-4" name="name" placeholder="Ad *" required>
                                     </div>
                                     <div class="col-md-6">
-                                        <input type="text" class="form-control mb-4" name="surname" placeholder="Soyad *">
+                                        <input type="text" class="form-control mb-4" name="surname" placeholder="Soyad *" required>
                                     </div>
                                 </div>
-                                <input type="email" class="form-control mb-4" name="email" placeholder="E-Posta Adresi *">
-                                <input type="tel" class="form-control mb-4" name="phone" placeholder="Telefon No *">
+                                <input type="email" class="form-control mb-4" name="email" placeholder="E-Posta Adresi *" required>
+                                <input type="tel" class="form-control mb-4" name="phone" placeholder="Telefon No *" required>
                                 <select class="form-select mb-4" name="country">
                                     <option value="TR">Türkiye</option>
                                     <option value="USA">USA</option>
                                 </select>
-                                <input type="text" class="form-control mb-4" name="city" placeholder="İl *">
-                                <input type="text" class="form-control mb-4" name="adress" placeholder="Adres *">
+                                <input type="text" class="form-control mb-4" name="city" placeholder="İl *" required>
+                                <input type="text" class="form-control mb-4" name="adress" placeholder="Adres *" required>
                                 <input type="text" class="form-control mb-4" name="postal_code" placeholder="Posta Kodu">
                                 <textarea class="form-control mb-4" name="message" placeholder="Sipariş ile ilgili notlar" rows="5"></textarea>
                                 <input type="hidden" name="userId" value="{{ Auth::user()->id }}">

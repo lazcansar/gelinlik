@@ -89,6 +89,7 @@ Route::post('/admin-panel/siparisler/order-status/{id}', [AdminpageController::c
 Route::post('/admin-panel/siparisler/tracking-number/{id}', [AdminpageController::class, 'trackingNumberUpdate'])->name('order-tracking-update');
 Route::get('/admin-panel/siparisler/ara', [AdminpageController::class, 'orderSearch'])->name('order-search');
 Route::get('/admin-panel/siparisler/bul', [AdminpageController::class, 'orderSearchExecute'])->name('order-search-execute');
+Route::get('/admin-panel/siparisler/sil/{order_number}', [AdminpageController::class, 'orderDelete'])->name('admin-order-delete');
 
 
 // Cart Add
