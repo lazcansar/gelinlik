@@ -55,12 +55,13 @@
                 <?php endif; ?>
                 <a href="#" class="translate-link" onclick="dropDown();"><i class="bi bi-translate"></i></a>
                 <div class="translate" id="translate-menu">
-                    <ul>
-                        <li><a href="">Türkçe</a></li>
-                        <li><a href="">English</a></li>
-                        <li><a href="">Arabic</a></li>
-                        <li><a href="">Deutsch</a></li>
-                    </ul>
+                   
+                <div class="gtranslate_wrapper"></div>
+<script>window.gtranslateSettings = {"default_language":"tr","detect_browser_language":true,"languages":["tr","fr","de","es","ar","ru","en"],"wrapper_selector":".gtranslate_wrapper","flag_size":24}</script>
+<script src="https://cdn.gtranslate.net/widgets/latest/flags.js" defer></script>
+
+
+                
                 </div>
                     <a href="<?php echo e(route('search-page')); ?>"><i class="bi bi-search-heart"></i> </a>
                 <a href="<?php echo e(route('test-checkout')); ?>"><i class="bi bi-cart"></i> <?php echo e(count((array) session('cart'))); ?></a>

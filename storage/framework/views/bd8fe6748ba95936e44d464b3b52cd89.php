@@ -132,7 +132,7 @@
 
                         </div>
                         <div class="product-detail-beden-tablo">
-                            <img src="https://beyazdusler.com/wp-content/uploads/2023/12/beyaz-dusler-beden-tablosu-300x288.jpeg" class="img-fluid">
+                            <img src="/images/beyaz-dusler-beden-tablosu-300x288.jpeg" class="img-fluid">
                         </div>
                         <div class="product-detail-buy">
                             <form action="<?php echo e(route('add-cart')); ?>" method="POST" class="d-inline">
@@ -144,7 +144,7 @@
                         </div>
                         <div class="product-detail-secure">
                             <span>Güvenli Ödeme</span>
-                            <img src="https://beyazdusler.com/wp-content/uploads/2023/12/Varlik-1.png" class="img-fluid">
+                            <img src="/images/odeme-yontemleri.png" class="img-fluid">
                         </div>
                         <hr>
                         <div class="product-detail-info">
@@ -187,7 +187,7 @@
     </div>
 
     <!---Navs--->
-    <div class="container" style="max-width: 80%; font-family: 'Jost', sans-serif;">
+    <div class="container mobile-container" style="max-width: 80%; font-family: 'Jost', sans-serif;">
     <div class="model-nav">
         <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
             <li class="nav-item" role="presentation">
@@ -238,8 +238,17 @@
                         <a href="<?php echo e($likeUrl); ?>">
                         <div class="model-image">
                             <img src="../<?php echo e($likeCoverImage); ?>" class="img-fluid image-one">
-                            <img src="https://beyazdusler.com/wp-content/uploads/2023/12/abiy-1.jpg" class="img-fluid image-two">
-                            <a href="#" class="w-100 p-2 bg-dark text-white d-block text-center insert-card">Sepete Ekle</a>
+                            <?php
+                                                    $images = "images/product/".$productUrl;
+                                                    $allImages = glob("$images/*", GLOB_BRACE);
+                                                    echo '
+                            <img src="../'.$allImages[0].'" class="img-fluid image-two">';
+                                                    ?>
+                            <form action="<?php echo e(route('add-cart')); ?>" method="POST">
+                                                    <?php echo csrf_field(); ?>
+                                                    <input type="hidden" name="productId" value="<?php echo e($productDetail->productId); ?>">
+                                                    <button type="submit" class="w-100 p-2 rounded-0 btn btn-dark text-white d-block text-center insert-card">Sepete Ekle</button>
+                                                </form>
                         </div>
                         </a>
                         <div class="model-title">

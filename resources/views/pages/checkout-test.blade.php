@@ -184,7 +184,7 @@
         <div class="p-5">
             <div class="alert alert-warning text-center shadow">
                 <h5>Sipariş oluşturabilmek için lütfen kullanıcı girişi yapın!</h5>
-                <h4 class="mt-4 mb-4">Hesabınız yoksa <a href="">buraya tıklayarak hemen hesap oluşturabilirsiniz</a> sayfasından hemen kayıt olabilirsiniz.</h4>
+                <h4 class="mt-4 mb-4">Hesabınız yoksa <a href="{{ route('register-page') }}">buraya tıklayarak hemen hesap oluşturabilirsiniz.</a></h4>
                 <p>Beyazdusler.com</p>
             </div>
         </div>

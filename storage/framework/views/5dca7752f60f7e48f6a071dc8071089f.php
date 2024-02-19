@@ -29,30 +29,12 @@
         </div>
     </section>
 
-    <div class="container" style="font-family: 'Jost', sans-serif; padding: 50px 0; max-width: 80%;">
-        <div class="table-head">
-            <div class="row">
-                <div class="col-md-3" style="padding: 10px 25px; border-right: 1px dashed #C8815F;">
-                    <p style="font-weight: 300;">Sipariş Numarası:</p>
-                    <p>6409</p>
-                </div>
-                <div class="col-md-3" style="padding: 10px 25px; border-right: 1px dashed #C8815F;">
-                    <p style="font-weight: 300;">Tarih:</p>
-                    <p>14 Ocak 2023</p>
-                </div>
-                <div class="col-md-3" style="padding: 10px 25px; border-right: 1px dashed #C8815F;">
-                    <p style="font-weight: 300;">Toplam:</p>
-                    <p>₺7.500,00</p>
-                </div>
-                <div class="col-md-3" style="padding: 10px 25px;">
-                    <p style="font-weight: 300;">Ödeme Yönetemi:</p>
-                    <p>Banka Havalesi/EFT</p>
-                </div>
-            </div>
-        </div>
-
+    <div class="container border border-1 mt-4 mb-4 shadow" style="font-family: 'Jost', sans-serif; padding: 0 0 50px 0; max-width: 80%;">
         <div class="success-message">
-            Siparişiniz oluşturuldu.<br> Sipariş detaylarınız mail@afyazilim.com adresine gönderilmiştir.
+            Siparişiniz oluşturuldu.
+        </div>
+        <div class="mt-3 text-center">
+            Sipariş detaylarınıza <a href="<?php echo e(route('my-orders')); ?>"> Hesabım -> Siparişler</a> sayfasından ulaşabilirsiniz.
         </div>
     </div>
 

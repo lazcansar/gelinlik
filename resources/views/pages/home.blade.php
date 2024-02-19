@@ -240,21 +240,54 @@
     <!--Wedding Models--->
 
 
+    <div class="container">
+    <div class="wedding-models">
+        <div class="wedding-models-title">
+            En Özel Gününüze Özel, En Özel Modeller
+        </div>
+        <div class="wedding-models-sub">
+            Benzersiz tasarımlar, birbirinden şık modeller...
+        </div>
+    </div>
+</div>
 
     <div class="container promotion" style="max-width: 80%; padding: 50px 0;">
-        <div class="row align-items-center">
-            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 m-0 p-0 h-100">
-                <img src="/images/promotion/1.png" class="img-fluid">
+        <div class="row">
+
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 m-0 p-0 h-100" style="position:relative; border: 5px solid #fff;">
+                <img src="/images/promotion/pro-1.jpeg" class="promotion-image">
+                <div class="homeBanner" style="position: absolute; top: 50%; left: 25%; transfrom: translate(-50%, -50%);">
+                    <h4>Gelinlik Modelleri</h4>
+                    <p>İnce detay ruhunuzda saklı</p>
+                    <a href="{{ route('category-page') }}">Hemen İncele</a>
+                </div>
             </div>
-            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 m-0 p-0 h-100">
-                <img src="/images/promotion/2.png" class="img-fluid">
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 m-0 p-0 h-100" style="position:relative; border: 5px solid #fff;">
+                <img src="/images/promotion/pro-2.jpeg" class="promotion-image">
+                <div class="homeBanner" style="position: absolute; top: 50%; left: 25%; transfrom: translate(-50%, -50%);">
+                    <h4>Abiye Modelleri</h4>
+                    <p>İnce detay ruhunuzda saklı</p>
+                    <a href="{{ route('category-page') }}">Hemen İncele</a>
+                </div>
             </div>
-            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 m-0 p-0 h-100">
-                <img src="/images/promotion/3.jpeg" class="img-fluid">
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 m-0 p-0 h-100" style="position:relative; border: 5px solid #fff;">
+                <img src="/images/promotion/pro-3.jpeg" class="promotion-image">
+                <div class="homeBanner" style="position: absolute; top: 50%; left: 25%; transfrom: translate(-50%, -50%);">
+                    <h4>Nişanlık Modelleri</h4>
+                    <p>İnce detay ruhunuzda saklı</p>
+                    <a href="{{ route('category-page') }}">Hemen İncele</a>
+                </div>
             </div>
-            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 m-0 p-0 h-100">
-                <img src="/images/promotion/4.jpeg" class="img-fluid">
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 m-0 p-0 h-100" style="position:relative; border: 5px solid #fff;">
+                <img src="/images/promotion/pro-4.jpeg" class="promotion-image">
+                <div class="homeBanner" style="position: absolute; top: 50%; left: 25%; transfrom: translate(-50%, -50%);">
+                    <h4>Kınalık Modelleri</h4>
+                    <p>İnce detay ruhunuzda saklı</p>
+                    <a href="{{ route('category-page') }}">Hemen İncele</a>
+                </div>
             </div>
+
+
         </div>
     </div>
 

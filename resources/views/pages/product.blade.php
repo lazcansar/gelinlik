@@ -131,7 +131,7 @@
                             ₺{{ $productDetail->productPrice }}
                         </div>
                         <div class="product-detail-beden-tablo">
-                            <img src="https://beyazdusler.com/wp-content/uploads/2023/12/beyaz-dusler-beden-tablosu-300x288.jpeg" class="img-fluid">
+                            <img src="/images/beyaz-dusler-beden-tablosu-300x288.jpeg" class="img-fluid">
                         </div>
                         <div class="product-detail-buy">
                             <form action="{{ route('add-cart') }}" method="POST" class="d-inline">
@@ -143,7 +143,7 @@
                         </div>
                         <div class="product-detail-secure">
                             <span>Güvenli Ödeme</span>
-                            <img src="https://beyazdusler.com/wp-content/uploads/2023/12/Varlik-1.png" class="img-fluid">
+                            <img src="/images/odeme-yontemleri.png" class="img-fluid">
                         </div>
                         <hr>
                         <div class="product-detail-info">
@@ -154,13 +154,13 @@
                                                        @endif
                             @endforeach</p>
                             <p><span>Paylaş:</span>
-                                <a href="https://www.facebook.com/sharer/sharer.php?u={{ $socialUrl = url()->full(); }}" target="_blank">
+                                <a href="https://www.facebook.com/sharer/sharer.php?u={{ $socialUrl = url()->full() }}" target="_blank">
                                     <i class="bi bi-facebook"></i>
                                 </a>
-                                <a href="https://twitter.com/intent/tweet?text={{ $productDetail->productTitle }}&url={{ $socialUrl = url()->full(); }}" target="_blank">
+                                <a href="https://twitter.com/intent/tweet?text={{ $productDetail->productTitle }}&url={{ $socialUrl = url()->full() }}" target="_blank">
                                     <i class="bi bi-twitter"></i>
                                 </a>
-                                <a href="https://wa.me/?text={{ $productDetail->productTitle }}%20{{ $socialUrl = url()->full(); }}" target="_blank">
+                                <a href="https://wa.me/?text={{ $productDetail->productTitle }}%20{{ $socialUrl = url()->full() }}" target="_blank">
                                     <i class="bi bi-whatsapp"></i>
                                 </a>
                                   </p>
@@ -185,7 +185,7 @@
     </div>
 
     <!---Navs--->
-    <div class="container" style="max-width: 80%; font-family: 'Jost', sans-serif;">
+    <div class="container mobile-container" style="max-width: 80%; font-family: 'Jost', sans-serif;">
     <div class="model-nav">
         <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
             <li class="nav-item" role="presentation">
@@ -235,8 +235,17 @@
                         <a href="{{ $likeUrl }}">
                         <div class="model-image">
                             <img src="../{{ $likeCoverImage }}" class="img-fluid image-one">
-                            <img src="https://beyazdusler.com/wp-content/uploads/2023/12/abiy-1.jpg" class="img-fluid image-two">
-                            <a href="#" class="w-100 p-2 bg-dark text-white d-block text-center insert-card">Sepete Ekle</a>
+                            <?php
+                                                    $images = "images/product/".$productUrl;
+                                                    $allImages = glob("$images/*", GLOB_BRACE);
+                                                    echo '
+                            <img src="../'.$allImages[0].'" class="img-fluid image-two">';
+                                                    ?>
+                            <form action="{{ route('add-cart') }}" method="POST">
+                                                    @csrf
+                                                    <input type="hidden" name="productId" value="{{ $productDetail->productId }}">
+                                                    <button type="submit" class="w-100 p-2 rounded-0 btn btn-dark text-white d-block text-center insert-card">Sepete Ekle</button>
+                                                </form>
                         </div>
                         </a>
                         <div class="model-title">

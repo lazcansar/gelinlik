@@ -88,6 +88,32 @@ Navbar
     .login-page .container {
         max-width: 100% !important;
     }
+    .about-content {
+        width: 100% !important;
+    }
+    .comment-text {
+        padding: 0 !important;
+        height: max-content;
+    }
+    .sliderArea {
+        width: 75% !important;
+    }
+    .sliderTitle {
+        font-size: 48px !important;
+    }
+    .gallery-container {
+        justify-content: space-around !important;
+    }
+    .gallery-main img {
+        height: 100% !important;
+        object-fit: fill !important;
+    }
+    .model-nav .nav {
+        flex-wrap: nowrap !important;
+    }
+    .mobile-container {
+        max-width: 100% !important;
+    }
 }
 .side-menu li {
     font-weight: 400;
@@ -141,12 +167,15 @@ Navbar
     border-radius: 15px 0 15px 0;
     box-shadow: 0 0 5px rgba(0,0,0,.1);
 }
-.translate ul li {
-    border-bottom: 1px dashed #555555;
+.translate ul {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
 }
-.translate ul li a::before {
-    content: '»';
-    margin-right: 10px;
+.translate ul li {
+    flex: 0 0 auto;
+    width: 33.3%;
 }
 .show-translate {
     display: block;
@@ -369,10 +398,10 @@ Product Detail
 Home Page
  */
 .sliderItem:first-child {
-    height: 91vh;
+    height: calc(100vh - 70px) !important;
     width: 100%;
-    background-image: url("https://beyazdusler.com/wp-content/uploads/2023/12/istanbul-gelinlik.png");
-    background-position: center;
+    background-image: url("/images/en-yeni-gelinlik-modelleri-beyazdusler.webp");
+    background-position: 50% 0%;
     background-size: cover;
     background-repeat: no-repeat;
     display: flex;
@@ -380,7 +409,7 @@ Home Page
     justify-content: center;
 }
 .sliderItemTwo {
-    background-image: url("https://beyazdusler.com/wp-content/uploads/2023/12/istanbul-ozel-tasarim-gelinlik.png") !important;
+    background-image: url("/images/en-yeni-nisanlik-modelleri.webp") !important;
 }
 .sliderArea {
     width: 25%;
@@ -903,4 +932,17 @@ Account Page
 }
 .account-info .user-name {
     font-weight: 500;
+}
+.promotion-image {
+    max-width: 100%;
+    width: 100%;
+    filter: brightness(40%);
+    transition: all .2s;
+}
+.homeBanner h4, .homeBanner p, .homeBanner a {
+    color: #fff;
+    transition: all .2s;
+}
+.promotion-image:hover {
+    filter: brightness(100%);
 }

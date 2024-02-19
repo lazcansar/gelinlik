@@ -28,7 +28,7 @@
 
 
             <div class="dress-create-image text-center">
-                <img src="https://beyazdusler.com/wp-content/uploads/2023/12/online-dikim.webp" class="img-fluid">
+                <img src="/images/online-gelinlik-dikimi.webp" class="img-fluid">
             </div>
             <div class="wedding-create-content">
                 <span>Ölçü almadan önce dikkat etmeniz gerekenler;</span>
