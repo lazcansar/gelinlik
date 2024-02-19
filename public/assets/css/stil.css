@@ -233,12 +233,16 @@ Category Page
     font-family: 'Jost', sans-serif;
 }
 .category-page-bread {
-    background-image: url("https://july.uxper.co/fashion04/wp-content/uploads/sites/5/2022/04/page-title-shop.jpg");
+    background-image: url("/images/gelinlik-modelleri.webp");
     background-repeat: no-repeat;
     background-position: center center;
     background-attachment: scroll;
     background-size: cover;
     padding: 200px 0;
+}
+.category-page-title, .category-page-bread a, .category-page-bread span, .category-page-bread i {
+    text-shadow: 0 0 1px #000000;
+    color: #fff !important;
 }
 .total-item-count {
     margin-bottom: 2rem;

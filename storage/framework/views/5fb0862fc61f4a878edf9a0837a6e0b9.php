@@ -38,6 +38,29 @@
     <section class="my-account">
         <div class="container">
             <div class="row">
+                <div class="col-md-4">
+                    <div class="alert alert-info">
+                        <p><strong>Bitcon ile yapılacak ödemeler için: </strong><br> TH2LGnitf6szCEdbYL8D1Vox5aYTJTFn5u</p>
+                        <p>* Tether Trc20</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="alert alert-success">
+                        <p><strong>Revolut ile yapılacak ödemeler için:</strong><br> IE41REVO99036090876776</p>
+                        <p>* REVOIE23</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="alert alert-warning">
+                        <p><strong>Havele/EFT ile yapılacak ödemeler için:</strong> <br>ZELİHA ŞAHİNLER</p>
+                            <p>AKBANK TR63 0004 6001 6688 8000 1325 20</p>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="row">
 
                 <div class="col-md-4">
                     <div class="account-menu">
