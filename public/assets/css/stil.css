@@ -933,16 +933,23 @@ Account Page
 .account-info .user-name {
     font-weight: 500;
 }
+.promotion-div {
+    cursor: pointer;
+}
 .promotion-image {
     max-width: 100%;
     width: 100%;
-    filter: brightness(40%);
     transition: all .2s;
+    filter: brightness(40%);
+}
+.promotion-div:hover img {
+    transition: all .2s;
+    filter: brightness(90%);
 }
 .homeBanner h4, .homeBanner p, .homeBanner a {
     color: #fff;
     transition: all .2s;
 }
-.promotion-image:hover {
-    filter: brightness(100%);
+.promotion-div:hover .homeBanner h4, .promotion-div:hover .homeBanner p {
+    text-shadow: 0 0 5px #000000;
 }

@@ -254,36 +254,36 @@
     <div class="container promotion" style="max-width: 80%; padding: 50px 0;">
         <div class="row">
 
-            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 m-0 p-0 h-100" style="position:relative; border: 5px solid #fff;">
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 m-0 p-0 h-100 promotion-div" style="position:relative; border: 5px solid #fff;">
                 <img src="/images/promotion/pro-1.jpeg" class="promotion-image">
                 <div class="homeBanner" style="position: absolute; top: 50%; left: 25%; transfrom: translate(-50%, -50%);">
                     <h4>Gelinlik Modelleri</h4>
                     <p>İnce detay ruhunuzda saklı</p>
-                    <a href="{{ route('category-page') }}">Hemen İncele</a>
+                    <a class="btn btn-outline-light mt-3" href="{{ route('category-page') }}">Hemen İncele</a>
                 </div>
             </div>
-            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 m-0 p-0 h-100" style="position:relative; border: 5px solid #fff;">
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 m-0 p-0 h-100 promotion-div" style="position:relative; border: 5px solid #fff;">
                 <img src="/images/promotion/pro-2.jpeg" class="promotion-image">
                 <div class="homeBanner" style="position: absolute; top: 50%; left: 25%; transfrom: translate(-50%, -50%);">
                     <h4>Abiye Modelleri</h4>
                     <p>İnce detay ruhunuzda saklı</p>
-                    <a href="{{ route('category-page') }}">Hemen İncele</a>
+                    <a class="btn btn-outline-light mt-3" href="{{ route('category-page') }}">Hemen İncele</a>
                 </div>
             </div>
-            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 m-0 p-0 h-100" style="position:relative; border: 5px solid #fff;">
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 m-0 p-0 h-100 promotion-div" style="position:relative; border: 5px solid #fff;">
                 <img src="/images/promotion/pro-3.jpeg" class="promotion-image">
                 <div class="homeBanner" style="position: absolute; top: 50%; left: 25%; transfrom: translate(-50%, -50%);">
                     <h4>Nişanlık Modelleri</h4>
                     <p>İnce detay ruhunuzda saklı</p>
-                    <a href="{{ route('category-page') }}">Hemen İncele</a>
+                    <a class="btn btn-outline-light mt-3" href="{{ route('category-page') }}">Hemen İncele</a>
                 </div>
             </div>
-            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 m-0 p-0 h-100" style="position:relative; border: 5px solid #fff;">
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 m-0 p-0 h-100 promotion-div" style="position:relative; border: 5px solid #fff;">
                 <img src="/images/promotion/pro-4.jpeg" class="promotion-image">
                 <div class="homeBanner" style="position: absolute; top: 50%; left: 25%; transfrom: translate(-50%, -50%);">
                     <h4>Kınalık Modelleri</h4>
                     <p>İnce detay ruhunuzda saklı</p>
-                    <a href="{{ route('category-page') }}">Hemen İncele</a>
+                    <a class="btn btn-outline-light mt-3" href="{{ route('category-page') }}">Hemen İncele</a>
                 </div>
             </div>
 
