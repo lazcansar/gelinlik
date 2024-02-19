@@ -13,7 +13,6 @@ use function Symfony\Component\String\s;
 
 class PagesController extends Controller
 {
-
     public function searchPage()
     {
         $listContact = Contact::all();
@@ -58,8 +57,18 @@ class PagesController extends Controller
     {
         $customer = Musterihizmetleri::all();
         $listContact = Contact::all();
-        return view('pages.costumer', compact('customer', 'listContact'));
+        $customerDetail = '';
+        return view('pages.costumer', compact('customer', 'listContact', 'customerDetail'));
     }
+    public function customerPageDetail($url)
+    {
+        $customer = '';
+        $customerLinks = Musterihizmetleri::all();
+        $listContact = Contact::all();
+        $customerDetail = Musterihizmetleri::whereUrl($url)->first();
+        return view('pages.costumer', compact('customer', 'listContact', 'customerDetail', 'customerLinks'));
+    }
+
     public function weddingPageView()
     {
         $listContact = Contact::all();

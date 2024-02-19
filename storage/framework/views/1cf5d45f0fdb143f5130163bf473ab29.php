@@ -55,13 +55,13 @@
                 <?php endif; ?>
                 <a href="#" class="translate-link" onclick="dropDown();"><i class="bi bi-translate"></i></a>
                 <div class="translate" id="translate-menu">
-                   
+
                 <div class="gtranslate_wrapper"></div>
 <script>window.gtranslateSettings = {"default_language":"tr","detect_browser_language":true,"languages":["tr","fr","de","es","ar","ru","en"],"wrapper_selector":".gtranslate_wrapper","flag_size":24}</script>
 <script src="https://cdn.gtranslate.net/widgets/latest/flags.js" defer></script>
 
 
-                
+
                 </div>
                     <a href="<?php echo e(route('search-page')); ?>"><i class="bi bi-search-heart"></i> </a>
                 <a href="<?php echo e(route('test-checkout')); ?>"><i class="bi bi-cart"></i> <?php echo e(count((array) session('cart'))); ?></a>
@@ -114,9 +114,8 @@
                     <div class="footerLinks">
                         <h6>Yardım Masası</h6>
                         <ul>
-                            <li><a href="<?php echo e(route('customer-page')); ?>">Beden Kılavuzu</a></li>
+                            <li><a href="<?php echo e(route('wedding-create')); ?>">Beden Kılavuzu</a></li>
                             <li><a href="<?php echo e(route('sss-page')); ?>">Soru & Cevap</a></li>
-                            <li><a href="<?php echo e(route('customer-page')); ?>">Ödeme İadesi</a></li>
                         </ul>
                     </div>
                 </div>
@@ -124,10 +123,12 @@
                     <div class="footerLinks">
                         <h6>Hızlı Bağlantılar</h6>
                         <ul>
-                            <li><a href="<?php echo e(route('customer-page')); ?>">Ödeme Yöntemleri</a></li>
-                            <li><a href="<?php echo e(route('customer-page')); ?>">Kargo Bilgileri</a></li>
-                            <li><a href="<?php echo e(route('customer-page')); ?>">Gizlilik Politikası</a></li>
-                            <li><a href="<?php echo e(route('customer-page')); ?>">Kullanım Şartları</a></li>
+                          <?php
+                          $footerLinks = \App\Models\Musterihizmetleri::all();
+                          ?>
+                            <?php $__currentLoopData = $footerLinks; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $footerPage): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <li><a href="<?php echo e(route('customer-page-detail', $footerPage->url)); ?>"><?php echo e($footerPage->title); ?></a></li>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </ul>
                     </div>
                 </div>
@@ -170,7 +171,7 @@
     <div class="container">
         <div class="footerBottom">
             <div class="d-flex justify-content-between flex-wrap align-items-center">
-                <p class="mb-md-5 mb-sm-5 mobile-bottom">Copyright © 2023 Beyazdusler.com – Tüm hakları saklıdır. </p>
+                <p class="mb-md-5 mb-sm-5 mobile-bottom">Copyright © 2024 Beyazdusler.com – Tüm hakları saklıdır. </p>
                 <img src="<?php echo e(asset('images/logo_band_white.svg')); ?>" class="img-fluid">
             </div>
             <div class="reg-social d-flex justify-content-between flex-wrap flex-wrap-reverse align-items-center">

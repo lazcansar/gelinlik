@@ -55,13 +55,13 @@
                 @endguest
                 <a href="#" class="translate-link" onclick="dropDown();"><i class="bi bi-translate"></i></a>
                 <div class="translate" id="translate-menu">
-                   
+
                 <div class="gtranslate_wrapper"></div>
 <script>window.gtranslateSettings = {"default_language":"tr","detect_browser_language":true,"languages":["tr","fr","de","es","ar","ru","en"],"wrapper_selector":".gtranslate_wrapper","flag_size":24}</script>
 <script src="https://cdn.gtranslate.net/widgets/latest/flags.js" defer></script>
 
 
-                
+
                 </div>
                     <a href="{{ route('search-page') }}"><i class="bi bi-search-heart"></i> </a>
                 <a href="{{ route('test-checkout') }}"><i class="bi bi-cart"></i> {{ count((array) session('cart')) }}</a>
@@ -114,9 +114,8 @@
                     <div class="footerLinks">
                         <h6>Yardım Masası</h6>
                         <ul>
-                            <li><a href="{{ route('customer-page') }}">Beden Kılavuzu</a></li>
+                            <li><a href="{{ route('wedding-create') }}">Beden Kılavuzu</a></li>
                             <li><a href="{{ route('sss-page') }}">Soru & Cevap</a></li>
-                            <li><a href="{{ route('customer-page') }}">Ödeme İadesi</a></li>
                         </ul>
                     </div>
                 </div>
@@ -124,10 +123,12 @@
                     <div class="footerLinks">
                         <h6>Hızlı Bağlantılar</h6>
                         <ul>
-                            <li><a href="{{ route('customer-page') }}">Ödeme Yöntemleri</a></li>
-                            <li><a href="{{ route('customer-page') }}">Kargo Bilgileri</a></li>
-                            <li><a href="{{ route('customer-page') }}">Gizlilik Politikası</a></li>
-                            <li><a href="{{ route('customer-page') }}">Kullanım Şartları</a></li>
+                          @php
+                          $footerLinks = \App\Models\Musterihizmetleri::all();
+                          @endphp
+                            @foreach($footerLinks as $footerPage)
+                                <li><a href="{{ route('customer-page-detail', $footerPage->url) }}">{{ $footerPage->title }}</a></li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
@@ -170,7 +171,7 @@
     <div class="container">
         <div class="footerBottom">
             <div class="d-flex justify-content-between flex-wrap align-items-center">
-                <p class="mb-md-5 mb-sm-5 mobile-bottom">Copyright © 2023 Beyazdusler.com – Tüm hakları saklıdır. </p>
+                <p class="mb-md-5 mb-sm-5 mobile-bottom">Copyright © 2024 Beyazdusler.com – Tüm hakları saklıdır. </p>
                 <img src="{{ asset('images/logo_band_white.svg') }}" class="img-fluid">
             </div>
             <div class="reg-social d-flex justify-content-between flex-wrap flex-wrap-reverse align-items-center">

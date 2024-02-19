@@ -105,8 +105,6 @@ Navbar
         justify-content: space-around !important;
     }
     .gallery-main img {
-        height: 100% !important;
-        object-fit: fill !important;
     }
     .model-nav .nav {
         flex-wrap: nowrap !important;
